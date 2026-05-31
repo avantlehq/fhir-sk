@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Roadmap",
-  description:
-    "FHIR.sk learning roadmap — 8 phases from FHIR Foundations to EHDS and advanced interoperability patterns.",
+  description: "FHIR.sk 8-phase learning roadmap from FHIR Foundations to EHDS and advanced interoperability.",
+  alternates: { canonical: "https://fhir.sk/learn/roadmap" },
 };
 
 type Phase = {
@@ -14,6 +14,7 @@ type Phase = {
   description: string;
   goals: string[];
   deliverable: string;
+  relatedModules: string[];
 };
 
 const phases: Phase[] = [
@@ -33,6 +34,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Working HAPI FHIR server + Postman collection with all CRUD operations verified",
+    relatedModules: ["Mock Server", "Resource Builder"],
   },
   {
     number: 2,
@@ -49,6 +51,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Synthetic patient with full clinical record — demographics, vitals, diagnoses, medications, encounter",
+    relatedModules: ["Resource Builder", "Synthetic Data", "Mock Server"],
   },
   {
     number: 3,
@@ -64,6 +67,7 @@ const phases: Phase[] = [
       "Understand Must Support semantics",
     ],
     deliverable: "Custom FHIR Profile for a Slovak Patient with validation",
+    relatedModules: ["Validator", "Profile Explorer", "Resource Builder"],
   },
   {
     number: 4,
@@ -80,6 +84,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Terminology server with LOINC + ICD-10 + custom CodeSystem, validated ValueSets",
+    relatedModules: ["Terminology Explorer", "Validator"],
   },
   {
     number: 5,
@@ -96,6 +101,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Working Subscription + Bulk Export + SMART on FHIR authorization flow",
+    relatedModules: ["Mock Server"],
   },
   {
     number: 6,
@@ -112,6 +118,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Synthetic IPS (International Patient Summary) conformant with EHRxF profiles",
+    relatedModules: ["Synthetic Data", "Profile Explorer", "Validator"],
   },
   {
     number: 7,
@@ -128,6 +135,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Architecture diagram + working FHIR Facade over a simulated legacy HL7 v2 system",
+    relatedModules: ["Mock Server"],
   },
   {
     number: 8,
@@ -144,6 +152,7 @@ const phases: Phase[] = [
     ],
     deliverable:
       "Working clinical quality measure (CQL + FHIR Measure) with synthetic population data",
+    relatedModules: ["Synthetic Data"],
   },
 ];
 
@@ -154,10 +163,10 @@ export default function RoadmapPage() {
         {/* Header */}
         <div className="mb-14">
           <Link
-            href="/"
+            href="/learn"
             className="text-sm text-slate-500 hover:text-teal-600 transition-colors mb-6 inline-block"
           >
-            ← Back to home
+            ← Back to Learn
           </Link>
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">
             Roadmap
@@ -240,6 +249,19 @@ export default function RoadmapPage() {
                   {phase.deliverable}
                 </span>
               </div>
+
+              {/* Related Lab Modules */}
+              {phase.relatedModules.length > 0 && (
+                <div className="px-6 py-3 border-t border-slate-100 pl-[3.25rem]">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Related Lab Modules: </span>
+                  {phase.relatedModules.map((mod, i) => (
+                    <span key={mod}>
+                      <span className="text-xs text-teal-600">{mod}</span>
+                      {i < phase.relatedModules.length - 1 && <span className="text-xs text-slate-300 mx-1">·</span>}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

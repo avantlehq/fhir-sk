@@ -8,7 +8,7 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { href: "/fhir", label: "What is FHIR" },
-  { href: "/roadmap", label: "Roadmap" },
+  { href: "/lab",   label: "Lab"   },
+  { href: "/learn", label: "Learn" },
   { href: "/about", label: "About" },
 ];

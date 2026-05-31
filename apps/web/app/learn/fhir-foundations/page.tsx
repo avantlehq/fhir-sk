@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "What is FHIR",
-  description:
-    "An introduction to HL7 FHIR R4 — what it is, why it was created, and how it works. Core concepts: Resources, REST API, Bundles, and FHIR in the EHDS context.",
+  title: "FHIR Foundations",
+  description: "An introduction to HL7 FHIR R4 — what it is, why it was created, and how it works.",
+  alternates: { canonical: "https://fhir.sk/learn/fhir-foundations" },
 };
 
 const concepts = [
@@ -40,17 +40,17 @@ const concepts = [
   },
 ];
 
-export default function FhirPage() {
+export default function FhirFoundationsPage() {
   return (
     <article className="py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
           <Link
-            href="/"
+            href="/learn"
             className="text-sm text-slate-500 hover:text-teal-600 transition-colors mb-6 inline-block"
           >
-            ← Back to home
+            ← Back to Learn
           </Link>
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">
             What is HL7 FHIR?
