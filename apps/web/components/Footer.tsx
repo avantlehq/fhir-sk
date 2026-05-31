@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navLinks } from "@/lib/site";
+import { VERSION } from "@/lib/version";
 
 export function Footer() {
   return (
@@ -48,8 +49,8 @@ export function Footer() {
         </div>
         <div className="border-t border-slate-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-3">
           <p className="text-xs">
-            &copy; {new Date().getFullYear()} FHIR.sk — Personal learning
-            project
+            &copy; {new Date().getFullYear()} FHIR.sk — Personal learning project{" "}
+            <span className="text-slate-600">v{VERSION}</span>
           </p>
           <p className="text-xs">No real patient data. Synthetic data only.</p>
         </div>
