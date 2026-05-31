@@ -35,9 +35,13 @@ fhir-sk/
 ├── apps/
 │   └── web/                  ← Next.js 16 web app (Vercel)
 │       ├── app/              ← App Router pages
-│       ├── components/       ← Header, Footer
+│       │   ├── lab/          ← /lab index + 6 module stubs
+│       │   ├── learn/        ← /learn index + roadmap + fhir-foundations + 4 stubs
+│       │   ├── about/
+│       │   └── disclaimer/
+│       ├── components/       ← Header, Footer, StatusBadge, ModuleCard, LearningCard, SectionHeader
 │       └── lib/
-│           ├── site.ts       ← siteConfig, navLinks
+│           ├── site.ts       ← siteConfig, navLinks (Lab / Learn / About)
 │           └── version.ts    ← VERSION, VERSION_NAME, CHANGELOG
 ├── infra/
 │   └── hapi/                 ← HAPI FHIR R4 Docker Compose + PostgreSQL
@@ -58,45 +62,76 @@ fhir-sk/
 
 | Layer | Technology |
 |-------|-----------|
-| Web frontend | Next.js 16, App Router, TypeScript, Tailwind CSS v3 |
+| Web frontend | Next.js 16.2.6, App Router, TypeScript, Tailwind CSS v3 |
 | Web deploy | Vercel (root directory: `apps/web`) |
 | FHIR server | HAPI FHIR R4 (`hapiproject/hapi:v7-tomcat`) |
 | Database | PostgreSQL 16 |
 | Local infra | Docker Compose |
-| Cloud infra | Railway |
+| Cloud infra | Railway (planned) |
 | FHIR version | R4 (primary), R4B noted where relevant, R5 monitoring |
 
 ---
 
 ## Web App (apps/web)
 
+### Navigation
+
+Three top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **About** (`/about`).
+
 ### Routes
 
 | Route | Status | Description |
 |-------|--------|-------------|
-| `/` | ✅ Live | Homepage: hero, 4 feature cards, Phase 1 status, disclaimer |
-| `/fhir` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles |
-| `/roadmap` | ✅ Live | 8-phase roadmap with status badges |
+| `/` | ✅ Live | Homepage: hero, Lab/Learn overview, lab modules preview, disclaimer |
+| `/lab` | ✅ Live | Lab index with 6 module cards |
+| `/lab/mock-server` | ✅ Stub | HAPI FHIR R4 mock server |
+| `/lab/resource-builder` | ✅ Stub | Create/edit FHIR R4 resources |
+| `/lab/validator` | ✅ Stub | Validate FHIR JSON/XML |
+| `/lab/synthetic-data` | ✅ Stub | Generate synthetic FHIR datasets |
+| `/lab/terminology-explorer` | ✅ Stub | Explore CodeSystem/ValueSet/ConceptMap |
+| `/lab/profile-explorer` | ✅ Stub | Inspect StructureDefinitions and EHDS profiles |
+| `/learn` | ✅ Live | Learn index with 5 learning path cards |
+| `/learn/roadmap` | ✅ Live | 8-phase roadmap with status badges |
+| `/learn/fhir-foundations` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles |
+| `/learn/resources` | ✅ Stub | Core healthcare resources |
+| `/learn/profiling` | ✅ Stub | Profiling and validation |
+| `/learn/terminology` | ✅ Stub | Terminology services |
+| `/learn/ehds` | ✅ Stub | EHDS and EHRxF |
 | `/about` | ✅ Live | Philosophy, objectives, tech stack, what it is NOT |
 | `/disclaimer` | ✅ Live | Synthetic data notice, no affiliation, legal |
-| `/sitemap.xml` | ✅ Live | Auto-generated |
+| `/sitemap.xml` | ✅ Live | Auto-generated (17 routes) |
 | `/robots.txt` | ✅ Live | Auto-generated |
 
-### Planned routes (future phases)
-- `/docs` — documentation hub (Phase 2+)
-- `/examples` — interactive FHIR resource explorer (Phase 3+)
-- `/status` — lab services status (Phase 2+)
+### Redirects (permanent 308)
+
+| Old URL | New URL |
+|---------|---------|
+| `/roadmap` | `/learn/roadmap` |
+| `/fhir` | `/learn/fhir-foundations` |
+
+Defined in `apps/web/next.config.mjs`.
+
+### Components
+
+| Component | Location | Description |
+|-----------|----------|-------------|
+| `Header` | `components/Header.tsx` | Top nav: Lab / Learn / About |
+| `Footer` | `components/Footer.tsx` | Nav links, version display |
+| `StatusBadge` | `components/StatusBadge.tsx` | "In Progress" / "Planned" / "Live" badge |
+| `ModuleCard` | `components/ModuleCard.tsx` | Lab module card with status badge |
+| `LearningCard` | `components/LearningCard.tsx` | Learn section card |
+| `SectionHeader` | `components/SectionHeader.tsx` | Section heading with label/description |
 
 ### Version management
 
 Version is defined in `apps/web/lib/version.ts`:
-- `VERSION` — semantic version string (e.g. "0.1.0")
-- `VERSION_NAME` — human name (e.g. "Foundation")
+- `VERSION` — semantic version string
+- `VERSION_NAME` — human name
 - `CHANGELOG` — array of version entries with date and changes
 
 **Rule: update version.ts + package.json after every meaningful deployment.**
 
-Current version: **0.1.0 "Foundation"**
+Current version: **0.2.0 "Lab Architecture"**
 
 ### Design system
 
@@ -164,61 +199,47 @@ Requests: CapabilityStatement, Patient CRUD, Search, Transaction Bundle, Observa
 
 | Resource | URL | Status |
 |----------|-----|--------|
-| Web (production) | https://fhir.sk | DNS pending |
+| Web (production) | https://fhir.sk | DNS pending propagation |
 | Web (preview) | https://fhir-sk.vercel.app | ✅ Live |
 | HAPI FHIR (cloud) | https://hapi.fhir.sk | ❌ Not deployed |
 | GitHub | https://github.com/avantlehq/fhir-sk | ✅ |
 
-**DNS:** fhir.sk registered at Websupport.sk, NS pointed to Vercel (ns1.vercel-dns.com).
+**DNS:** fhir.sk registered at Websupport.sk, NS pointed to Vercel (ns1.vercel-dns.com). DNSSEC disabled (Vercel does not support it).
 **Vercel root directory:** `apps/web` — must be set in Vercel project settings.
 
 ---
 
-## Roadmap
+## Phase 1 Status — FHIR Foundations (IN PROGRESS)
 
-### Phase 1 — FHIR Foundations (IN PROGRESS)
-- Deploy HAPI FHIR locally
-- Patient CRUD via Postman
-- CapabilityStatement understanding
-- First Transaction Bundle
-- Synthetic dataset
-- **Deliverable:** Running local FHIR server with working examples
+Web infrastructure done (v0.2.0). FHIR server work not yet started.
 
-### Phase 2 — Core Healthcare Resources (PLANNED)
-- Patient, Practitioner, Organization, Encounter, Observation, Condition
-- Resource relationships
-- **Deliverable:** Synthetic healthcare dataset
+- [x] Web app deployed to Vercel
+- [x] Domain DNS configured (NS → Vercel)
+- [x] Information architecture (Lab / Learn / About)
+- [ ] Deploy HAPI FHIR locally via Docker Compose
+- [ ] Patient CRUD via Postman
+- [ ] Read and interpret CapabilityStatement
+- [ ] POST a transaction Bundle
+- [ ] Complete Phase 1 learning notes (docs/phase-1-notes.md)
 
-### Phase 3 — Profiling and Validation (PLANNED)
-- StructureDefinition, Profiles, Extensions
-- FHIR Validator
-- Implementation Guides
-- **Deliverable:** First custom FHIR profile
+**Next step: `cd infra/hapi && docker compose up -d`, then run Postman collection.**
 
-### Phase 4 — Terminology Services (PLANNED)
-- SNOMED CT, LOINC, ICD-10, ICD-11
-- ValueSets, CodeSystems, ConceptMaps
-- **Deliverable:** Basic terminology environment
+---
 
-### Phase 5 — Healthcare Integration Patterns (PLANNED)
-- Clinical workflows, event patterns
-- API design patterns
-- **Deliverable:** Reference interoperability scenarios
+## Roadmap Summary
 
-### Phase 6 — EHDS and EHRxF (PLANNED)
-- Patient Summary, ePrescription, eDispensation
-- MyHealth@EU, Provenance, Audit
-- **Deliverable:** EHDS-aligned examples
+| Phase | Name | Status |
+|-------|------|--------|
+| 1 | FHIR Foundations | In Progress |
+| 2 | Core Healthcare Resources | Planned |
+| 3 | Profiling and Validation | Planned |
+| 4 | Terminology Services | Planned |
+| 5 | Healthcare Integration Patterns | Planned |
+| 6 | EHDS and EHRxF | Planned |
+| 7 | Interoperability Architecture | Planned |
+| 8 | Advanced Experiments | Planned |
 
-### Phase 7 — Interoperability Architecture (PLANNED)
-- IAM, Consent, Governance, Registry patterns
-- **Deliverable:** Healthcare interoperability architecture lab
-
-### Phase 8 — Advanced Experiments (PLANNED)
-- Terminology server, advanced validation
-- Synthetic data generation
-- AI-assisted FHIR mapping
-- **Deliverable:** Advanced interoperability playground
+Full roadmap at `/learn/roadmap`.
 
 ---
 
