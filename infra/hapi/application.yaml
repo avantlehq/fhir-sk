@@ -1,0 +1,28 @@
+hapi:
+  fhir:
+    fhir_version: R4
+    server_address: http://localhost:8080/fhir
+    default_encoding: JSON
+    default_pretty_print: true
+    allow_external_references: true
+    expunge_enabled: true
+    narrative_enabled: false
+    cors:
+      allow_Credentials: true
+      allowed_origin:
+        - "*"
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hapi
+    username: hapi
+    password: hapi_password
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.format_sql: false
+    hibernate:
+      ddl-auto: update
+  main:
+    allow-circular-references: true

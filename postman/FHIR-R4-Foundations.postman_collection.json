@@ -1,0 +1,365 @@
+{
+  "info": {
+    "name": "FHIR R4 Foundations — fhir.sk",
+    "description": "HL7 FHIR R4 Foundations collection for the FHIR.sk Interoperability Lab. Covers CRUD operations on Patient, Observation, Bundle transactions, and CapabilityStatement. Uses synthetic data only.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "fhir-sk-foundations-001"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/fhir",
+      "type": "string",
+      "description": "HAPI FHIR R4 base URL"
+    },
+    {
+      "key": "patient_id",
+      "value": "patient-synthetic-001",
+      "type": "string",
+      "description": "Synthetic patient ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 — Server",
+      "item": [
+        {
+          "name": "GET CapabilityStatement",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/metadata",
+              "host": ["{{base_url}}"],
+              "path": ["metadata"]
+            },
+            "description": "Retrieve the server's CapabilityStatement. This describes what the FHIR server supports: resources, interactions, search parameters, and FHIR version. Always start here to understand what a FHIR server can do."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 — Patient CRUD",
+      "item": [
+        {
+          "name": "POST Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"patient-synthetic-001\",\n  \"meta\": {\n    \"tag\": [\n      {\n        \"system\": \"https://fhir.sk/tags\",\n        \"code\": \"synthetic\",\n        \"display\": \"Synthetic data — not a real patient\"\n      }\n    ]\n  },\n  \"identifier\": [\n    {\n      \"use\": \"official\",\n      \"system\": \"urn:oid:2.16.840.1.113883.2.9.4.3.2\",\n      \"value\": \"SYNTHETIC-123456789\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Doe\",\n      \"given\": [\"John\", \"Michael\"]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+421-900-000-000\",\n      \"use\": \"home\"\n    },\n    {\n      \"system\": \"email\",\n      \"value\": \"john.doe.synthetic@example.com\",\n      \"use\": \"home\"\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1980-01-15\",\n  \"address\": [\n    {\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"line\": [\"Fictional Street 42\"],\n      \"city\": \"Bratislava\",\n      \"postalCode\": \"81101\",\n      \"country\": \"SK\"\n    }\n  ],\n  \"communication\": [\n    {\n      \"language\": {\n        \"coding\": [\n          {\n            \"system\": \"urn:ietf:bcp:47\",\n            \"code\": \"sk\",\n            \"display\": \"Slovak\"\n          }\n        ]\n      },\n      \"preferred\": true\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/Patient",
+              "host": ["{{base_url}}"],
+              "path": ["Patient"]
+            },
+            "description": "Create a new synthetic Patient resource. FHIR uses POST to create a resource. The server may assign its own ID, or accept the client-provided ID. Returns 201 Created on success with a Location header pointing to the new resource."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Patient by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Patient/{{patient_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["Patient", "{{patient_id}}"]
+            },
+            "description": "Read a specific Patient by FHIR resource ID. The URL pattern is [base]/[ResourceType]/[id]. Returns 200 OK with the full Patient resource, or 404 Not Found if the patient does not exist."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Patient search by name",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Patient?name=Doe",
+              "host": ["{{base_url}}"],
+              "path": ["Patient"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Doe",
+                  "description": "Search by patient family name (partial match supported)"
+                }
+              ]
+            },
+            "description": "Search for Patients by name. FHIR search returns a Bundle of type 'searchset'. The bundle contains entries for each matching Patient. The 'name' search parameter matches against both family and given names."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Patient search by identifier",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Patient?identifier=urn:oid:2.16.840.1.113883.2.9.4.3.2|SYNTHETIC-123456789",
+              "host": ["{{base_url}}"],
+              "path": ["Patient"],
+              "query": [
+                {
+                  "key": "identifier",
+                  "value": "urn:oid:2.16.840.1.113883.2.9.4.3.2|SYNTHETIC-123456789",
+                  "description": "Search by system|value identifier"
+                }
+              ]
+            },
+            "description": "Search for a Patient by their identifier (system|value format). This is how you look up a patient by their national ID or hospital number in real systems."
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Patient update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"patient-synthetic-001\",\n  \"meta\": {\n    \"tag\": [\n      {\n        \"system\": \"https://fhir.sk/tags\",\n        \"code\": \"synthetic\",\n        \"display\": \"Synthetic data — not a real patient\"\n      }\n    ]\n  },\n  \"identifier\": [\n    {\n      \"use\": \"official\",\n      \"system\": \"urn:oid:2.16.840.1.113883.2.9.4.3.2\",\n      \"value\": \"SYNTHETIC-123456789\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"use\": \"official\",\n      \"family\": \"Doe\",\n      \"given\": [\"John\", \"Michael\"]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"+421-900-111-222\",\n      \"use\": \"mobile\"\n    }\n  ],\n  \"gender\": \"male\",\n  \"birthDate\": \"1980-01-15\",\n  \"address\": [\n    {\n      \"use\": \"home\",\n      \"type\": \"both\",\n      \"line\": [\"Updated Fictional Street 99\"],\n      \"city\": \"Bratislava\",\n      \"postalCode\": \"81102\",\n      \"country\": \"SK\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/Patient/{{patient_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["Patient", "{{patient_id}}"]
+            },
+            "description": "Update a Patient using HTTP PUT. In FHIR, PUT replaces the entire resource (full update). The resource ID in the URL must match the id in the body. FHIR maintains version history — you can retrieve previous versions using the _history endpoint."
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Patient",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Patient/{{patient_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["Patient", "{{patient_id}}"]
+            },
+            "description": "Delete a Patient resource. In FHIR, DELETE performs a 'soft delete' by default — the resource is marked as deleted but version history is preserved. Returns 200 OK or 204 No Content on success."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 — Observation",
+      "item": [
+        {
+          "name": "POST Observation (body weight)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Observation\",\n  \"meta\": {\n    \"tag\": [\n      {\n        \"system\": \"https://fhir.sk/tags\",\n        \"code\": \"synthetic\",\n        \"display\": \"Synthetic data — not a real clinical record\"\n      }\n    ]\n  },\n  \"status\": \"final\",\n  \"category\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n          \"code\": \"vital-signs\",\n          \"display\": \"Vital Signs\"\n        }\n      ]\n    }\n  ],\n  \"code\": {\n    \"coding\": [\n      {\n        \"system\": \"http://loinc.org\",\n        \"code\": \"29463-7\",\n        \"display\": \"Body weight\"\n      }\n    ],\n    \"text\": \"Body weight\"\n  },\n  \"subject\": {\n    \"reference\": \"Patient/patient-synthetic-001\",\n    \"display\": \"John Doe (synthetic)\"\n  },\n  \"effectiveDateTime\": \"2024-01-15T09:30:00.000Z\",\n  \"valueQuantity\": {\n    \"value\": 75,\n    \"unit\": \"kg\",\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"kg\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/Observation",
+              "host": ["{{base_url}}"],
+              "path": ["Observation"]
+            },
+            "description": "Create a body weight Observation using LOINC code 29463-7. The value uses UCUM units (kg). The subject references the synthetic Patient. LOINC codes are the standard for lab and clinical observations in FHIR."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Observations for Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Observation?patient={{patient_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["Observation"],
+              "query": [
+                {
+                  "key": "patient",
+                  "value": "{{patient_id}}",
+                  "description": "Filter observations by patient reference"
+                }
+              ]
+            },
+            "description": "Search for all Observations associated with the synthetic Patient. The 'patient' search parameter filters by subject reference."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 — Bundle",
+      "item": [
+        {
+          "name": "POST Transaction Bundle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/fhir+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Bundle\",\n  \"type\": \"transaction\",\n  \"timestamp\": \"2024-01-15T10:00:00.000Z\",\n  \"entry\": [\n    {\n      \"fullUrl\": \"urn:uuid:patient-synthetic-001\",\n      \"resource\": {\n        \"resourceType\": \"Patient\",\n        \"id\": \"patient-synthetic-001\",\n        \"meta\": {\n          \"tag\": [\n            {\n              \"system\": \"https://fhir.sk/tags\",\n              \"code\": \"synthetic\",\n              \"display\": \"Synthetic data — not a real patient\"\n            }\n          ]\n        },\n        \"identifier\": [\n          {\n            \"use\": \"official\",\n            \"system\": \"urn:oid:2.16.840.1.113883.2.9.4.3.2\",\n            \"value\": \"SYNTHETIC-123456789\"\n          }\n        ],\n        \"active\": true,\n        \"name\": [\n          {\n            \"use\": \"official\",\n            \"family\": \"Doe\",\n            \"given\": [\"John\", \"Michael\"]\n          }\n        ],\n        \"gender\": \"male\",\n        \"birthDate\": \"1980-01-15\",\n        \"address\": [\n          {\n            \"use\": \"home\",\n            \"line\": [\"Fictional Street 42\"],\n            \"city\": \"Bratislava\",\n            \"postalCode\": \"81101\",\n            \"country\": \"SK\"\n          }\n        ]\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Patient\",\n        \"ifNoneExist\": \"identifier=urn:oid:2.16.840.1.113883.2.9.4.3.2|SYNTHETIC-123456789\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:observation-synthetic-001\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"tag\": [\n            {\n              \"system\": \"https://fhir.sk/tags\",\n              \"code\": \"synthetic\",\n              \"display\": \"Synthetic data\"\n            }\n          ]\n        },\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"vital-signs\",\n                \"display\": \"Vital Signs\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"29463-7\",\n              \"display\": \"Body weight\"\n            }\n          ],\n          \"text\": \"Body weight\"\n        },\n        \"subject\": {\n          \"reference\": \"urn:uuid:patient-synthetic-001\"\n        },\n        \"effectiveDateTime\": \"2024-01-15T09:30:00.000Z\",\n        \"valueQuantity\": {\n          \"value\": 75,\n          \"unit\": \"kg\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"kg\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": ["{{base_url}}"]
+            },
+            "description": "POST a transaction Bundle to the FHIR server base URL. A transaction Bundle processes all entries atomically — if any entry fails, all entries are rolled back. This Bundle creates a Patient and an Observation together. Internal references using urn:uuid are resolved by the server."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 — History",
+      "item": [
+        {
+          "name": "GET Patient history",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Patient/{{patient_id}}/_history",
+              "host": ["{{base_url}}"],
+              "path": ["Patient", "{{patient_id}}", "_history"]
+            },
+            "description": "Retrieve the full version history of a Patient resource. FHIR maintains a version history for all resources. Every update creates a new version. The _history interaction returns a Bundle of type 'history' with all versions."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Patient specific version",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/Patient/{{patient_id}}/_history/1",
+              "host": ["{{base_url}}"],
+              "path": ["Patient", "{{patient_id}}", "_history", "1"]
+            },
+            "description": "Retrieve a specific version of a Patient resource using the vread interaction. Version ID is typically a sequential number. Useful for auditing and understanding what changed between versions."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

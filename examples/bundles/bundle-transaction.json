@@ -1,0 +1,115 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-synthetic-transaction-001",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://fhir.sk/tags",
+        "code": "synthetic",
+        "display": "Synthetic data — not a real clinical record"
+      }
+    ]
+  },
+  "type": "transaction",
+  "timestamp": "2024-01-15T10:00:00.000Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-synthetic-001",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-synthetic-001",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://fhir.sk/tags",
+              "code": "synthetic",
+              "display": "Synthetic data — not a real patient"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "system": "urn:oid:2.16.840.1.113883.2.9.4.3.2",
+            "value": "SYNTHETIC-123456789"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": ["John", "Michael"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1980-01-15",
+        "address": [
+          {
+            "use": "home",
+            "line": ["Fictional Street 42"],
+            "city": "Bratislava",
+            "postalCode": "81101",
+            "country": "SK"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=urn:oid:2.16.840.1.113883.2.9.4.3.2|SYNTHETIC-123456789"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-synthetic-001",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://fhir.sk/tags",
+              "code": "synthetic",
+              "display": "Synthetic data — not a real clinical record"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "29463-7",
+              "display": "Body weight"
+            }
+          ],
+          "text": "Body weight"
+        },
+        "subject": {
+          "reference": "urn:uuid:patient-synthetic-001"
+        },
+        "effectiveDateTime": "2024-01-15T09:30:00.000Z",
+        "valueQuantity": {
+          "value": 75,
+          "unit": "kg",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}
