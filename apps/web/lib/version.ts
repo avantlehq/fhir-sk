@@ -1,7 +1,21 @@
-export const VERSION = "0.3.0";
-export const VERSION_NAME = "Navigation & Docs";
+export const VERSION = "0.3.1";
+export const VERSION_NAME = "Lab Identity";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.3.1",
+    date: "2026-06-03",
+    changes: [
+      "Homepage repositioned as FHIR Interoperability Lab (not a learning platform)",
+      "Hero subtitle updated: practical lab identity, removed 'learning environment' framing",
+      "Primary CTA: 'Open Lab', secondary CTA: 'Explore Roadmap' → /learn/roadmap",
+      "Removed redundant Lab/Learn two-column overview section",
+      "Added Learning Roadmap section with direct links",
+      "Added Future Direction section: EHDS/EHRxF planned scenarios (no empty pages)",
+      "Added About the Project section on homepage",
+      "Meta description updated to reflect lab identity",
+    ],
+  },
   {
     version: "0.3.0",
     date: "2026-06-02",
