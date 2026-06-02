@@ -8,14 +8,8 @@ const navCol = [
 ];
 
 const connectCol = [
-  { href: "/about#contact",  label: "Contact"    },
   { href: "/newsletter",     label: "Newsletter" },
   { href: "/disclaimer",     label: "Disclaimer" },
-  {
-    href: "https://github.com/avantlehq/fhir-sk",
-    label: "GitHub ↗",
-    external: true,
-  },
 ];
 
 export function Footer() {

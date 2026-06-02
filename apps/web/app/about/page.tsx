@@ -153,19 +153,6 @@ export default function AboutPage() {
                 </p>
                 <p className="text-slate-500">R4 (primary), R4B noted</p>
               </div>
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">Source</p>
-                <p className="text-slate-500">
-                  <Link
-                    href="https://github.com/avantlehq/fhir-sk"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-teal-600 hover:text-teal-700"
-                  >
-                    github.com/avantlehq/fhir-sk ↗
-                  </Link>
-                </p>
-              </div>
             </div>
           </div>
         </section>
@@ -195,31 +182,6 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* Contact */}
-        <section id="contact" className="mb-12">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">Contact</h2>
-          <p className="text-slate-700 leading-relaxed mb-4">
-            Questions, ideas, or feedback about FHIR.sk? Open an issue on GitHub
-            or send an email.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href="https://github.com/avantlehq/fhir-sk/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:border-teal-600 hover:text-teal-700 transition-colors"
-            >
-              GitHub Issues ↗
-            </a>
-            <a
-              href="mailto:mitasik@avantle.com"
-              className="inline-flex items-center gap-2 text-sm font-medium border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:border-teal-600 hover:text-teal-700 transition-colors"
-            >
-              mitasik@avantle.com
-            </a>
-          </div>
         </section>
 
         {/* Disclaimer link */}

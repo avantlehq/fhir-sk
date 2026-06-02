@@ -28,16 +28,7 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="https://github.com/avantlehq/fhir-sk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:border-teal-600 hover:text-teal-700 transition-colors"
-            >
-              GitHub
-            </Link>
-          </div>
+          <div className="hidden md:flex items-center gap-3" />
           <button
             className="md:hidden p-2 text-slate-600"
             onClick={() => setOpen(!open)}
@@ -79,15 +70,6 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="https://github.com/avantlehq/fhir-sk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mt-2 text-sm font-semibold text-slate-600"
-              onClick={() => setOpen(false)}
-            >
-              GitHub ↗
-            </Link>
           </div>
         )}
       </div>
