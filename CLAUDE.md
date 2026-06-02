@@ -82,7 +82,7 @@ Three top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **About** (`/a
 
 | Route | Status | Description |
 |-------|--------|-------------|
-| `/` | ✅ Live | Homepage: hero, Lab/Learn overview, lab modules preview, disclaimer |
+| `/` | ✅ Live | Homepage: hero, lab modules, learning roadmap, future direction, about, newsletter, disclaimer |
 | `/lab` | ✅ Live | Lab index with 6 module cards |
 | `/lab/mock-server` | ✅ Stub | HAPI FHIR R4 mock server |
 | `/lab/resource-builder` | ✅ Stub | Create/edit FHIR R4 resources |
@@ -131,7 +131,7 @@ Version is defined in `apps/web/lib/version.ts`:
 
 **Rule: update version.ts + package.json after every meaningful deployment.**
 
-Current version: **0.2.0 "Lab Architecture"**
+Current version: **0.3.1 "Lab Identity"**
 
 ### Design system
 
@@ -211,11 +211,12 @@ Requests: CapabilityStatement, Patient CRUD, Search, Transaction Bundle, Observa
 
 ## Phase 1 Status — FHIR Foundations (IN PROGRESS)
 
-Web infrastructure done (v0.2.0). FHIR server work not yet started.
+Web infrastructure done (v0.3.1). FHIR server work not yet started.
 
 - [x] Web app deployed to Vercel
 - [x] Domain DNS configured (NS → Vercel)
 - [x] Information architecture (Lab / Learn / About)
+- [x] Homepage repositioned as FHIR Interoperability Lab (v0.3.1)
 - [ ] Deploy HAPI FHIR locally via Docker Compose
 - [ ] Patient CRUD via Postman
 - [ ] Read and interpret CapabilityStatement
