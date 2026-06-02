@@ -3,7 +3,7 @@ export const siteConfig = {
   url: "https://fhir.sk",
   title: "FHIR.sk — FHIR Interoperability Lab",
   description:
-    "Testing environment for HL7 FHIR R4, synthetic healthcare data and EHDS concepts. Personal learning and experimentation platform.",
+    "FHIR Interoperability Lab focused on HL7 FHIR, healthcare interoperability, and EHDS. Built to explore standards and share practical knowledge through hands-on work.",
   locale: "en",
 };
 

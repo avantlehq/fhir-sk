@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About FHIR.sk — a personal learning platform for HL7 FHIR R4, healthcare interoperability, and EHDS. Not affiliated with any healthcare institution.",
+    "About FHIR.sk — FHIR Interoperability Lab focused on HL7 FHIR, healthcare interoperability, and EHDS. Not affiliated with any healthcare institution.",
 };
 
 const philosophy = [
@@ -62,9 +62,9 @@ export default function AboutPage() {
             About FHIR.sk
           </h1>
           <p className="mt-4 text-lg text-slate-500 leading-relaxed">
-            A personal FHIR interoperability lab. The purpose is simple: become
-            a practical expert in HL7 FHIR, healthcare interoperability, and
-            EHDS through hands-on implementation.
+            FHIR Interoperability Lab focused on HL7 FHIR, healthcare
+            interoperability, and EHDS. Built to explore standards and share
+            practical knowledge through hands-on work.
           </p>
         </div>
 
@@ -195,6 +195,31 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="mb-12">
+          <h2 className="text-xl font-bold text-slate-900 mb-4">Contact</h2>
+          <p className="text-slate-700 leading-relaxed mb-4">
+            Questions, ideas, or feedback about FHIR.sk? Open an issue on GitHub
+            or send an email.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://github.com/avantlehq/fhir-sk/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:border-teal-600 hover:text-teal-700 transition-colors"
+            >
+              GitHub Issues ↗
+            </a>
+            <a
+              href="mailto:mitasik@avantle.com"
+              className="inline-flex items-center gap-2 text-sm font-medium border border-slate-300 text-slate-700 px-4 py-2 rounded-lg hover:border-teal-600 hover:text-teal-700 transition-colors"
+            >
+              mitasik@avantle.com
+            </a>
+          </div>
         </section>
 
         {/* Disclaimer link */}

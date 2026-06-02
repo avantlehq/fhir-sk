@@ -1,7 +1,19 @@
-export const VERSION = "0.2.0";
-export const VERSION_NAME = "Lab Architecture";
+export const VERSION = "0.3.0";
+export const VERSION_NAME = "Navigation & Docs";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.3.0",
+    date: "2026-06-02",
+    changes: [
+      "New /newsletter page with topics overview and GitHub fallback",
+      "Newsletter CTA section on homepage",
+      "Professional 3-column footer (Explore / Connect columns)",
+      "About page: updated description (removed 'personal'), added Contact section",
+      "Sitemap updated with /newsletter route",
+      "siteConfig description updated",
+    ],
+  },
   {
     version: "0.2.0",
     date: "2026-06-01",

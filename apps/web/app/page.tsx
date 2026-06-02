@@ -95,12 +95,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Newsletter CTA */}
+      <section className="py-14 px-4 bg-teal-900 text-white">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-xs font-semibold text-teal-300 uppercase tracking-widest mb-3">Newsletter</p>
+          <h2 className="text-2xl font-bold mb-3">
+            Stay updated on HL7 FHIR, EHDS and interoperability.
+          </h2>
+          <p className="text-teal-200 text-sm leading-relaxed mb-6">
+            Practical notes sent when there is something worth sharing. No spam.
+          </p>
+          <Link
+            href="/newsletter"
+            className="inline-block bg-white text-teal-900 font-semibold px-6 py-3 rounded-lg hover:bg-teal-50 transition-colors text-sm"
+          >
+            Subscribe →
+          </Link>
+        </div>
+      </section>
+
       {/* Disclaimer */}
       <section className="py-8 px-4 bg-amber-50 border-t border-amber-200">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <span className="text-amber-700 font-semibold text-sm flex-shrink-0">⚠ Important:</span>
           <p className="text-amber-800 text-sm leading-relaxed">
-            This is a personal learning project. All data is synthetic. Not affiliated with NCZI, HL7 Slovakia, or any healthcare institution.{" "}
+            All data is synthetic. Not affiliated with NCZI, HL7 Slovakia, or any healthcare institution.{" "}
             <Link href="/disclaimer" className="underline hover:no-underline">Read full disclaimer.</Link>
           </p>
         </div>
