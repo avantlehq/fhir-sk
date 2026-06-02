@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Newsletter",
-  description:
-    "Stay updated on HL7 FHIR, EHDS and healthcare interoperability. Subscribe to FHIR.sk updates.",
-};
+import Link from "next/link";
+import { useState } from "react";
 
 const topics = [
   "HL7 FHIR R4 concepts and implementation notes",
@@ -16,6 +12,32 @@ const topics = [
 ];
 
 export default function NewsletterPage() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
+
+    const res = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setStatus("error");
+      setErrorMsg(data.error ?? "Something went wrong.");
+    } else {
+      setStatus("success");
+      setEmail("");
+    }
+  }
+
   return (
     <div className="py-16">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,29 +75,35 @@ export default function NewsletterPage() {
         </div>
 
         <div className="border border-slate-200 rounded-xl p-8 bg-slate-50">
-          <p className="text-sm font-semibold text-slate-700 mb-1">
-            Subscription coming soon
-          </p>
-          <p className="text-sm text-slate-500 leading-relaxed">
-            Email subscription is being set up. In the meantime, follow progress
-            on{" "}
-            <a
-              href="https://github.com/avantlehq/fhir-sk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-teal-600 hover:text-teal-700 font-medium"
-            >
-              GitHub ↗
-            </a>{" "}
-            or reach out via{" "}
-            <a
-              href="mailto:mitasik@avantle.com"
-              className="text-teal-600 hover:text-teal-700 font-medium"
-            >
-              email
-            </a>
-            .
-          </p>
+          {status === "success" ? (
+            <div>
+              <p className="font-semibold text-slate-900 mb-1">You are subscribed.</p>
+              <p className="text-sm text-slate-500">
+                You will receive updates on HL7 FHIR, EHDS, and interoperability.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="flex-1 px-4 py-2.5 text-sm border border-slate-300 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="px-6 py-2.5 bg-teal-600 text-white text-sm font-semibold rounded-lg hover:bg-teal-500 transition-colors disabled:opacity-60"
+              >
+                {status === "loading" ? "Subscribing…" : "Subscribe"}
+              </button>
+            </form>
+          )}
+          {status === "error" && (
+            <p className="mt-3 text-sm text-red-600">{errorMsg}</p>
+          )}
         </div>
       </div>
     </div>
