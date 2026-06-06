@@ -263,12 +263,13 @@ All examples use **synthetic data only**. Fictional names and identifiers.
 | 4 | Terminologies | ✅ Complete | v1.2.0 |
 | 5 | EHDS and EHRxF | ✅ Complete | v1.3.0 |
 | 6 | Governance and Consolidation | ✅ Complete | v1.4.0 |
-| 7 | Slovak Interoperability Mapping | 🔄 In Progress | — |
-| 8 | Slovak FHIR Profiles | 🔲 Planned | — |
-| 9 | Architecture Patterns | 🔲 Planned | — |
-| 10 | Implementation Guide + Terminology Architecture | 🔲 Planned | — |
+| 7 | Slovak eHealth Analysis | 🔄 In Progress | — |
+| 8 | FHIR Mapping | 🔲 Planned | — |
+| 9 | Slovak FHIR Profiles | 🔲 Planned | — |
+| 10 | Architecture Patterns | 🔲 Planned | — |
+| 11 | Implementation Guide + Terminology Architecture | 🔲 Planned | — |
 
-Phases 7–10 follow the principle: Reality → Profiles → Architecture → IG.
+Phases 7–11: eHealth Analysis → Mapping → Profiles → Architecture → IG + Terminology.
 Full details in `docs/phases.md`.
 
 ---

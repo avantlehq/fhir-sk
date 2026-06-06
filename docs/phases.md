@@ -46,16 +46,17 @@ Profiles and IGs must emerge from reality, not precede it. A profile invented wi
 
 | Phase | Topic |
 |-------|-------|
-| Phase 7 | Slovak Interoperability Mapping |
-| Phase 8 | Slovak FHIR Profiles |
-| Phase 9 | Architecture Patterns |
-| Phase 10 | Implementation Guide + Terminology Architecture |
+| Phase 7 | Slovak eHealth Analysis |
+| Phase 8 | FHIR Mapping |
+| Phase 9 | Slovak FHIR Profiles |
+| Phase 10 | Architecture Patterns |
+| Phase 11 | Implementation Guide + Terminology Architecture |
 
 ### Year 3 — EHDS + Cross-border
 
 | Phase | Topic |
 |-------|-------|
-| Phase 11+ | EHDS EHRxF conformance, MyHealth@EU cross-border, national rollout |
+| Phase 12+ | EHDS EHRxF conformance, MyHealth@EU cross-border, national rollout |
 
 ---
 
@@ -280,98 +281,167 @@ Analytics over a 5-patient synthetic dataset has no learning value. Phase 7 will
 
 ---
 
-## Phase 7 — Slovak Interoperability Mapping
+## Phase 7 — Slovak eHealth Analysis
 
 **Status:** In Progress (started 2026-06-07)
 
-**Goal:** Analyze Slovak eHealth modules from eZdravie IM v4.6.0. For each module: extract data elements, map to FHIR R4, identify terminological bindings, document gaps. Output: mapping tables that will drive Phase 8 profile design.
+**Goal:** Pochopiť ako slovenské zdravotníctvo funguje dnes — architektúru eZdravia, Integračný manuál NCZI, SOAP služby, XML správy, XSD schémy, ADL archetypy, číselníky, identifikátory. Toto je samostatný learning track, nie len vstupný dokument pre mapovanie.
 
-**Why mapping precedes profiles:** A profile invented without source system analysis is a guess. Phase 7 produces the source of truth that Phases 8–9 build on.
+**Strategická hodnota:** Väčšina FHIR konzultantov vie FHIR. Málokto vie zároveň eZdravie, NCZI IM, XML/XSD, SOAP a vedieť to preložiť do FHIR a EHDS. Toto je vzácna kompetencia špecifická pre slovenský kontext.
 
-**Modules in scope:**
+**Celý knowledge chain:**
+```
+Súčasný stav SR
+↓
+Integračný manuál NCZI
+↓
+XML / XSD / ADL
+↓
+FHIR mapovanie  (Phase 8)
+↓
+FHIR profily    (Phase 9)
+↓
+EHDS            (Phase 12+)
+```
 
-| Priority | Module | FHIR target resources | Why |
-|----------|--------|----------------------|-----|
-| 1 | eLab v3 | Observation, DiagnosticReport | Core EHDS Phase 1, strong LOINC model, clean data structure |
-| 2 | eVyšetrenie v8/v9 | Composition, Encounter, Condition, Observation, Procedure | Most clinically rich, ambulatory record |
-| 3 | eRecept v6 | MedicationRequest, MedicationDispense | EHDS Phase 1 ePrescription |
-| 4 | JRUZ v1.2.0 | Patient, Practitioner, Organization | Identity foundation for all other profiles |
-
-**Source material:** eZdravie IM v4.6.0 / ZS 8.5 (April 2026). Internal NCZI document. Prior analysis: `C:\Users\rasti\Projects\eZdravie_IM_evaluation\`.
+**Source material:** eZdravie IM v4.6.0 / ZS 8.5 (April 2026). Interný NCZI dokument. Predchádzajúca analýza: `C:\Users\rasti\Projects\eZdravie_IM_evaluation\`.
 
 ### Privacy Rule
 
-IM is an internal NCZI document. What goes public (fhir.sk, GitHub): abstract mapping tables, profile design decisions, Learn articles. What stays private (local docs/ only): specific XML structures, message schemas, endpoint details, XSD excerpts from IM.
+IM je interný NCZI dokument. Verejné (fhir.sk + GitHub): abstraktné analýzy, popis architektúry, Learn články. Privátne (len lokálne docs/): XML štruktúry, XSD excerpty, endpoint detaily, procesné scenáre z IM.
 
-### Success Criteria
+### Track A — Current State Analysis
 
-**eLab v3:**
-- [ ] Data elements extracted and documented (docs/phase-7-elab-analysis.md)
-- [ ] Mapping table: XML element → FHIR R4 path + data type + cardinality
-- [ ] Terminology gap identified: what codes does eLab use, where is LOINC needed
-- [ ] Key design decisions documented: single Observation vs DiagnosticReport + Observation[]
-- [ ] Learn article: How eLab Maps to FHIR
+**Cieľ:** Porozumieť tomu ako eZdravie funguje — nie ako ho zmeniť, ale ako ho čítať a interpretovať.
 
-**eVyšetrenie v8/v9:**
-- [ ] Document structure mapped: what sections, what data elements
-- [ ] Mapping: eVyšetrenie → Composition + Encounter + Condition + Observation + Procedure
-- [ ] MKCH-10 binding identified for Condition.code
-- [ ] Learn article: How eVyšetrenie Maps to FHIR
+**Oblasti štúdia:**
 
-**eRecept v6:**
-- [ ] Mapping: eRecept → MedicationRequest + MedicationDispense
-- [ ] ATC binding for medication codes
-- [ ] Learn article: How ePrescription Maps to FHIR
+| Oblasť | Čo pochopiť |
+|--------|-------------|
+| Architektúra eZdravia | 13 modulov, verzie, vzájomné závislosti, NZIS vs eZdravie |
+| SOAP/XML services | WSDL, operácie, request/response pattern, WS-Security, eID |
+| XSD schémy | Ako čítať XSD, typy, reštrikcie, extensions, enumerations |
+| ADL archetypy | Čo je ADL, vzťah k XSD a klinickému modelu (ak eZdravie používa) |
+| Číselníky NCZI | Ako sú organizované, OID strom, verzie, vzťah k medzinárodným (MKCH-10, ATC) |
+| Identifikátory | Rodné číslo (OID), JRÚZ ID, poistný kód, IČO PZS, kód lekára, kód zariadenia |
+| JRUZ | Národný register — dátový model, identitné vzťahy, update model |
+| NZIS | Vzťah k eZdraviu, sekundárne využitie, štatistické výstupy |
 
-**JRUZ v1.2.0:**
-- [ ] Slovak patient identifiers documented (rodné číslo OID, JRÚZ ID, poistný kód)
-- [ ] Practitioner identifier scheme (kód lekára, špecializácia číselník)
-- [ ] Organization identifier scheme (IČO PZS, kód zariadenia)
+**Moduly na analýzu (prioritný poriadok):**
 
-### New fhir.sk Content
+| Priorita | Modul | Prečo |
+|----------|-------|-------|
+| 1 | eLab v3 | Najštruktúrovanejší, najčistejší dátový model |
+| 2 | eVyšetrenie v8/v9 | Najklinicky bohatší — ambulantný nález |
+| 3 | eRecept v6 | EHDS Phase 1 ePrescription |
+| 4 | JRUZ v1.2.0 | Identitný základ pre všetko ostatné |
 
-**Learn track: Slovak Interoperability** (Track 6 — replaces Analytics placeholder)
+**Success criteria Track A:**
+- [ ] Architektúra eZdravia zdokumentovaná (docs/phase-7-architecture.md)
+- [ ] eLab v3: dátové elementy, XSD štruktúra, procesný tok (docs/phase-7-elab-analysis.md)
+- [ ] eVyšetrenie: sekcie dokumentu, povinné vs voliteľné elementy (docs/phase-7-evysetrenie-analysis.md)
+- [ ] eRecept: životný cyklus receptu, XSD dátové elementy (docs/phase-7-erecept-analysis.md)
+- [ ] JRUZ: identifikátory, dátový model, update vzory (docs/phase-7-jruz-analysis.md)
+- [ ] Číselníky NCZI: OID strom, vzťah k LOINC/MKCH-10/ATC zdokumentovaný
+
+**Learn články Track A (fhir.sk — Track 6: Slovak Interoperability):**
+- How eZdravie Works Today
+- Understanding the NCZI Integration Manual
+- SOAP Architecture of Slovak eHealth
+- XSD to Data Elements: Reading eZdravie Schemas
+- Slovak Health Identifiers: rodné číslo, JRÚZ, IČO PZS
+- Current State of Slovak Interoperability
+
+---
+
+## Phase 8 — FHIR Mapping
+
+**Status:** Planned (po Phase 7 Track A)
+
+**Goal:** Pre každý eZdravie modul vytvoriť mapovanie: XML element → FHIR R4 path. Identifikovať terminologické medzery, gap analýzy, design rozhodnutia. Výstup: mapovanie tabuľky ktoré budú vstupom pre Phase 9 profily.
+
+**Input:** Phase 7 analýza každého modulu. Mapovanie začína až po pochopení zdrojového systému.
+
+### Mapovanie modulov
+
+**eLab v3 → FHIR:**
+
+| eZdravie element | FHIR resource | FHIR path | Poznámka |
+|------------------|---------------|-----------|---------|
+| laboratoryResult.testCode | Observation | Observation.code | LOINC binding — treba ConceptMap |
+| laboratoryResult.value | Observation | Observation.value[x] | Numeric vs string |
+| laboratoryResult.unit | Observation | Observation.valueQuantity.unit | UCUM binding |
+| laboratoryResult.referenceRange | Observation | Observation.referenceRange | Low/high/text |
+| laboratoryResult.status | Observation | Observation.status | Enum mapping |
+| laboratoryResult.performer | Observation | Observation.performer | → Practitioner ref |
+| panel / set výsledkov | DiagnosticReport | DiagnosticReport.result[] | 1 DR + N Observations |
+
+**eVyšetrenie v8/v9 → FHIR:**
+- Hlavička dokumentu → Composition (type, subject, author, date)
+- Návšteva pacienta → Encounter (class AMB, period, reasonCode)
+- Diagnózy → Condition[] (MKCH-10 binding, clinicalStatus)
+- Objektívny nález / Observation → Observation[]
+- Výkony → Procedure[]
+- Celý dokument → Document Bundle (Composition first entry)
+
+**eRecept v6 → FHIR:**
+- Predpis → MedicationRequest (ATC binding, status, intent)
+- Vydanie → MedicationDispense (quantity, performer → Pharmacy)
+- Životný cyklus: predpísaný → vydaný → exspirovaný
+
+**JRUZ v1.2.0 → FHIR:**
+- Pacient → Patient (rodné číslo + JRÚZ ID slices, name, birthDate, gender, address)
+- Lekár → Practitioner (kód lekára, špecializácia binding)
+- Zariadenie → Organization (IČO PZS, kód zariadenia)
+
+### Success criteria
+
+- [ ] Mapovacia tabuľka eLab v3: každý XML element → FHIR path (docs/phase-8-elab-mapping.md)
+- [ ] Terminologická gap analýza: aké SK kódy nemajú priamy LOINC ekvivalent
+- [ ] Design rozhodnutie zdokumentované: DiagnosticReport + Observation[] vs samostatné Observations
+- [ ] Mapovacia tabuľka eVyšetrenie: sekcia → FHIR resource (docs/phase-8-evysetrenie-mapping.md)
+- [ ] Mapovacia tabuľka eRecept → MedicationRequest (docs/phase-8-erecept-mapping.md)
+- [ ] Identifikátory JRUZ → Patient.identifier slices (docs/phase-8-jruz-mapping.md)
+
+**Learn články (fhir.sk — Track 6):**
 - How eLab Maps to FHIR
-- How eVyšetrenie Maps to FHIR
+- How eVyšetrenie Maps to FHIR: From XML Document to FHIR Bundle
 - How ePrescription Maps to FHIR
-- From XML/SOAP to FHIR REST
-- EHDS and Slovak eHealth — the Road to 2027
+- From XML/SOAP to FHIR REST: The Full Transformation
 
-**Reference: FHIR Mapping Catalog** (new section)
-- eLab v3 → Observation + DiagnosticReport
+**Reference — FHIR Mapping Catalog** (nová sekcia):
+- eLab v3 → Observation + DiagnosticReport (tabuľka element po elemente)
 - eRecept v6 → MedicationRequest
 - JRUZ → Patient identifiers
 
 ---
 
-## Phase 8 — Slovak FHIR Profiles
+## Phase 9 — Slovak FHIR Profiles
 
-**Status:** Planned (after Phase 7)
+**Status:** Planned (po Phase 8)
 
-**Goal:** Create Slovak FHIR profiles derived from Phase 7 mapping analysis. Profiles constrain FHIR R4 to match what Slovak systems actually exchange — not invented constraints.
+**Goal:** Vytvoriť Slovak FHIR profily odvodené z Phase 8 mapovania. Každý constraint má dôvod zdokumentovaný v Phase 7–8. Žiadna profile práca bez dokončeného mapovania.
 
-**Input:** Phase 7 mapping tables. No profile work before mapping is done.
+**8 profilov:**
 
-**Profiles to create:**
+| Profil | Základ | Nahrádza |
+|--------|--------|---------|
+| FhirSkPatient v1.0 | JRUZ analýza (Phase 7) | vymyslený v0.2.0 |
+| FhirSkObservation | eLab analýza (Phase 8) | — |
+| FhirSkDiagnosticReport | eLab analýza (Phase 8) | — |
+| FhirSkMedicationRequest | eRecept analýza (Phase 8) | — |
+| FhirSkEncounter | eVyšetrenie analýza (Phase 8) | — |
+| FhirSkCondition | eVyšetrenie + MKCH-10 (Phase 8) | — |
+| FhirSkPractitioner | JRUZ analýza (Phase 7) | — |
+| FhirSkOrganization | JRUZ analýza (Phase 7) | — |
 
-| Profile | Based on | Replaces |
-|---------|----------|---------|
-| FhirSkPatient v1.0 | JRUZ analysis | current vymyslený v0.2.0 |
-| FhirSkObservation | eLab v3 analysis | — |
-| FhirSkDiagnosticReport | eLab v3 analysis | — |
-| FhirSkMedicationRequest | eRecept v6 analysis | — |
-| FhirSkEncounter | eVyšetrenie analysis | — |
-| FhirSkCondition | eVyšetrenie + MKCH-10 | — |
-| FhirSkPractitioner | JRUZ analysis | — |
-| FhirSkOrganization | JRUZ analysis | — |
-
-**Tooling:** StructureDefinition JSON (current approach) for drafts. FSH/SUSHI for final profiles in Phase 9.
+**Tooling:** StructureDefinition JSON pre drafty. FSH/SUSHI pre finálne profily v Phase 11.
 
 ---
 
-## Phase 9 — Architecture Patterns
+## Phase 10 — Architecture Patterns
 
-**Status:** Planned (after Phase 8)
+**Status:** Planned (after Phase 9 — Slovak Profiles)
 
 **Goal:** Understand how FHIR integrates at system level. The most important decisions in any FHIR project are architectural — Facade vs Hybrid vs FHIR-native determines the entire project trajectory, costs, and timeline. This is consultant-level competency, not developer tooling.
 
@@ -404,13 +474,13 @@ Every Slovak PZS that needs EHDS compliance by 2027 will face this exact decisio
 
 ---
 
-## Phase 10 — Implementation Guide + Terminology Architecture
+## Phase 11 — Implementation Guide + Terminology Architecture
 
-**Status:** Planned (after Phase 9)
+**Status:** Planned (after Phase 10 — Architecture Patterns)
 
 **Goal:** Two parallel tracks that are tightly coupled in practice — publish Slovak FHIR profiles as a formal IG, and stand up a proper terminology infrastructure. For EHDS, both are required. A system that cannot expand a ValueSet or validate a SNOMED code is not conformant.
 
-**Why after Architecture:** IG structure reflects architecture decisions. Facade IG ≠ FHIR-native IG. Terminology architecture is infrastructure — needs to fit the deployment pattern chosen in Phase 9.
+**Why after Architecture:** IG structure reflects architecture decisions. Facade IG ≠ FHIR-native IG. Terminology architecture is infrastructure — needs to fit the deployment pattern chosen in Phase 10.
 
 ### Track A — Slovak FHIR Implementation Guide
 
@@ -459,7 +529,7 @@ FHIR resources reference external terminology servers for $expand, $validate-cod
 | Track 3 — Terminologies | Phase 4 | ✅ Live |
 | Track 4 — EHDS and EHRxF | Phase 5 | ✅ Live |
 | Track 5 — Governance and Conformance | Phase 6 | ✅ Live |
-| Track 6 — Slovak Interoperability | Phase 7 | Year 2 |
-| Track 7 — Architecture Patterns | Phase 9 | Year 2 |
-| Track 8 — Terminology Architecture | Phase 10 | Year 2 |
-| Track 9 — EHDS and Cross-border | Phase 11+ | Year 3 |
+| Track 6 — Slovak Interoperability | Phase 7–8 | Year 2 |
+| Track 7 — Architecture Patterns | Phase 10 | Year 2 |
+| Track 8 — Terminology Architecture | Phase 11 | Year 2 |
+| Track 9 — EHDS and Cross-border | Phase 12+ | Year 3 |
