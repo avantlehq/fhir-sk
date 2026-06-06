@@ -100,7 +100,7 @@ HAPI FHIR + Docker + PostgreSQL — stable and documented.
 - [x] Domain DNS configured (fhir.sk → Vercel NS)
 - [x] Information architecture: Lab / Learn / About
 - [x] Homepage: 4 sections (v0.4.0)
-- [ ] fhir.sk DNS resolves (Vercel green status)
+- [x] fhir.sk DNS resolves (Vercel, www.fhir.sk primary, fhir.sk → www redirect)
 - [x] HAPI FHIR running locally via Docker Compose (curl, not Postman)
 - [x] Synthetic Patient: CRUD complete (curl, 2026-06-06)
 - [x] CapabilityStatement read and understood

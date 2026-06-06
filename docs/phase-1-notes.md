@@ -256,4 +256,4 @@ FHIR interactions. FHIR adds History (GET `_history`) and Search (GET with query
 - [x] Version history verified (versionId increments, soft-delete returns 410)
 - [x] Transaction Bundle processed — Patient + Observation, internal urn:uuid resolved
 - [x] All 7 review questions answered
-- [ ] fhir.sk DNS resolves (Vercel green status)
+- [x] fhir.sk DNS resolves — www.fhir.sk primary, fhir.sk → www redirect (Vercel)
