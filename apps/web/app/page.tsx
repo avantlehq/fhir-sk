@@ -5,24 +5,23 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "FHIR.sk — FHIR Interoperability Lab",
-  description: "A practical environment for testing, validating and exploring HL7 FHIR concepts using synthetic healthcare data.",
+  description: "A practical lab for exploring healthcare interoperability through HL7 FHIR, terminologies, synthetic health data and EHDS.",
   alternates: { canonical: siteConfig.url },
 };
 
 const labModules = [
-  { title: "Resource Builder", description: "Create and edit FHIR R4 resources. View JSON output and validate against base profiles.", status: "Planned" as const, href: "/lab/resource-builder" },
-  { title: "Validator", description: "Validate FHIR JSON and XML against R4 rules and profiles. Supports Bundles, Patient Summary and ePrescription.", status: "Planned" as const, href: "/lab/validator" },
   { title: "Mock Server", description: "Simulated FHIR REST API for CRUD operations, search and transaction testing based on HAPI FHIR R4.", status: "In Progress" as const, href: "/lab/mock-server" },
+  { title: "Validator", description: "Validate FHIR JSON and XML against R4 rules and profiles. Supports Bundles, Patient Summary and ePrescription.", status: "Planned" as const, href: "/lab/validator" },
   { title: "Synthetic Data", description: "Generate realistic fictional FHIR datasets: patients, encounters, observations, medications and Patient Summary.", status: "Planned" as const, href: "/lab/synthetic-data" },
-  { title: "Terminology Explorer", description: "Explore CodeSystem, ValueSet and ConceptMap. Work with LOINC, SNOMED CT, ICD-10 and ATC examples.", status: "Planned" as const, href: "/lab/terminology-explorer" },
-  { title: "Profile Explorer", description: "Inspect StructureDefinitions, constraints, Must Support elements and example resources for EHDS profiles.", status: "Planned" as const, href: "/lab/profile-explorer" },
 ];
 
-const futureScenarios = [
-  { title: "Patient Summary", description: "IPS-based Patient Summary aligned with EHDS and EHRxF." },
-  { title: "ePrescription", description: "Cross-border ePrescription and eDispensation workflows." },
-  { title: "Laboratory Results", description: "Structured lab reports using FHIR DiagnosticReport and Observation." },
-  { title: "Cross-border Care", description: "MyHealth@EU interoperability scenarios using synthetic data." },
+const learnAreas = [
+  { title: "FHIR Fundamentals", description: "Resources, REST API, Bundles, CapabilityStatement and HAPI FHIR.", href: "/learn/fhir-foundations" },
+  { title: "Health Data Standards", description: "HL7 v2, CDA, FHIR, openEHR and OMOP — how standards relate.", href: "/learn/resources" },
+  { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10/11, ValueSet and CodeSystem.", href: "/learn/terminology" },
+  { title: "EHDS and EHRxF", description: "European Health Data Space, Patient Summary, ePrescription and MyHealth@EU.", href: "/learn/ehds" },
+  { title: "Governance and Conformance", description: "Consent, Provenance, AuditEvent, conformance testing and implementation guides.", href: "/learn/profiling" },
+  { title: "Analytics and Secondary Use", description: "FHIR to SQL, OMOP, Power BI over synthetic data and EHDS secondary use.", href: "/learn" },
 ];
 
 export default function HomePage() {
@@ -38,8 +37,8 @@ export default function HomePage() {
             FHIR Interoperability Lab
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed">
-            A practical environment for testing, validating and exploring HL7 FHIR
-            concepts using synthetic healthcare data.
+            A practical lab for exploring healthcare interoperability through HL7 FHIR,
+            terminologies, synthetic health data and EHDS.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Link href="/lab" className="bg-teal-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-teal-500 transition-colors">
@@ -52,13 +51,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Lab modules */}
+      {/* Lab Modules */}
       <section className="py-16 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
           <div className="mb-10">
-            <span className="inline-block text-xs font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-widest mb-3">Lab Modules</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">What you can test</h2>
-            <p className="mt-3 text-slate-500 text-lg">Tools for working with FHIR resources, validation and synthetic data. Statuses reflect current project maturity.</p>
+            <span className="inline-block text-xs font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-widest mb-3">Lab</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Interoperability Tools</h2>
+            <p className="mt-3 text-slate-500 text-lg">Tools for working with FHIR resources, validation and synthetic data.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {labModules.map((m) => (
@@ -73,72 +72,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Learning Roadmap */}
+      {/* Learn */}
       <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <span className="inline-block text-xs font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-widest mb-3">Learn</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Learning Roadmap</h2>
-            <p className="mt-3 text-slate-500 text-lg max-w-2xl">
-              Structured content to help you understand the FHIR concepts needed to use the lab effectively.
-              Eight phases from foundations to advanced interoperability architecture.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/learn/roadmap" className="inline-block border border-slate-300 text-slate-700 font-semibold px-5 py-3 rounded-lg hover:border-slate-500 hover:text-slate-900 transition-colors text-sm">
-              View full roadmap →
-            </Link>
-            <Link href="/learn/fhir-foundations" className="inline-block border border-slate-300 text-slate-700 font-semibold px-5 py-3 rounded-lg hover:border-slate-500 hover:text-slate-900 transition-colors text-sm">
-              FHIR Foundations →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Future Direction */}
-      <section className="py-16 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
           <div className="mb-10">
-            <span className="inline-block text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-full uppercase tracking-widest mb-3">Future Direction</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">EHDS and EHRxF Scenarios</h2>
-            <p className="mt-3 text-slate-500 text-lg max-w-2xl">
-              As the lab matures, it will expand to cover European Health Data Space interoperability scenarios
-              using synthetic data aligned with EHRxF profiles and EHDS use cases.
-            </p>
+            <span className="inline-block text-xs font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-widest mb-3">Learn</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Knowledge Tracks</h2>
+            <p className="mt-3 text-slate-500 text-lg">Practical guides and explanations across six areas of healthcare interoperability.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {futureScenarios.map((s) => (
-              <div key={s.title} className="bg-white border border-slate-200 rounded-xl p-5">
-                <span className="inline-block text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full uppercase tracking-widest mb-3">Planned</span>
-                <h3 className="text-base font-bold text-slate-900 mb-2">{s.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{s.description}</p>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {learnAreas.map((area) => (
+              <Link
+                key={area.title}
+                href={area.href}
+                className="flex items-start justify-between gap-4 border border-slate-200 rounded-xl p-5 hover:border-teal-300 hover:bg-slate-50 transition-colors group"
+              >
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 mb-1">{area.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{area.description}</p>
+                </div>
+                <span className="text-teal-600 font-bold text-lg flex-shrink-0 group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-6">
-            <span className="inline-block text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-full uppercase tracking-widest mb-3">About</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">About the Project</h2>
-          </div>
-          <p className="text-slate-600 leading-relaxed text-lg max-w-3xl">
-            FHIR.sk is an independent interoperability lab focused on HL7 FHIR R4, synthetic healthcare data
-            and EHDS adoption in the Central European context. It is not affiliated with any healthcare institution,
-            national authority or standards body. All data used is synthetic and fictional.
-          </p>
-          <div className="mt-6">
-            <Link href="/about" className="text-teal-600 font-semibold hover:text-teal-700 text-sm">
-              Read more about the project →
+          <div className="mt-8">
+            <Link href="/learn" className="text-teal-600 font-semibold hover:text-teal-700 text-sm">
+              View all learning content →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Newsletter CTA */}
+      {/* Newsletter */}
       <section className="py-14 px-4 bg-teal-900 text-white">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-xs font-semibold text-teal-300 uppercase tracking-widest mb-3">Newsletter</p>

@@ -253,6 +253,19 @@ Full roadmap at `/learn/roadmap`.
 5. **AI last.** AI features come only after Phase 5+.
 6. **English content.** Slovak i18n planned but not implemented yet.
 7. **Version bump on every meaningful deploy.** Update `version.ts` + `package.json`.
+8. **Docs update before commit.** Any commit that changes IA, navigation, design system, or phase plan must also update the relevant file in `docs/` in the same commit. Code and docs stay in sync.
+
+## Project Docs
+
+Strategic and design documentation lives in `docs/`. Always read before making structural decisions.
+
+| File | Purpose |
+|------|---------|
+| `docs/vision.md` | What the project is, positioning, scope, content principles |
+| `docs/architecture.md` | IA, navigation, routes, homepage structure, Learn/Reference separation |
+| `docs/phases.md` | 8 phases, current status, success criteria |
+| `docs/design.md` | Colors, typography, components, tone, dependencies |
+| `docs/phase-1-notes.md` | FHIR learning notes for Phase 1 |
 
 ---
 

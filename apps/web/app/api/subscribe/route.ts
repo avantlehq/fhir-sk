@@ -1,10 +1,9 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const topicId = process.env.RESEND_TOPIC_ID!;
-
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const topicId = process.env.RESEND_TOPIC_ID!;
   const { email } = await req.json();
 
   if (!email || !email.includes("@")) {

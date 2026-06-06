@@ -1,7 +1,20 @@
-export const VERSION = "0.3.1";
-export const VERSION_NAME = "Lab Identity";
+export const VERSION = "0.4.0";
+export const VERSION_NAME = "Homepage Focus";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.4.0",
+    date: "2026-06-06",
+    changes: [
+      "Homepage reduced to 4 sections: Hero, Lab, Learn, Newsletter",
+      "Lab modules on homepage: only 3 active (Mock Server, Validator, Synthetic Data)",
+      "Removed Future Direction, About and redundant Learning Roadmap sections from homepage",
+      "Added Learn Knowledge Tracks section with 6 track links",
+      "Updated hero subtitle to reflect interoperability positioning",
+      "Updated page metadata description",
+      "Added docs/: vision.md, architecture.md, phases.md, design.md",
+    ],
+  },
   {
     version: "0.3.1",
     date: "2026-06-03",
