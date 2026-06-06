@@ -1,7 +1,22 @@
-export const VERSION = "0.4.0";
-export const VERSION_NAME = "Homepage Focus";
+export const VERSION = "0.5.0";
+export const VERSION_NAME = "Phase 2 — Mock Server + Reference";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.5.0",
+    date: "2026-06-06",
+    changes: [
+      "Reference section: 10 core FHIR entries (FHIR, Resource, Patient, Observation, Bundle, Profile, REST API, Search, Validation, CapabilityStatement)",
+      "Reference added to top navigation (Lab | Learn | Reference | About)",
+      "Mock Server MVP: 8 static FHIR API routes via Next.js App Router",
+      "Mock Server page: endpoint cards with method badge, curl examples",
+      "Core clinical synthetic dataset: Condition, Encounter, MedicationRequest, 3 Observations",
+      "fhir-mock lib: static FHIR data + searchsetBundle helper + CapabilityStatement",
+      "Phase 1 complete: HAPI FHIR local setup, Patient CRUD, Transaction Bundle via curl",
+      "docs/phase-1-notes.md: full Phase 1 notes and 7 review questions answered",
+      "docs/architecture.md: Reference nav and site map updated",
+    ],
+  },
   {
     version: "0.4.0",
     date: "2026-06-06",

@@ -252,7 +252,7 @@ Full roadmap at `/learn/roadmap`.
 4. **Architecture before coding.** Always explain WHY before HOW.
 5. **AI last.** AI features come only after Phase 5+.
 6. **English content.** Slovak i18n planned but not implemented yet.
-7. **Version bump on every meaningful deploy.** Update `version.ts` + `package.json`.
+7. **Version bump on every deploy.** Every commit that is pushed to production MUST bump the version in `apps/web/lib/version.ts` (VERSION, VERSION_NAME, CHANGELOG entry) and `apps/web/package.json`. No deploy without a version bump. No exceptions.
 8. **Docs update before commit.** Any commit that changes IA, navigation, design system, or phase plan must also update the relevant file in `docs/` in the same commit. Code and docs stay in sync.
 
 ## Project Docs
