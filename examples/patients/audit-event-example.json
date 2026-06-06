@@ -1,0 +1,112 @@
+{
+  "resourceType": "AuditEvent",
+  "id": "audit-ips-access-001",
+  "type": {
+    "system": "http://dicom.nema.org/resources/ontology/DCM",
+    "code": "110106",
+    "display": "Export"
+  },
+  "subtype": [{
+    "system": "http://hl7.org/fhir/restful-interaction",
+    "code": "read",
+    "display": "read"
+  }],
+  "action": "R",
+  "period": {
+    "start": "2024-03-15T10:30:00+01:00",
+    "end": "2024-03-15T10:30:02+01:00"
+  },
+  "recorded": "2024-03-15T10:30:02+01:00",
+  "outcome": "0",
+  "outcomeDesc": "Success",
+  "purposeOfEvent": [{
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+      "code": "TREAT",
+      "display": "treatment"
+    }]
+  }],
+  "agent": [
+    {
+      "type": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+          "code": "IRCP",
+          "display": "information recipient"
+        }]
+      },
+      "who": {
+        "display": "MUDr. Peter Novák"
+      },
+      "altId": "SK-GP-12345",
+      "name": "MUDr. Peter Novák",
+      "requestor": true,
+      "network": {
+        "address": "192.168.1.42",
+        "type": "2"
+      }
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+          "code": "DEV",
+          "display": "device"
+        }]
+      },
+      "who": {
+        "display": "HAPI FHIR R4 — fhir.sk lab"
+      },
+      "requestor": false
+    }
+  ],
+  "source": {
+    "observer": {
+      "display": "HAPI FHIR R4 — fhir.sk lab"
+    },
+    "type": [{
+      "system": "http://terminology.hl7.org/CodeSystem/security-source-type",
+      "code": "3",
+      "display": "Web Server"
+    }]
+  },
+  "entity": [
+    {
+      "what": {
+        "reference": "Bundle/ips-jana-horvath-20240315",
+        "display": "IPS Patient Summary — Jana Horváth"
+      },
+      "type": {
+        "system": "http://terminology.hl7.org/CodeSystem/audit-entity-type",
+        "code": "2",
+        "display": "System Object"
+      },
+      "role": {
+        "system": "http://terminology.hl7.org/CodeSystem/object-role",
+        "code": "3",
+        "display": "Report"
+      },
+      "securityLabel": [{
+        "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+        "code": "N",
+        "display": "normal"
+      }]
+    },
+    {
+      "what": {
+        "reference": "Patient/patient-001",
+        "display": "Jana Horváth"
+      },
+      "type": {
+        "system": "http://terminology.hl7.org/CodeSystem/audit-entity-type",
+        "code": "1",
+        "display": "Person"
+      },
+      "role": {
+        "system": "http://terminology.hl7.org/CodeSystem/object-role",
+        "code": "1",
+        "display": "Patient"
+      }
+    }
+  ]
+}

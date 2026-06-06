@@ -1,0 +1,62 @@
+{
+  "resourceType": "Provenance",
+  "id": "provenance-ips-001",
+  "target": [
+    {
+      "reference": "Bundle/ips-jana-horvath-20240315",
+      "display": "IPS Patient Summary — Jana Horváth"
+    }
+  ],
+  "occurredDateTime": "2024-03-15T10:30:00+01:00",
+  "recorded": "2024-03-15T10:30:00+01:00",
+  "reason": [{
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+      "code": "TREAT",
+      "display": "treatment"
+    }]
+  }],
+  "activity": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/v3-DataOperation",
+      "code": "CREATE",
+      "display": "create"
+    }]
+  },
+  "agent": [
+    {
+      "type": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/provenance-participant-type",
+          "code": "author",
+          "display": "Author"
+        }]
+      },
+      "who": {
+        "display": "MUDr. Peter Novák"
+      },
+      "onBehalfOf": {
+        "display": "Všeobecná ambulancia MUDr. Novák"
+      }
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/provenance-participant-type",
+          "code": "assembler",
+          "display": "Assembler"
+        }]
+      },
+      "who": {
+        "display": "HAPI FHIR R4 — fhir.sk lab"
+      }
+    }
+  ],
+  "entity": [{
+    "role": "source",
+    "what": {
+      "reference": "Patient/patient-001",
+      "display": "Jana Horváth — source patient record"
+    }
+  }]
+}

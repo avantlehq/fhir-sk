@@ -1,7 +1,22 @@
-export const VERSION = "1.3.0";
-export const VERSION_NAME = "Phase 5 — EHDS and IPS";
+export const VERSION = "1.4.0";
+export const VERSION_NAME = "Phase 6 — Governance and Consolidation";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.0",
+    date: "2026-06-07",
+    changes: [
+      "Phase 6 complete: Governance resources, Mock Server + Validator consolidation, Conformance article",
+      "Governance: Consent (GDPR opt-in, provision tree), AuditEvent (DICOM type, IPS access), Provenance (authorship + assembler)",
+      "Mock Server: AllergyIntolerance endpoint (GET /api/fhir/AllergyIntolerance), IPS Bundle endpoint (GET /api/fhir/Bundle/[id])",
+      "fhir-mock: ALLERGY_INTOLERANCE + IPS_BUNDLE constants, CapabilityStatement updated with 2 new resource types",
+      "Validator: AllergyIntolerance profile (fhirsk-allergy) — 4 required checks + criticality warning",
+      "ValidatorClient: per-profile valid/invalid samples, new AllergyIntolerance profile option",
+      "Learn: What is Conformance — CapabilityStatement, conformance resources table, Consent/AuditEvent/Provenance explained",
+      "docs/phases.md: Phase 6 rewritten (Governance + Consolidation, no Analytics PoC), Phase 7 updated to Synthetic Data at Scale",
+      "docs/phase-6-notes.md: governance resource elements, conformance vs compliance, 6 review questions",
+    ],
+  },
   {
     version: "1.3.0",
     date: "2026-06-07",

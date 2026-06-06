@@ -106,6 +106,75 @@ export const OBS_WEIGHT = {
   valueQuantity: { value: 82, unit: "kg", system: "http://unitsofmeasure.org", code: "kg" },
 };
 
+export const ALLERGY_INTOLERANCE = {
+  resourceType: "AllergyIntolerance",
+  id: "allergy-amoxicillin-001",
+  meta: { tag: [{ system: "https://fhir.sk/tags", code: "synthetic" }] },
+  clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", code: "active", display: "Active" }] },
+  verificationStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", code: "confirmed", display: "Confirmed" }] },
+  type: "allergy",
+  category: ["medication"],
+  criticality: "high",
+  code: {
+    coding: [{ system: "http://snomed.info/sct", code: "372687004", display: "Amoxicillin" }],
+    text: "Amoxicillin",
+  },
+  patient: { reference: "Patient/patient-horvath-001" },
+  onsetDateTime: "2015-06-01",
+  reaction: [{
+    manifestation: [{ coding: [{ system: "http://snomed.info/sct", code: "271807003", display: "Skin rash" }] }],
+    severity: "moderate",
+  }],
+};
+
+export const IPS_BUNDLE = {
+  resourceType: "Bundle",
+  id: "ips-horvath-001",
+  meta: { tag: [{ system: "https://fhir.sk/tags", code: "synthetic" }] },
+  identifier: { system: "https://fhir.sk/fhir/Bundle", value: "ips-horvath-001" },
+  type: "document",
+  timestamp: "2026-06-06T10:30:00Z",
+  entry: [
+    {
+      fullUrl: "urn:uuid:comp-001",
+      resource: {
+        resourceType: "Composition",
+        id: "comp-001",
+        status: "final",
+        type: { coding: [{ system: "http://loinc.org", code: "60591-5", display: "Patient summary Document" }] },
+        subject: { reference: "urn:uuid:patient-horvath-001" },
+        date: "2026-06-06T10:30:00Z",
+        author: [{ display: "FHIR.sk Mock Server" }],
+        title: "Patient Summary — Jana Horváth",
+        section: [
+          {
+            title: "Allergies and Intolerances",
+            code: { coding: [{ system: "http://loinc.org", code: "48765-2" }] },
+            text: { status: "generated", div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">Amoxicillin allergy — high criticality, confirmed.</div>" },
+            entry: [{ reference: "urn:uuid:allergy-amoxicillin-001" }],
+          },
+          {
+            title: "Medication Summary",
+            code: { coding: [{ system: "http://loinc.org", code: "10160-0" }] },
+            text: { status: "generated", div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">Metformin 500mg twice daily.</div>" },
+            entry: [{ reference: "urn:uuid:medreq-metformin-001" }],
+          },
+          {
+            title: "Problem List",
+            code: { coding: [{ system: "http://loinc.org", code: "11450-4" }] },
+            text: { status: "generated", div: "<div xmlns=\"http://www.w3.org/1999/xhtml\">Diabetes mellitus type 2 — active, confirmed.</div>" },
+            entry: [{ reference: "urn:uuid:condition-diabetes-001" }],
+          },
+        ],
+      },
+    },
+    { fullUrl: "urn:uuid:patient-horvath-001", resource: { ...PATIENT, id: "patient-horvath-001" } },
+    { fullUrl: "urn:uuid:allergy-amoxicillin-001", resource: { ...ALLERGY_INTOLERANCE, id: "allergy-amoxicillin-001" } },
+    { fullUrl: "urn:uuid:medreq-metformin-001", resource: { ...MEDICATION_REQUEST, id: "medreq-metformin-001" } },
+    { fullUrl: "urn:uuid:condition-diabetes-001", resource: { ...CONDITION, id: "condition-diabetes-001" } },
+  ],
+};
+
 export function searchsetBundle(resources: object[], resourceType: string) {
   return {
     resourceType: "Bundle",
@@ -136,6 +205,8 @@ export const CAPABILITY_STATEMENT = {
       { type: "Encounter", interaction: [{ code: "read" }, { code: "search-type" }] },
       { type: "MedicationRequest", interaction: [{ code: "read" }, { code: "search-type" }] },
       { type: "Observation", interaction: [{ code: "read" }, { code: "search-type" }] },
+      { type: "AllergyIntolerance", interaction: [{ code: "read" }, { code: "search-type" }] },
+      { type: "Bundle", interaction: [{ code: "read" }] },
     ],
   }],
 };

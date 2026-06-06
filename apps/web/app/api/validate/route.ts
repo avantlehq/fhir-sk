@@ -91,6 +91,51 @@ function validateFhirSkPatient(resource: Record<string, unknown>): Issue[] {
   return issues;
 }
 
+function validateAllergyIntolerance(resource: Record<string, unknown>): Issue[] {
+  const issues: Issue[] = [];
+
+  if (resource.resourceType !== "AllergyIntolerance") {
+    issues.push({ severity: "error", code: "invalid", diagnostics: `AllergyIntolerance profile requires resourceType = "AllergyIntolerance", got "${resource.resourceType}".` });
+    return issues;
+  }
+
+  if (!resource.clinicalStatus) {
+    issues.push({ severity: "error", code: "required", diagnostics: "AllergyIntolerance.clinicalStatus is required (1..1). Must be coded from allergyintolerance-clinical.", expression: "AllergyIntolerance.clinicalStatus" });
+  }
+
+  if (!resource.verificationStatus) {
+    issues.push({ severity: "error", code: "required", diagnostics: "AllergyIntolerance.verificationStatus is required (1..1). Must be coded from allergyintolerance-verification.", expression: "AllergyIntolerance.verificationStatus" });
+  }
+
+  if (!resource.code) {
+    issues.push({ severity: "error", code: "required", diagnostics: "AllergyIntolerance.code is required (1..1) — the substance the patient is allergic to.", expression: "AllergyIntolerance.code" });
+  }
+
+  if (!resource.patient) {
+    issues.push({ severity: "error", code: "required", diagnostics: "AllergyIntolerance.patient is required (1..1) — reference to the Patient.", expression: "AllergyIntolerance.patient" });
+  }
+
+  if (!resource.criticality) {
+    issues.push({ severity: "warning", code: "best-practice", diagnostics: "AllergyIntolerance.criticality should be set (low | high | unable-to-assess) to support clinical decision support.", expression: "AllergyIntolerance.criticality" });
+  }
+
+  const reaction = resource.reaction as Record<string, unknown>[] | undefined;
+  if (reaction && reaction.length > 0) {
+    reaction.forEach((r, i) => {
+      const manifestation = r.manifestation as unknown[] | undefined;
+      if (!manifestation || manifestation.length === 0) {
+        issues.push({ severity: "error", code: "required", diagnostics: `AllergyIntolerance.reaction[${i}].manifestation is required (1..*).`, expression: `AllergyIntolerance.reaction[${i}].manifestation` });
+      }
+    });
+  }
+
+  if (issues.length === 0) {
+    issues.push({ severity: "information", code: "informational", diagnostics: "Resource is structurally valid — all required AllergyIntolerance constraints satisfied." });
+  }
+
+  return issues;
+}
+
 export async function POST(req: Request) {
   let body: { json: string; profile: string };
   try {
@@ -123,6 +168,8 @@ export async function POST(req: Request) {
   let profileIssues: Issue[] = [];
   if (profile === "fhirsk-patient") {
     profileIssues = validateFhirSkPatient(resource);
+  } else if (profile === "fhirsk-allergy") {
+    profileIssues = validateAllergyIntolerance(resource);
   }
 
   const all = [...baseIssues, ...profileIssues];

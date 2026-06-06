@@ -2,19 +2,43 @@
 
 import { useState } from "react";
 
-const SAMPLE_VALID = JSON.stringify({
-  resourceType: "Patient",
-  identifier: [{ system: "urn:oid:2.16.840.1.113883.2.9.4.3.2", value: "SYNTHETIC-HORVATH-001" }],
-  name: [{ use: "official", family: "Horváth", given: ["Jana"] }],
-  gender: "female",
-  birthDate: "1979-03-12",
-  address: [{ city: "Bratislava", postalCode: "82104", country: "SK" }],
-}, null, 2);
-
-const SAMPLE_INVALID = JSON.stringify({
-  resourceType: "Patient",
-  name: [{ family: "Test" }],
-}, null, 2);
+const SAMPLES: Record<string, { valid: string; invalid: string }> = {
+  "fhirsk-patient": {
+    valid: JSON.stringify({
+      resourceType: "Patient",
+      identifier: [{ system: "urn:oid:2.16.840.1.113883.2.9.4.3.2", value: "SYNTHETIC-HORVATH-001" }],
+      name: [{ use: "official", family: "Horváth", given: ["Jana"] }],
+      gender: "female",
+      birthDate: "1979-03-12",
+      address: [{ city: "Bratislava", postalCode: "82104", country: "SK" }],
+    }, null, 2),
+    invalid: JSON.stringify({
+      resourceType: "Patient",
+      name: [{ family: "Test" }],
+    }, null, 2),
+  },
+  "fhirsk-allergy": {
+    valid: JSON.stringify({
+      resourceType: "AllergyIntolerance",
+      clinicalStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", code: "active" }] },
+      verificationStatus: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", code: "confirmed" }] },
+      type: "allergy",
+      category: ["medication"],
+      criticality: "high",
+      code: { coding: [{ system: "http://snomed.info/sct", code: "372687004", display: "Amoxicillin" }] },
+      patient: { reference: "Patient/patient-horvath-001" },
+      reaction: [{ manifestation: [{ coding: [{ system: "http://snomed.info/sct", code: "271807003", display: "Skin rash" }] }], severity: "moderate" }],
+    }, null, 2),
+    invalid: JSON.stringify({
+      resourceType: "AllergyIntolerance",
+      code: { coding: [{ system: "http://snomed.info/sct", code: "372687004", display: "Amoxicillin" }] },
+    }, null, 2),
+  },
+  base: {
+    valid: JSON.stringify({ resourceType: "Observation", id: "obs-001", status: "final", code: { coding: [{ system: "http://loinc.org", code: "2339-0" }] } }, null, 2),
+    invalid: JSON.stringify({ name: "missing resourceType" }, null, 2),
+  },
+};
 
 type Issue = {
   severity: string;
@@ -36,8 +60,8 @@ const severityConfig: Record<string, { bg: string; border: string; text: string;
 };
 
 export function ValidatorClient() {
-  const [json, setJson] = useState(SAMPLE_VALID);
   const [profile, setProfile] = useState("fhirsk-patient");
+  const [json, setJson] = useState(SAMPLES["fhirsk-patient"].valid);
   const [result, setResult] = useState<OutcomeResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -77,18 +101,19 @@ export function ValidatorClient() {
             className="w-full sm:w-64 border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="base">Base FHIR R4</option>
-            <option value="fhirsk-patient">FhirSk Patient (fhirsk-patient|0.1.0)</option>
+            <option value="fhirsk-patient">FhirSkPatient (fhirsk-patient|0.2.0)</option>
+            <option value="fhirsk-allergy">AllergyIntolerance (fhirsk-allergy)</option>
           </select>
         </div>
         <div className="flex gap-2 pt-5">
           <button
-            onClick={() => setJson(SAMPLE_VALID)}
+            onClick={() => setJson(SAMPLES[profile]?.valid ?? SAMPLES.base.valid)}
             className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
           >
             Load valid
           </button>
           <button
-            onClick={() => setJson(SAMPLE_INVALID)}
+            onClick={() => setJson(SAMPLES[profile]?.invalid ?? SAMPLES.base.invalid)}
             className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors"
           >
             Load invalid
@@ -134,7 +159,7 @@ export function ValidatorClient() {
             <span className={`text-sm ${isValid ? "text-teal-600" : "text-red-600"}`}>
               {errors.length} error{errors.length !== 1 ? "s" : ""},
               {" "}{warnings.length} warning{warnings.length !== 1 ? "s" : ""}
-              {profile === "fhirsk-patient" ? " — FhirSk Patient profile" : " — Base FHIR R4"}
+              {profile === "fhirsk-patient" ? " — FhirSkPatient profile" : profile === "fhirsk-allergy" ? " — AllergyIntolerance profile" : " — Base FHIR R4"}
             </span>
           </div>
 

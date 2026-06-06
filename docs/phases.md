@@ -6,9 +6,9 @@ Last revised: 2026-06-06
 
 ## Current Status
 
-**Active phase:** Phase 6 — Governance and Conformance
+**Active phase:** Phase 7 — Synthetic Data at Scale + Analytics
 
-Phase 1, 2, 3, 4, and 5 complete (v1.3.0). Starting Phase 6.
+Phases 1–6 complete (v1.4.0). Starting Phase 7.
 
 ---
 
@@ -225,58 +225,59 @@ Track 2: HL7 v2, CDA, FHIR comparison ✅
 
 ---
 
-## Phase 6 — Governance and Conformance
+## Phase 6 — Governance and Consolidation
 
-**Status:** Planned
+**Status:** Complete (v1.4.0)
 
-**Month:** 5 (start) — 6 (primary)
+**Month:** 6
 
-**Goal:** Consent, Provenance, AuditEvent. Analytics Proof of Concept.
+**Goal:** Complete governance resources (Consent, AuditEvent, Provenance). Consolidate and deepen Phases 1–5 through hands-on exercises. No analytics pipeline — that belongs in Phase 7 when real data volume makes it meaningful.
 
 ### Success Criteria
 
-- [ ] Consent resource modelled for synthetic patient
-- [ ] AuditEvent logged for a FHIR operation
-- [ ] Learn article: What is Conformance
-- [ ] Analytics PoC complete (see below)
+**Governance:**
+- [x] Consent resource modelled for synthetic patient (GDPR opt-in, provision tree)
+- [x] AuditEvent resource for IPS document access (DICOM type, agent, entity)
+- [x] Provenance resource tracking IPS document authorship (author + assembler)
+- [x] Learn article: What is Conformance (/learn/profiling/conformance)
+
+**Consolidation:**
+- [x] Mock Server extended: AllergyIntolerance + IPS Document Bundle endpoints
+- [x] Validator extended: AllergyIntolerance structural validation (fhirsk-allergy profile)
+- [ ] Postman collection updated with Phase 2–5 resources (manual step)
+- [x] docs/phase-6-notes.md: governance concepts, conformance vs compliance, 6 review Q&A
 
 ### Content (Track 5)
 
-Consent, Provenance, AuditEvent, Clinical Governance, Conformance
+Consent, AuditEvent, Provenance, Conformance
 
-### Analytics Proof of Concept (Month 6)
+### Why no Analytics PoC here
 
-One demonstration scenario. Not a separate module. Not a new product.
-
-```
-Patient + Observation
-↓
-HAPI FHIR
-↓
-PostgreSQL
-↓
-Power BI (1 dashboard)
-```
-
-Example dashboards: patient count, diagnoses, lab results.
-
-Document the flow. Do not build an Analytics Lab section.
+Analytics over a 5-patient synthetic dataset has no learning value. Phase 7 will build the full pipeline when we have 50–100 patients across multiple conditions and time periods. The tools (FHIR Bulk Data, SQL schema design, Power BI) deserve a dedicated phase, not a footnote.
 
 ---
 
-## Phase 7 — Analytics and Secondary Use
+## Phase 7 — Synthetic Data at Scale + Analytics
 
 **Status:** Year 2
 
-**Goal:** Full analytics pipeline over synthetic FHIR dataset.
+**Goal:** Generate a large synthetic dataset (50–100 patients), build a FHIR → PostgreSQL analytics pipeline, create Power BI dashboards.
+
+### Success Criteria
+
+- [ ] 50–100 synthetic patients with realistic clinical histories (Synthea or hand-crafted)
+- [ ] FHIR Bulk Data ($export) pipeline to extract NDJSON
+- [ ] ETL: NDJSON → analytics PostgreSQL schema
+- [ ] Power BI dashboards: patient demographics, diagnoses, lab trends, medication distribution
+- [ ] Learn article: FHIR for Analytics
 
 ### Topics
 
-FHIR to PostgreSQL, FHIR to SQL, FHIR to OMOP, population health, quality indicators, secondary use, Power BI
+FHIR Bulk Data, $export, NDJSON, ETL design, FHIR → SQL mapping, population health, quality indicators, Power BI, secondary use, EHDS secondary use framework
 
 ### Note
 
-Phase 6 Analytics PoC provides the foundation. Phase 7 expands it into a full lab module.
+This replaces the former "Analytics PoC" that was incorrectly placed in Phase 6. Real analytics requires real data volume — 5 patients teaches nothing about query patterns or dashboard design.
 
 ---
 

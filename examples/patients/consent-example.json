@@ -1,0 +1,98 @@
+{
+  "resourceType": "Consent",
+  "id": "consent-jana-horvath-001",
+  "status": "active",
+  "scope": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/consentscope",
+      "code": "patient-privacy",
+      "display": "Privacy Consent"
+    }]
+  },
+  "category": [{
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+      "code": "IDSCL",
+      "display": "information disclosure"
+    }]
+  }],
+  "patient": {
+    "reference": "Patient/patient-001",
+    "display": "Jana Horváth"
+  },
+  "dateTime": "2024-03-15T10:30:00+01:00",
+  "performer": [{
+    "reference": "Patient/patient-001",
+    "display": "Jana Horváth"
+  }],
+  "organization": [{
+    "display": "Všeobecná ambulancia MUDr. Novák"
+  }],
+  "sourceAttachment": {
+    "contentType": "application/pdf",
+    "title": "Súhlas so spracovaním osobných údajov — podpísaný formulár"
+  },
+  "policyRule": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+      "code": "OPTIN",
+      "display": "opt-in"
+    }]
+  },
+  "provision": {
+    "type": "permit",
+    "period": {
+      "start": "2024-03-15",
+      "end": "2027-03-15"
+    },
+    "actor": [
+      {
+        "role": {
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+            "code": "PRCP",
+            "display": "primary information recipient"
+          }]
+        },
+        "reference": {
+          "display": "Všeobecná ambulancia MUDr. Novák"
+        }
+      }
+    ],
+    "action": [
+      {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/consentaction",
+          "code": "access",
+          "display": "Access"
+        }]
+      },
+      {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/consentaction",
+          "code": "correct",
+          "display": "Access and Correct"
+        }]
+      }
+    ],
+    "purpose": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "TREAT",
+        "display": "treatment"
+      }
+    ],
+    "provision": [
+      {
+        "type": "deny",
+        "purpose": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+            "code": "HMARKT",
+            "display": "healthcare marketing"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -26,6 +26,12 @@ const articles = [
     summary: "Three generations of healthcare data standards. What each solved, where each is still used, and why FHIR became the dominant modern standard.",
     tags: ["HL7 v2", "CDA", "FHIR R4", "interoperability"],
   },
+  {
+    href: "/learn/profiling/conformance",
+    title: "What is Conformance?",
+    summary: "CapabilityStatement, conformance resources, the difference between conformance/validation/compliance, and governance resources (Consent, AuditEvent, Provenance).",
+    tags: ["CapabilityStatement", "Consent", "AuditEvent", "Provenance"],
+  },
 ];
 
 export default function ProfilingPage() {
