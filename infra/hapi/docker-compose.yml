@@ -1,6 +1,6 @@
 services:
   hapi-fhir:
-    image: hapiproject/hapi:v7-tomcat
+    image: hapiproject/hapi:latest
     container_name: fhir-sk-hapi
     ports:
       - "8080:8080"
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:16-alpine
+    image: postgres:15-alpine
     container_name: fhir-sk-postgres
     environment:
       POSTGRES_DB: hapi

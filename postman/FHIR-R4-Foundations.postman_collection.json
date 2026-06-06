@@ -3,7 +3,7 @@
     "name": "FHIR R4 Foundations — fhir.sk",
     "description": "HL7 FHIR R4 Foundations collection for the FHIR.sk Interoperability Lab. Covers CRUD operations on Patient, Observation, Bundle transactions, and CapabilityStatement. Uses synthetic data only.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "fhir-sk-foundations-001"
+    "_postman_id": "a1b2c3d4-e5f6-4890-abcd-ef1234567890"
   },
   "variable": [
     {

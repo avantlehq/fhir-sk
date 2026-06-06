@@ -24,5 +24,7 @@ spring:
       hibernate.format_sql: false
     hibernate:
       ddl-auto: update
+  flyway:
+    enabled: false
   main:
     allow-circular-references: true

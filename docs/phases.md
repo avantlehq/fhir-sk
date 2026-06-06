@@ -101,12 +101,11 @@ HAPI FHIR + Docker + PostgreSQL — stable and documented.
 - [x] Information architecture: Lab / Learn / About
 - [x] Homepage: 4 sections (v0.4.0)
 - [ ] fhir.sk DNS resolves (Vercel green status)
-- [ ] HAPI FHIR running locally via Docker Compose
-- [ ] Postman collection — all requests return expected responses
-- [ ] Synthetic Patient: CRUD complete
-- [ ] CapabilityStatement read and understood
-- [ ] Transaction Bundle processed successfully
-- [ ] All 7 review questions answered (docs/phase-1-notes.md)
+- [x] HAPI FHIR running locally via Docker Compose (curl, not Postman)
+- [x] Synthetic Patient: CRUD complete (curl, 2026-06-06)
+- [x] CapabilityStatement read and understood
+- [x] Transaction Bundle processed successfully (2026-06-06)
+- [x] All 7 review questions answered (docs/phase-1-notes.md)
 
 ### Content (Track 1)
 
