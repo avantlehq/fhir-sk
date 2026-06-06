@@ -1,7 +1,16 @@
-export const VERSION = "1.4.1";
-export const VERSION_NAME = "Status corrections and roadmap update";
+export const VERSION = "1.4.2";
+export const VERSION_NAME = "Homepage hero, CTAs and learn track visual update";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.2",
+    date: "2026-06-07",
+    changes: [
+      "Hero badge: 'Mock API · 25 Reference entries · IPS Bundle · EHDS' — specific, not generic",
+      "Hero CTAs: 3 buttons — Open Lab (primary), Browse Reference (secondary border), Roadmap (tertiary text-only)",
+      "Learn tracks: Track 6 'Analytics and Secondary Use' visually dimmed — dashed border, muted text, Year 2 badge",
+    ],
+  },
   {
     version: "1.4.1",
     date: "2026-06-07",
