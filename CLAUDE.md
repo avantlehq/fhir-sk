@@ -263,9 +263,12 @@ All examples use **synthetic data only**. Fictional names and identifiers.
 | 4 | Terminologies | ✅ Complete | v1.2.0 |
 | 5 | EHDS and EHRxF | ✅ Complete | v1.3.0 |
 | 6 | Governance and Consolidation | ✅ Complete | v1.4.0 |
-| 7 | Synthetic Data at Scale + Analytics | 🔲 Year 2 | — |
-| 8 | AI over FHIR | 🔲 Year 2 | — |
+| 7 | Slovak Interoperability Mapping | 🔄 In Progress | — |
+| 8 | Slovak FHIR Profiles | 🔲 Planned | — |
+| 9 | Architecture Patterns | 🔲 Planned | — |
+| 10 | Implementation Guide + Terminology Architecture | 🔲 Planned | — |
 
+Phases 7–10 follow the principle: Reality → Profiles → Architecture → IG.
 Full details in `docs/phases.md`.
 
 ---

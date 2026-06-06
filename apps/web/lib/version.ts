@@ -1,7 +1,20 @@
-export const VERSION = "1.4.2";
-export const VERSION_NAME = "Homepage hero, CTAs and learn track visual update";
+export const VERSION = "1.4.3";
+export const VERSION_NAME = "Phase 7–10 roadmap: Slovak Interoperability strategy";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.3",
+    date: "2026-06-07",
+    changes: [
+      "CLAUDE.md: Phase table updated — Phases 7–10 reflect Slovak Interoperability strategy",
+      "docs/phases.md: Phases 7–10 fully defined with success criteria, module priorities and new Year 3 framing",
+      "Phase 7: Slovak Interoperability Mapping — eLab, eVyšetrenie, eRecept, JRUZ (priority order)",
+      "Phase 8: Slovak FHIR Profiles — derived from Phase 7 analysis, not invented",
+      "Phase 9: Architecture Patterns — Facade/Hybrid/FHIR-native decision framework (before IG)",
+      "Phase 10: IG + Terminology Architecture — FSH/SUSHI + Snowstorm + ConceptMap (SK→LOINC)",
+      "Year 3 framing added: EHDS EHRxF conformance, MyHealth@EU cross-border",
+    ],
+  },
   {
     version: "1.4.2",
     date: "2026-06-07",
