@@ -1,7 +1,20 @@
-export const VERSION = "0.5.0";
-export const VERSION_NAME = "Phase 2 — Mock Server + Reference";
+export const VERSION = "0.6.0";
+export const VERSION_NAME = "Phase 2 — Learn Articles";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.6.0",
+    date: "2026-06-06",
+    changes: [
+      "5 Learn articles: Observation, Condition, Encounter, Search, Bundle",
+      "/learn/resources rebuilt as article index with 5 cards",
+      "Observation: LOINC codes, blood pressure component[], vital-signs vs laboratory",
+      "Condition: clinicalStatus + verificationStatus lifecycle, SNOMED CT + ICD-10 coding",
+      "Encounter: status lifecycle, class (AMB/EMER/IMP/VR), participant, period, reasonCode",
+      "Search: parameter types (string, token, date, reference, quantity), modifiers, searchset Bundle",
+      "Bundle: transaction vs batch, urn:uuid internal references, entry structure, atomicity",
+    ],
+  },
   {
     version: "0.5.0",
     date: "2026-06-06",
