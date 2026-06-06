@@ -1,7 +1,19 @@
-export const VERSION = "0.8.0";
-export const VERSION_NAME = "Phase 3 — FhirSkPatient Profile";
+export const VERSION = "0.9.0";
+export const VERSION_NAME = "Phase 3 — Validator MVP";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.9.0",
+    date: "2026-06-06",
+    changes: [
+      "Validator MVP: /lab/validator — paste FHIR JSON, select profile, get OperationOutcome",
+      "API route: POST /api/validate — structural validation + FhirSkPatient profile checks",
+      "Profiles supported: base FHIR R4 (structural), fhirsk-patient (cardinality constraints)",
+      "UI: textarea, profile selector, load valid/invalid samples, severity color-coding",
+      "OperationOutcome displayed with error/warning/information badges and expression paths",
+      "Raw OperationOutcome JSON in collapsible details block",
+    ],
+  },
   {
     version: "0.8.0",
     date: "2026-06-06",
