@@ -1,7 +1,19 @@
-export const VERSION = "0.7.0";
-export const VERSION_NAME = "Phase 2 Complete";
+export const VERSION = "0.8.0";
+export const VERSION_NAME = "Phase 3 — FhirSkPatient Profile";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.8.0",
+    date: "2026-06-06",
+    changes: [
+      "Phase 3 start: FhirSkPatient StructureDefinition (examples/profiles/fhirsk-patient.json)",
+      "Profile constraints: identifier 1..*, name 1..*, name.family 1..1, name.given 1..*, gender 1..1, birthDate 1..1, mustSupport on address + communication",
+      "Slicing: nationalId slice by system OID (urn:oid:2.16.840.1.113883.2.9.4.3.2)",
+      "Validated jana-horvath.json against profile: 0 errors, 1 warning (dom-6 best practice)",
+      "Validated invalid Patient against profile: 4 errors (identifier, gender, birthDate, name.given)",
+      "docs/phase-3-notes.md: profile structure, $validate usage, all 6 review questions answered",
+    ],
+  },
   {
     version: "0.7.0",
     date: "2026-06-06",

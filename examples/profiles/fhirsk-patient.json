@@ -1,0 +1,98 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "fhirsk-patient",
+  "url": "https://fhir.sk/fhir/StructureDefinition/fhirsk-patient",
+  "version": "0.1.0",
+  "name": "FhirSkPatient",
+  "title": "FhirSk Patient Profile",
+  "status": "draft",
+  "date": "2026-06-06",
+  "publisher": "FHIR.sk Interoperability Lab",
+  "description": "Base Patient profile for the FHIR.sk lab. Constrains Patient to require a national identifier, name, gender and birthDate. Used for learning how profiles constrain base resources.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient.identifier",
+        "path": "Patient.identifier",
+        "slicing": {
+          "discriminator": [{ "type": "value", "path": "system" }],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true,
+        "comment": "At least one identifier required. The nationalId slice constrains the Slovak national identifier."
+      },
+      {
+        "id": "Patient.identifier:nationalId",
+        "path": "Patient.identifier",
+        "sliceName": "nationalId",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.identifier:nationalId.system",
+        "path": "Patient.identifier.system",
+        "min": 1,
+        "fixedUri": "urn:oid:2.16.840.1.113883.2.9.4.3.2",
+        "comment": "OID for Slovak national identifier (rodné číslo / national ID)."
+      },
+      {
+        "id": "Patient.identifier:nationalId.value",
+        "path": "Patient.identifier.value",
+        "min": 1
+      },
+      {
+        "id": "Patient.name",
+        "path": "Patient.name",
+        "min": 1,
+        "mustSupport": true,
+        "comment": "At least one HumanName required. Base FHIR allows 0..*."
+      },
+      {
+        "id": "Patient.name.family",
+        "path": "Patient.name.family",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.name.given",
+        "path": "Patient.name.given",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.gender",
+        "path": "Patient.gender",
+        "min": 1,
+        "mustSupport": true,
+        "comment": "Administrative gender required. Base FHIR is 0..1."
+      },
+      {
+        "id": "Patient.birthDate",
+        "path": "Patient.birthDate",
+        "min": 1,
+        "mustSupport": true,
+        "comment": "Date of birth required. Base FHIR is 0..1."
+      },
+      {
+        "id": "Patient.address",
+        "path": "Patient.address",
+        "mustSupport": true,
+        "comment": "Must-support: systems must be able to store and return address if present."
+      },
+      {
+        "id": "Patient.communication",
+        "path": "Patient.communication",
+        "mustSupport": true,
+        "comment": "Must-support: preferred language should be captured when known."
+      }
+    ]
+  }
+}
