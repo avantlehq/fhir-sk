@@ -1,7 +1,19 @@
-export const VERSION = "1.1.0";
-export const VERSION_NAME = "Phase 3 — Reference +15";
+export const VERSION = "1.2.0";
+export const VERSION_NAME = "Phase 4 — Terminology";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.2.0",
+    date: "2026-06-06",
+    changes: [
+      "Phase 4 complete: Terminology Explorer MVP, Learn article, ValueSet binding in FhirSkPatient",
+      "Terminology Explorer (/lab/terminology-explorer): 5 ValueSets, 4 CodeSystems, tab UI, 2-panel layout",
+      "Static terminology data (lib/fhir-terminology.ts): administrative-gender, condition-clinical, observation-category, LOINC vital signs, fhirsk-identifier-type",
+      "Learn article: Why Terminologies Matter — CodeSystem, ValueSet, binding strengths, SNOMED vs LOINC",
+      "/learn/terminology rebuilt as article index (Track 3)",
+      "FhirSkPatient v0.2.0: added required binding on Patient.gender (administrative-gender ValueSet)",
+    ],
+  },
   {
     version: "1.1.0",
     date: "2026-06-06",

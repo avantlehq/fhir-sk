@@ -6,9 +6,9 @@ Last revised: 2026-06-06
 
 ## Current Status
 
-**Active phase:** Phase 4 — Terminologies
+**Active phase:** Phase 5 — EHDS and EHRxF
 
-Phase 1, 2, and 3 complete (v1.1.0). Starting Phase 4.
+Phase 1, 2, 3, and 4 complete (v1.2.0). Starting Phase 5.
 
 ---
 
@@ -181,32 +181,26 @@ Track 2: HL7 v2, CDA, FHIR comparison ✅
 
 ## Phase 4 — Terminologies
 
-**Status:** Planned
+**Status:** Complete (v1.2.0)
 
-**Month:** 4 (+ Phase 5 intro)
+**Month:** 4
 
 **Goal:** Use SNOMED CT and LOINC in resources. ValueSet Viewer over static data.
 
 ### Success Criteria
 
-- [ ] Resources coded with SNOMED CT and LOINC
-- [ ] ValueSet referenced in a profile
-- [ ] Terminology Explorer MVP: ValueSet Viewer and CodeSystem Explorer over static data
-- [ ] Learn article: Why Terminologies Matter
-
-### Terminology Explorer scope
-
-Static data only. No Snowstorm, no Ontoserver, no full SNOMED CT server in Year 1.
-
-Acceptable MVP: ValueSet Viewer + CodeSystem Explorer using bundled static JSON.
+- [x] Resources coded with SNOMED CT and LOINC (done in Phase 2/3 — Condition, Observation)
+- [x] ValueSet referenced in a profile (FhirSkPatient v0.2.0 — required binding on Patient.gender)
+- [x] Terminology Explorer MVP at /lab/terminology-explorer (5 ValueSets, 4 CodeSystems)
+- [x] Learn article: Why Terminologies Matter (/learn/terminology/why-terminologies-matter)
 
 ### Content (Track 3)
 
-SNOMED CT, LOINC, ValueSet, CodeSystem
+- [x] Why Terminologies Matter: CodeSystem, ValueSet, binding strengths, SNOMED vs LOINC
 
 ### Reference
 
-Terminologies and EHDS expansion
+- [x] ValueSet, CodeSystem (added in Phase 3)
 
 ---
 
