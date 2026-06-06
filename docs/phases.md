@@ -6,9 +6,9 @@ Last revised: 2026-06-06
 
 ## Current Status
 
-**Active phase:** Phase 7 — Synthetic Data at Scale + Analytics
+**Active phase:** Phase 7 — eLab v3 → FHIR R4 Mapping (Slovak Interoperability)
 
-Phases 1–6 complete (v1.4.0). Starting Phase 7.
+Phases 1–6 complete (v1.4.2). Phase 7 redefined 2026-06-07 — see below.
 
 ---
 
@@ -257,43 +257,98 @@ Analytics over a 5-patient synthetic dataset has no learning value. Phase 7 will
 
 ---
 
-## Phase 7 — Synthetic Data at Scale + Analytics
+## Phase 7 — Slovak Interoperability: eZdravie → FHIR R4 Mapping
 
-**Status:** Year 2
+**Status:** In Progress (started 2026-06-07)
 
-**Goal:** Generate a large synthetic dataset (50–100 patients), build a FHIR → PostgreSQL analytics pipeline, create Power BI dashboards.
+**Goal:** Map Slovak national eHealth modules (eZdravie IM v4.6.0) to FHIR R4. Produce Slovak FHIR profiles grounded in actual national data requirements. Build "Slovak Interoperability" Learn track and FHIR Mapping Catalog Reference section on fhir.sk.
+
+**Why this over generic analytics:** Analytics over a 5-patient synthetic dataset has no learning value. Mapping real Slovak XML/SOAP data structures to FHIR is directly relevant to EHDS 2027 requirements and produces reusable artefacts with real consulting value.
+
+**Source material:** eZdravie Integration Manual v4.6.0 / ZS 8.5 (April 2026). NCZI internal document — used as reference only, not published to public repo. Analysis at `C:\Users\rasti\Projects\eZdravie_IM_evaluation\`.
+
+### Sprint Plan
+
+| Sprint | Module | FHIR resources | Key outputs |
+|--------|--------|----------------|-------------|
+| 1 | eLab v3 | Observation, DiagnosticReport | XML model analysis, LOINC mapping for Slovak lab codes, FhirSkObservation profile |
+| 2 | eRecept v6 | MedicationRequest, MedicationDispense | ATC terminology mapping, FhirSkMedicationRequest profile |
+| 3 | JRUZ v1.2.0 | Patient, Practitioner, Organization | FhirSkPatient (JRUZ-based, replaces vymyslený), FhirSkPractitioner, FhirSkOrganization |
+| 4 | Slovak FHIR IG | IG bundle | FSH/SUSHI authoring, IG publisher, all 3 profiles published |
 
 ### Success Criteria
 
-- [ ] 50–100 synthetic patients with realistic clinical histories (Synthea or hand-crafted)
-- [ ] FHIR Bulk Data ($export) pipeline to extract NDJSON
-- [ ] ETL: NDJSON → analytics PostgreSQL schema
-- [ ] Power BI dashboards: patient demographics, diagnoses, lab trends, medication distribution
-- [ ] Learn article: FHIR for Analytics
+**Sprint 1 — eLab:**
+- [ ] eLab v3 data elements extracted and documented (docs/phase-7-elab-analysis.md)
+- [ ] Mapping table: eLab XML element → FHIR R4 path + type + terminology
+- [ ] LOINC mapping for top 20 Slovak lab test codes
+- [ ] FhirSkObservation StructureDefinition created (examples/profiles/)
+- [ ] FhirSkObservation validated against HAPI FHIR $validate
+- [ ] Learn article: How eLab Maps to FHIR (/learn/slovak-interoperability/elab-to-fhir)
+- [ ] Reference: eLab → FHIR entry in FHIR Mapping Catalog
 
-### Topics
+**Sprint 2 — eRecept:**
+- [ ] eRecept v6 data elements extracted and documented
+- [ ] Mapping table: eRecept XML → MedicationRequest + MedicationDispense
+- [ ] ATC code binding in FhirSkMedicationRequest
+- [ ] FhirSkMedicationRequest StructureDefinition created
+- [ ] Learn article: How ePrescription Maps to FHIR
 
-FHIR Bulk Data, $export, NDJSON, ETL design, FHIR → SQL mapping, population health, quality indicators, Power BI, secondary use, EHDS secondary use framework
+**Sprint 3 — JRUZ:**
+- [ ] JRUZ patient data model documented
+- [ ] FhirSkPatient v1.0.0 — replaces v0.2.0, based on actual JRUZ identifiers
+- [ ] FhirSkPractitioner + FhirSkOrganization profiles
+- [ ] Synthetic examples updated to use JRUZ-aligned identifiers
 
-### Note
+**Sprint 4 — Slovak FHIR IG:**
+- [ ] FSH/SUSHI toolchain set up locally
+- [ ] All 3 profiles rewritten in FSH
+- [ ] IG published (at minimum locally via IG Publisher)
+- [ ] Learn article: Building a National FHIR IG
 
-This replaces the former "Analytics PoC" that was incorrectly placed in Phase 6. Real analytics requires real data volume — 5 patients teaches nothing about query patterns or dashboard design.
+### New fhir.sk Content
+
+**Learn track: Slovak Interoperability** (Track 6 — replaces Analytics placeholder)
+- How eLab Maps to FHIR
+- How ePrescription Maps to FHIR
+- From XML/SOAP to FHIR REST
+- EHDS Impact on Slovak eHealth
+- Building a National FHIR IG
+
+**Reference: FHIR Mapping Catalog** (new section)
+- eLab v3 mapping (XML element → Observation/DiagnosticReport path)
+- eRecept v6 mapping (XML element → MedicationRequest path)
+- JRUZ mapping (patient identifiers → Patient resource)
+
+### Privacy Rule
+
+eZdravie IM is an internal NCZI document. Public outputs (profiles, mapping tables in abstract form, Learn articles) may be published to fhir.sk and GitHub. Specific XML structures, message schemas and endpoint details from the IM stay in private `docs/` notes only.
 
 ---
 
-## Phase 8 — AI over FHIR
+## Phase 8 — Analytics and Secondary Use
 
 **Status:** Year 2
 
-**Goal:** AI demonstration over structured, interoperable health data.
+**Goal:** After Slovak profiles exist (Phase 7), generate synthetic data conformant to Slovak profiles, build analytics pipeline, create Power BI dashboards.
+
+**Prerequisite:** Phase 7 complete — need real Slovak FHIR profiles before generating synthetic data that matches them.
 
 ### Topics
 
-AI-ready data requirements, structured health data for ML, LLM over FHIR resources, EHDS AI secondary use
+FHIR Bulk Data, $export, NDJSON, ETL design, PostgreSQL analytics schema, Power BI, EHDS secondary use framework
 
-### Note
+---
 
-AI features only after Phase 5+. Year 2 only.
+## Phase 9 — AI over FHIR
+
+**Status:** Year 2
+
+**Goal:** AI demonstration over structured, interoperable Slovak health data.
+
+### Topics
+
+AI-ready data requirements, LLM over FHIR resources, clinical NLP over narrative text, EHDS AI secondary use
 
 ---
 
