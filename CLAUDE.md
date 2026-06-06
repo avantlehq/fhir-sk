@@ -35,25 +35,41 @@ fhir-sk/
 ├── apps/
 │   └── web/                  ← Next.js 16 web app (Vercel)
 │       ├── app/              ← App Router pages
-│       │   ├── lab/          ← /lab index + 6 module stubs
-│       │   ├── learn/        ← /learn index + roadmap + fhir-foundations + 4 stubs
+│       │   ├── api/fhir/     ← Mock FHIR REST API (7 resource routes)
+│       │   ├── api/validate/ ← POST /api/validate — OperationOutcome response
+│       │   ├── lab/          ← /lab index + 3 active modules + 3 stubs
+│       │   ├── learn/        ← /learn + resources/ + profiling/ + terminology/ + ehds/
+│       │   ├── reference/    ← /reference + 25 entry pages
 │       │   ├── about/
 │       │   └── disclaimer/
 │       ├── components/       ← Header, Footer, StatusBadge, ModuleCard, LearningCard, SectionHeader
 │       └── lib/
-│           ├── site.ts       ← siteConfig, navLinks (Lab / Learn / About)
-│           └── version.ts    ← VERSION, VERSION_NAME, CHANGELOG
+│           ├── site.ts       ← siteConfig, navLinks (Lab / Learn / Reference / About)
+│           ├── version.ts    ← VERSION, VERSION_NAME, CHANGELOG
+│           ├── fhir-mock/    ← Static FHIR data: Patient, Condition, Encounter, MedicationRequest,
+│           │   index.ts         Observation, AllergyIntolerance, IPS Bundle, CapabilityStatement
+│           └── fhir-terminology.ts ← Static ValueSets + CodeSystems (5 + 4)
 ├── infra/
 │   └── hapi/                 ← HAPI FHIR R4 Docker Compose + PostgreSQL
 │       ├── docker-compose.yml
 │       ├── application.yaml  ← HAPI FHIR config
 │       └── README.md
 ├── examples/
-│   ├── patients/             ← Synthetic Patient resources (JSON)
-│   ├── observations/         ← Synthetic Observation resources (JSON)
-│   └── bundles/              ← Transaction/batch Bundles (JSON)
+│   ├── patients/             ← Synthetic resources: Patient, AllergyIntolerance,
+│   │                            Consent, AuditEvent, Provenance
+│   ├── observations/         ← Synthetic Observation resources
+│   ├── profiles/             ← FhirSkPatient StructureDefinition (v0.2.0)
+│   └── bundles/              ← Transaction Bundle (Phase 2), IPS Document Bundle (Phase 5)
 ├── postman/                  ← Postman Collection v2.1
-└── docs/                     ← Learning notes, architecture docs (Markdown)
+└── docs/                     ← Learning notes and architecture docs
+    ├── vision.md
+    ├── architecture.md
+    ├── phases.md             ← Phase status (Phases 1–6 complete, Phase 7 next)
+    ├── design.md
+    ├── phase-1-notes.md
+    ├── phase-3-notes.md
+    ├── phase-5-notes.md
+    └── phase-6-notes.md
 ```
 
 ---
@@ -62,13 +78,13 @@ fhir-sk/
 
 | Layer | Technology |
 |-------|-----------|
-| Web frontend | Next.js 16.2.6, App Router, TypeScript, Tailwind CSS v3 |
+| Web frontend | Next.js 16, App Router, TypeScript, Tailwind CSS v3 |
 | Web deploy | Vercel (root directory: `apps/web`) |
 | FHIR server | HAPI FHIR R4 (`hapiproject/hapi:v7-tomcat`) |
 | Database | PostgreSQL 16 |
 | Local infra | Docker Compose |
-| Cloud infra | Railway (planned) |
-| FHIR version | R4 (primary), R4B noted where relevant, R5 monitoring |
+| Cloud infra | Railway (planned for HAPI cloud deploy) |
+| FHIR version | R4 (primary) |
 
 ---
 
@@ -76,51 +92,66 @@ fhir-sk/
 
 ### Navigation
 
-Three top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **About** (`/about`).
+Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (`/reference`), **About** (`/about`).
 
 ### Routes
 
 | Route | Status | Description |
 |-------|--------|-------------|
-| `/` | ✅ Live | Homepage: hero, lab modules, learning roadmap, future direction, about, newsletter, disclaimer |
+| `/` | ✅ Live | Homepage: hero, lab modules, learning roadmap, newsletter |
 | `/lab` | ✅ Live | Lab index with 6 module cards |
-| `/lab/mock-server` | ✅ Stub | HAPI FHIR R4 mock server |
-| `/lab/resource-builder` | ✅ Stub | Create/edit FHIR R4 resources |
-| `/lab/validator` | ✅ Stub | Validate FHIR JSON/XML |
-| `/lab/synthetic-data` | ✅ Stub | Generate synthetic FHIR datasets |
-| `/lab/terminology-explorer` | ✅ Stub | Explore CodeSystem/ValueSet/ConceptMap |
-| `/lab/profile-explorer` | ✅ Stub | Inspect StructureDefinitions and EHDS profiles |
-| `/learn` | ✅ Live | Learn index with 5 learning path cards |
+| `/lab/mock-server` | ✅ Live | Mock FHIR REST API — 9 endpoints, curl examples |
+| `/lab/validator` | ✅ Live | Validate FHIR JSON — 3 profiles, OperationOutcome display |
+| `/lab/terminology-explorer` | ✅ Live | Browse ValueSets and CodeSystems — static data |
+| `/lab/resource-builder` | 🔧 Stub | Planned: create/edit FHIR R4 resources |
+| `/lab/synthetic-data` | 🔧 Stub | Planned: generate synthetic FHIR datasets |
+| `/lab/profile-explorer` | 🔧 Stub | Planned: inspect StructureDefinitions |
+| `/learn` | ✅ Live | Learn index with 5 track cards |
 | `/learn/roadmap` | ✅ Live | 8-phase roadmap with status badges |
 | `/learn/fhir-foundations` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles |
-| `/learn/resources` | ✅ Stub | Core healthcare resources |
-| `/learn/profiling` | ✅ Stub | Profiling and validation |
-| `/learn/terminology` | ✅ Stub | Terminology services |
-| `/learn/ehds` | ✅ Stub | EHDS and EHRxF |
+| `/learn/resources` | ✅ Live | Article index: Observation, Condition, Encounter, Search, Bundle |
+| `/learn/resources/observation` | ✅ Live | Observation deep-dive |
+| `/learn/resources/condition` | ✅ Live | Condition deep-dive |
+| `/learn/resources/encounter` | ✅ Live | Encounter deep-dive |
+| `/learn/resources/search` | ✅ Live | FHIR search parameter types |
+| `/learn/resources/bundle` | ✅ Live | Transaction vs batch, urn:uuid references |
+| `/learn/profiling` | ✅ Live | Article index: Profile, Validation, Standards comparison, Conformance |
+| `/learn/profiling/profile` | ✅ Live | What is a Profile |
+| `/learn/profiling/validation` | ✅ Live | Validation and OperationOutcome |
+| `/learn/profiling/standards-comparison` | ✅ Live | HL7 v2 vs CDA vs FHIR |
+| `/learn/profiling/conformance` | ✅ Live | Conformance, CapabilityStatement, governance resources |
+| `/learn/terminology` | ✅ Live | Article index: Why Terminologies Matter |
+| `/learn/terminology/why-terminologies-matter` | ✅ Live | CodeSystem, ValueSet, binding, SNOMED vs LOINC |
+| `/learn/ehds` | ✅ Live | Article index: FHIR and EHDS, International Patient Summary |
+| `/learn/ehds/fhir-and-ehds` | ✅ Live | EHDS regulation 2025/327, EHRxF, MyHealth@EU |
+| `/learn/ehds/international-patient-summary` | ✅ Live | IPS Composition, sections, document Bundle |
+| `/reference` | ✅ Live | 25 entries in 5 groups |
+| `/reference/[slug]` | ✅ Live | 25 individual reference pages |
 | `/about` | ✅ Live | Philosophy, objectives, tech stack, what it is NOT |
 | `/disclaimer` | ✅ Live | Synthetic data notice, no affiliation, legal |
-| `/sitemap.xml` | ✅ Live | Auto-generated (17 routes) |
-| `/robots.txt` | ✅ Live | Auto-generated |
 
-### Redirects (permanent 308)
+### Mock FHIR API routes (apps/web/app/api/fhir/)
 
-| Old URL | New URL |
-|---------|---------|
-| `/roadmap` | `/learn/roadmap` |
-| `/fhir` | `/learn/fhir-foundations` |
+| Method | Route | Returns |
+|--------|-------|---------|
+| GET | `/api/fhir/metadata` | CapabilityStatement |
+| GET | `/api/fhir/Patient` | searchset Bundle |
+| GET | `/api/fhir/Patient/[id]` | Patient or OperationOutcome 404 |
+| GET | `/api/fhir/Condition` | searchset Bundle |
+| GET | `/api/fhir/Encounter` | searchset Bundle |
+| GET | `/api/fhir/MedicationRequest` | searchset Bundle |
+| GET | `/api/fhir/Observation` | searchset Bundle |
+| GET | `/api/fhir/AllergyIntolerance` | searchset Bundle (patient= filter) |
+| GET | `/api/fhir/Bundle/[id]` | IPS Document Bundle or 404 |
+| POST | `/api/validate` | OperationOutcome (3 profiles) |
 
-Defined in `apps/web/next.config.mjs`.
+### Validator profiles (POST /api/validate)
 
-### Components
-
-| Component | Location | Description |
-|-----------|----------|-------------|
-| `Header` | `components/Header.tsx` | Top nav: Lab / Learn / About |
-| `Footer` | `components/Footer.tsx` | Nav links, version display |
-| `StatusBadge` | `components/StatusBadge.tsx` | "In Progress" / "Planned" / "Live" badge |
-| `ModuleCard` | `components/ModuleCard.tsx` | Lab module card with status badge |
-| `LearningCard` | `components/LearningCard.tsx` | Learn section card |
-| `SectionHeader` | `components/SectionHeader.tsx` | Section heading with label/description |
+| profile value | Validates |
+|---------------|-----------|
+| `base` | Structural FHIR R4 — resourceType, id, meta |
+| `fhirsk-patient` | FhirSkPatient v0.2.0 — identifier, name, gender (with binding), birthDate |
+| `fhirsk-allergy` | AllergyIntolerance — clinicalStatus, verificationStatus, code, patient |
 
 ### Version management
 
@@ -129,9 +160,9 @@ Version is defined in `apps/web/lib/version.ts`:
 - `VERSION_NAME` — human name
 - `CHANGELOG` — array of version entries with date and changes
 
-**Rule: update version.ts + package.json after every meaningful deployment.**
+**Rule: update version.ts + package.json after every deployment. No exceptions.**
 
-Current version: **0.3.1 "Lab Identity"**
+Current version: **1.4.0 "Phase 6 — Governance and Consolidation"**
 
 ### Design system
 
@@ -177,21 +208,35 @@ Minimum 1 GB RAM. Railway plan must accommodate this.
 
 All examples use **synthetic data only**. Fictional names and identifiers.
 
+### patients/
+
 | File | Resource | Description |
 |------|----------|-------------|
-| `patients/patient-example.json` | Patient | John Doe, synthetic Slovak address |
-| `observations/observation-example.json` | Observation | Body weight, LOINC 29463-7, 75 kg |
-| `bundles/bundle-transaction.json` | Bundle | Transaction: Patient + Observation |
+| `patient-example.json` | Patient | John Doe, synthetic Slovak address |
+| `allergy-intolerance-example.json` | AllergyIntolerance | Amoxicillin allergy, high criticality |
+| `consent-example.json` | Consent | GDPR opt-in, treatment permit, marketing deny |
+| `audit-event-example.json` | AuditEvent | IPS document read — DICOM audit trail |
+| `provenance-example.json` | Provenance | IPS document authorship and assembly |
 
----
+### observations/
 
-## Postman (postman/)
+| File | Resource | Description |
+|------|----------|-------------|
+| `observation-example.json` | Observation | Body weight, LOINC 29463-7, 75 kg |
 
-Collection: `FHIR-R4-Foundations.postman_collection.json`
+### profiles/
 
-Variable: `base_url` = `http://localhost:8080/fhir`
+| File | Resource | Description |
+|------|----------|-------------|
+| `fhirsk-patient.json` | StructureDefinition | FhirSkPatient v0.2.0 — Slovak national ID, name, gender (with binding), birthDate required |
 
-Requests: CapabilityStatement, Patient CRUD, Search, Transaction Bundle, Observation.
+### bundles/
+
+| File | Resource | Description |
+|------|----------|-------------|
+| `bundle-transaction.json` | Bundle | Transaction: Patient + Observation |
+| `bundle-phase2-clinical.json` | Bundle | Transaction: Patient + Condition + Encounter + MedicationRequest |
+| `ips-patient-summary.json` | Bundle | IPS Document Bundle: 9 entries, 4 sections, Jana Horváth |
 
 ---
 
@@ -199,48 +244,29 @@ Requests: CapabilityStatement, Patient CRUD, Search, Transaction Bundle, Observa
 
 | Resource | URL | Status |
 |----------|-----|--------|
-| Web (production) | https://fhir.sk | DNS pending propagation |
+| Web (production) | https://fhir.sk | ✅ Live (DNS via Vercel) |
 | Web (preview) | https://fhir-sk.vercel.app | ✅ Live |
 | HAPI FHIR (cloud) | https://hapi.fhir.sk | ❌ Not deployed |
 | GitHub | https://github.com/avantlehq/fhir-sk | ✅ |
 
-**DNS:** fhir.sk registered at Websupport.sk, NS pointed to Vercel (ns1.vercel-dns.com). DNSSEC disabled (Vercel does not support it).
 **Vercel root directory:** `apps/web` — must be set in Vercel project settings.
 
 ---
 
-## Phase 1 Status — FHIR Foundations (IN PROGRESS)
+## Phase Status
 
-Web infrastructure done (v0.3.1). FHIR server work not yet started.
+| Phase | Name | Status | Version |
+|-------|------|--------|---------|
+| 1 | FHIR Foundations | ✅ Complete | v0.5.0 |
+| 2 | Core Clinical Resources | ✅ Complete | v0.7.0 |
+| 3 | Profiling and Validation | ✅ Complete | v1.1.0 |
+| 4 | Terminologies | ✅ Complete | v1.2.0 |
+| 5 | EHDS and EHRxF | ✅ Complete | v1.3.0 |
+| 6 | Governance and Consolidation | ✅ Complete | v1.4.0 |
+| 7 | Synthetic Data at Scale + Analytics | 🔲 Year 2 | — |
+| 8 | AI over FHIR | 🔲 Year 2 | — |
 
-- [x] Web app deployed to Vercel
-- [x] Domain DNS configured (NS → Vercel)
-- [x] Information architecture (Lab / Learn / About)
-- [x] Homepage repositioned as FHIR Interoperability Lab (v0.3.1)
-- [ ] Deploy HAPI FHIR locally via Docker Compose
-- [ ] Patient CRUD via Postman
-- [ ] Read and interpret CapabilityStatement
-- [ ] POST a transaction Bundle
-- [ ] Complete Phase 1 learning notes (docs/phase-1-notes.md)
-
-**Next step: `cd infra/hapi && docker compose up -d`, then run Postman collection.**
-
----
-
-## Roadmap Summary
-
-| Phase | Name | Status |
-|-------|------|--------|
-| 1 | FHIR Foundations | In Progress |
-| 2 | Core Healthcare Resources | Planned |
-| 3 | Profiling and Validation | Planned |
-| 4 | Terminology Services | Planned |
-| 5 | Healthcare Integration Patterns | Planned |
-| 6 | EHDS and EHRxF | Planned |
-| 7 | Interoperability Architecture | Planned |
-| 8 | Advanced Experiments | Planned |
-
-Full roadmap at `/learn/roadmap`.
+Full details in `docs/phases.md`.
 
 ---
 
@@ -252,7 +278,7 @@ Full roadmap at `/learn/roadmap`.
 4. **Architecture before coding.** Always explain WHY before HOW.
 5. **AI last.** AI features come only after Phase 5+.
 6. **English content.** Slovak i18n planned but not implemented yet.
-7. **Version bump on every deploy.** Every commit that is pushed to production MUST bump the version in `apps/web/lib/version.ts` (VERSION, VERSION_NAME, CHANGELOG entry) and `apps/web/package.json`. No deploy without a version bump. No exceptions.
+7. **Version bump on every deploy.** Every commit pushed to production MUST bump the version in `apps/web/lib/version.ts` (VERSION, VERSION_NAME, CHANGELOG entry) and `apps/web/package.json`. No deploy without a version bump. No exceptions.
 8. **Docs update before commit.** Any commit that changes IA, navigation, design system, or phase plan must also update the relevant file in `docs/` in the same commit. Code and docs stay in sync.
 
 ## Project Docs
@@ -266,6 +292,9 @@ Strategic and design documentation lives in `docs/`. Always read before making s
 | `docs/phases.md` | 8 phases, current status, success criteria |
 | `docs/design.md` | Colors, typography, components, tone, dependencies |
 | `docs/phase-1-notes.md` | FHIR learning notes for Phase 1 |
+| `docs/phase-3-notes.md` | Profiling and validation notes |
+| `docs/phase-5-notes.md` | EHDS, IPS, AllergyIntolerance notes |
+| `docs/phase-6-notes.md` | Governance resources, conformance, consolidation notes |
 
 ---
 
