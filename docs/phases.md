@@ -6,9 +6,9 @@ Last revised: 2026-06-06
 
 ## Current Status
 
-**Active phase:** Phase 3 — Profiles and Validation (Planned)
+**Active phase:** Phase 4 — Terminologies
 
-Phase 1 and Phase 2 complete (v0.6.0). Starting Phase 3.
+Phase 1, 2, and 3 complete (v1.1.0). Starting Phase 4.
 
 ---
 
@@ -152,7 +152,7 @@ HAPI FHIR + Docker + PostgreSQL — stable and documented.
 
 ## Phase 3 — Profiles and Validation
 
-**Status:** In Progress
+**Status:** Complete (v0.8.0 → v1.1.0)
 
 **Month:** 3
 
@@ -160,19 +160,22 @@ HAPI FHIR + Docker + PostgreSQL — stable and documented.
 
 ### Success Criteria
 
-- [ ] Simple profile created and validated against
-- [ ] Validator MVP: JSON validation, profile validation, bundle validation
-- [ ] Learn article: What is a Profile
+- [x] FhirSkPatient StructureDefinition created (examples/profiles/fhirsk-patient.json)
+- [x] Profile validated against HAPI FHIR (Jana Horváth: 0 errors, invalid Patient: 4 errors)
+- [x] Validator MVP at /lab/validator (structural + FhirSkPatient profile)
+- [x] Learn articles: Profile, Validation, Standards comparison (HL7 v2 / CDA / FHIR)
+- [x] Reference +15: StructureDefinition, Extension, Must-Support, Slicing, Implementation Guide, FHIRPath, HL7 v2, CDA, OperationOutcome, Condition, Encounter, MedicationRequest, ValueSet, CodeSystem, SMART on FHIR
+- [x] Reference index reorganized to 25 entries in 5 groups
 
 ### Content
 
-Track 1: Profiles, StructureDefinition, Validation, CapabilityStatement
+Track 1: Profile, Validation, OperationOutcome ✅
 
-Track 2: HL7 v2, CDA, FHIR comparison
+Track 2: HL7 v2, CDA, FHIR comparison ✅
 
 ### Reference
 
-+15 new entries
++15 new entries ✅ (total: 25)
 
 ---
 

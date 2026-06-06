@@ -1,7 +1,21 @@
-export const VERSION = "1.0.0";
-export const VERSION_NAME = "Phase 3 — Learn Articles";
+export const VERSION = "1.1.0";
+export const VERSION_NAME = "Phase 3 — Reference +15";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.1.0",
+    date: "2026-06-06",
+    changes: [
+      "Reference expanded from 10 to 25 entries — Phase 3 Reference milestone complete",
+      "New entries — Standards: StructureDefinition, Extension, Must-Support, Slicing, Implementation Guide, FHIRPath",
+      "New entries — Standards: HL7 v2 (ADT example), CDA (document header example)",
+      "New entries — Resources: Condition (SNOMED+ICD-10), Encounter (status lifecycle, class), MedicationRequest (ATC dose example)",
+      "New entries — Terminology: ValueSet (binding strengths), CodeSystem (SNOMED/LOINC/ICD-10/ATC/UCUM table)",
+      "New entries — Security: SMART on FHIR (launch types, scopes, discovery)",
+      "New entries — Core: OperationOutcome (severity table, issue codes)",
+      "Reference index reorganized into 5 groups: Core FHIR, Resources, Profiling, Terminology, Security",
+    ],
+  },
   {
     version: "1.0.0",
     date: "2026-06-06",

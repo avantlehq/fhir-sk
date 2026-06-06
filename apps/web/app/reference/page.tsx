@@ -9,16 +9,37 @@ export const metadata: Metadata = {
 };
 
 const entries = [
+  // Core FHIR
   { slug: "fhir", title: "FHIR", summary: "HL7 standard for exchanging healthcare information over REST APIs." },
   { slug: "resource", title: "Resource", summary: "The fundamental unit of FHIR — a structured JSON document with a defined schema." },
-  { slug: "patient", title: "Patient", summary: "Demographic and administrative information about a person receiving care." },
-  { slug: "observation", title: "Observation", summary: "A measurement or assertion about a patient — vital signs, lab results, clinical findings." },
-  { slug: "bundle", title: "Bundle", summary: "A container for multiple FHIR resources — used for transactions, search results, and documents." },
-  { slug: "profile", title: "Profile", summary: "A StructureDefinition that constrains a base resource for a specific use case." },
   { slug: "rest-api", title: "REST API", summary: "The HTTP interface for interacting with FHIR resources using standard verbs and URL patterns." },
   { slug: "search", title: "Search", summary: "The FHIR query mechanism for finding resources using URL parameters." },
-  { slug: "validation", title: "Validation", summary: "Checking that a resource conforms to the FHIR specification or a profile." },
+  { slug: "bundle", title: "Bundle", summary: "A container for multiple FHIR resources — used for transactions, search results, and documents." },
   { slug: "capability-statement", title: "CapabilityStatement", summary: "A machine-readable description of what a FHIR server supports." },
+  { slug: "operation-outcome", title: "OperationOutcome", summary: "The standard FHIR resource for returning errors, warnings, and informational messages." },
+  { slug: "fhirpath", title: "FHIRPath", summary: "A path-based expression language for navigating FHIR resources, used in profiles and search." },
+  // Resources
+  { slug: "patient", title: "Patient", summary: "Demographic and administrative information about a person receiving care." },
+  { slug: "observation", title: "Observation", summary: "A measurement or assertion about a patient — vital signs, lab results, clinical findings." },
+  { slug: "condition", title: "Condition", summary: "A clinical finding, diagnosis, or complaint assessed by a clinician." },
+  { slug: "encounter", title: "Encounter", summary: "An interaction between a patient and healthcare provider — a visit, admission, or telehealth call." },
+  { slug: "medication-request", title: "MedicationRequest", summary: "A prescription or order for a medication — drug, dose, route, frequency." },
+  // Profiling
+  { slug: "profile", title: "Profile", summary: "A StructureDefinition that constrains a base resource for a specific use case." },
+  { slug: "structure-definition", title: "StructureDefinition", summary: "The FHIR resource that defines the structure of other resources, profiles, and extensions." },
+  { slug: "extension", title: "Extension", summary: "Adds a data element to a resource that is not part of the base FHIR specification." },
+  { slug: "must-support", title: "Must-Support", summary: "A profile flag requiring systems to store and return an element if present." },
+  { slug: "slicing", title: "Slicing", summary: "Splits a repeating element into named sub-types with their own cardinality and constraints." },
+  { slug: "implementation-guide", title: "Implementation Guide", summary: "A publishable specification bundling profiles, value sets, examples, and conformance rules." },
+  { slug: "validation", title: "Validation", summary: "Checking that a resource conforms to the FHIR specification or a profile." },
+  // Terminology
+  { slug: "value-set", title: "ValueSet", summary: "A curated collection of codes selected from one or more CodeSystems." },
+  { slug: "code-system", title: "CodeSystem", summary: "Defines a set of codes and their meanings — SNOMED CT, LOINC, ICD-10, ATC." },
+  // Standards
+  { slug: "hl7-v2", title: "HL7 v2", summary: "Pipe-delimited message standard from 1987 — still dominant inside hospitals for ADT and lab results." },
+  { slug: "cda", title: "CDA", summary: "HL7 Clinical Document Architecture — XML standard for discharge summaries, referrals, patient summaries." },
+  // Security
+  { slug: "smart-on-fhir", title: "SMART on FHIR", summary: "OAuth2-based authorization framework for connecting apps to FHIR servers." },
 ];
 
 export default function ReferencePage() {
