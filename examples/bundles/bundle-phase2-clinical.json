@@ -1,0 +1,183 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "_comment": "Phase 2 Transaction Bundle — Patient + Condition + Encounter + MedicationRequest. All resources created atomically. Internal references use urn:uuid so they resolve before server assigns real IDs.",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:11111111-0000-0000-0000-000000000001",
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [{ "system": "https://fhir.sk/tags", "code": "synthetic" }]
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "system": "urn:oid:2.16.840.1.113883.2.9.4.3.2",
+            "value": "SYNTHETIC-HORVATH-001"
+          }
+        ],
+        "active": true,
+        "name": [{ "use": "official", "family": "Horváth", "given": ["Jana"] }],
+        "gender": "female",
+        "birthDate": "1979-03-12",
+        "address": [{ "city": "Bratislava", "postalCode": "82104", "country": "SK" }],
+        "communication": [
+          {
+            "language": {
+              "coding": [{ "system": "urn:ietf:bcp:47", "code": "sk" }]
+            },
+            "preferred": true
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=urn:oid:2.16.840.1.113883.2.9.4.3.2|SYNTHETIC-HORVATH-001"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:22222222-0000-0000-0000-000000000002",
+      "resource": {
+        "resourceType": "Condition",
+        "meta": {
+          "tag": [{ "system": "https://fhir.sk/tags", "code": "synthetic" }]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Diabetes mellitus type 2"
+            },
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "E11",
+              "display": "Type 2 diabetes mellitus"
+            }
+          ],
+          "text": "Diabetes mellitus type 2"
+        },
+        "subject": {
+          "reference": "urn:uuid:11111111-0000-0000-0000-000000000001"
+        },
+        "onsetDateTime": "2018-05-10",
+        "recordedDate": "2018-05-10"
+      },
+      "request": { "method": "POST", "url": "Condition" }
+    },
+    {
+      "fullUrl": "urn:uuid:33333333-0000-0000-0000-000000000003",
+      "resource": {
+        "resourceType": "Encounter",
+        "meta": {
+          "tag": [{ "system": "https://fhir.sk/tags", "code": "synthetic" }]
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:11111111-0000-0000-0000-000000000001"
+        },
+        "reasonReference": [
+          {
+            "reference": "urn:uuid:22222222-0000-0000-0000-000000000002"
+          }
+        ],
+        "period": {
+          "start": "2026-06-06T09:00:00Z",
+          "end": "2026-06-06T09:30:00Z"
+        }
+      },
+      "request": { "method": "POST", "url": "Encounter" }
+    },
+    {
+      "fullUrl": "urn:uuid:44444444-0000-0000-0000-000000000004",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "meta": {
+          "tag": [{ "system": "https://fhir.sk/tags", "code": "synthetic" }]
+        },
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.whocc.no/atc",
+              "code": "A10BA02",
+              "display": "Metformin"
+            }
+          ],
+          "text": "Metformin 500mg"
+        },
+        "subject": {
+          "reference": "urn:uuid:11111111-0000-0000-0000-000000000001"
+        },
+        "encounter": {
+          "reference": "urn:uuid:33333333-0000-0000-0000-000000000003"
+        },
+        "authoredOn": "2026-06-06",
+        "dosageInstruction": [
+          {
+            "text": "500mg twice daily with meals",
+            "timing": {
+              "repeat": { "frequency": 2, "period": 1, "periodUnit": "d" }
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 500,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "request": { "method": "POST", "url": "MedicationRequest" }
+    }
+  ]
+}

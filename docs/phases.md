@@ -6,9 +6,9 @@ Last revised: 2026-06-06
 
 ## Current Status
 
-**Active phase:** Phase 1 — FHIR Foundations (In Progress)
+**Active phase:** Phase 3 — Profiles and Validation (Planned)
 
-Web infrastructure complete (v0.4.0). FHIR server work not yet started.
+Phase 1 and Phase 2 complete (v0.6.0). Starting Phase 3.
 
 ---
 
@@ -88,7 +88,7 @@ HAPI FHIR + Docker + PostgreSQL — stable and documented.
 
 ## Phase 1 — FHIR Foundations
 
-**Status:** In Progress
+**Status:** Complete (v0.4.0 → v0.5.0)
 
 **Month:** 1
 
@@ -109,24 +109,17 @@ HAPI FHIR + Docker + PostgreSQL — stable and documented.
 
 ### Content (Track 1)
 
-- [ ] What is FHIR
-- [ ] FHIR Resource
-- [ ] Patient Resource
-- [ ] REST API Basics
-- [ ] HAPI FHIR Setup
-
-### Next Immediate Step
-
-```
-cd infra/hapi && docker compose up -d
-# endpoint: http://localhost:8080/fhir
-```
+- [x] What is FHIR — /learn/fhir-foundations
+- [ ] FHIR Resource — planned Phase 3
+- [ ] Patient Resource — planned Phase 3
+- [ ] REST API Basics — planned Phase 3
+- [ ] HAPI FHIR Setup — planned Phase 3
 
 ---
 
 ## Phase 2 — Core Clinical Resources
 
-**Status:** In Progress
+**Status:** Complete (v0.5.0 → v0.6.0)
 
 **Month:** 2
 
@@ -134,32 +127,32 @@ cd infra/hapi && docker compose up -d
 
 ### Success Criteria
 
-- [ ] Synthetic dataset: Patient + Observation + Condition + Encounter
-- [ ] All resources valid FHIR R4
-- [ ] Transaction Bundle with multiple resource types
-- [ ] Mock Server MVP running
+- [x] Synthetic dataset: Patient + Observation + Condition + Encounter + MedicationRequest
+- [x] All resources valid FHIR R4 (posted to HAPI FHIR, stored in examples/)
+- [x] Transaction Bundle with multiple resource types (examples/bundles/bundle-phase2-clinical.json)
+- [x] Mock Server MVP running (/lab/mock-server, 8 API routes)
 
 ### Content (Track 1)
 
-- [ ] Observation
-- [ ] Condition
-- [ ] Encounter
-- [ ] Search
-- [ ] Bundle
+- [x] Observation — /learn/resources/observation
+- [x] Condition — /learn/resources/condition
+- [x] Encounter — /learn/resources/encounter
+- [x] Search — /learn/resources/search
+- [x] Bundle — /learn/resources/bundle
 
 ### Reference (first 10 entries)
 
-FHIR, Resource, Patient, Observation, Bundle, Profile, REST API, Search, Validation, CapabilityStatement
+- [x] FHIR, Resource, Patient, Observation, Bundle, Profile, REST API, Search, Validation, CapabilityStatement
 
 ### Navigation change
 
-Add `Reference` to nav when 10+ entries exist.
+- [x] Reference added to nav (Lab | Learn | Reference | About)
 
 ---
 
 ## Phase 3 — Profiles and Validation
 
-**Status:** Planned
+**Status:** In Progress
 
 **Month:** 3
 

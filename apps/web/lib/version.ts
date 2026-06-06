@@ -1,7 +1,16 @@
-export const VERSION = "0.6.0";
-export const VERSION_NAME = "Phase 2 — Learn Articles";
+export const VERSION = "0.7.0";
+export const VERSION_NAME = "Phase 2 Complete";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "0.7.0",
+    date: "2026-06-06",
+    changes: [
+      "Phase 2 complete — all success criteria met",
+      "Transaction Bundle: Patient + Condition + Encounter + MedicationRequest with urn:uuid internal references (examples/bundles/bundle-phase2-clinical.json)",
+      "docs/phases.md: Phase 1 + Phase 2 marked complete, Phase 3 set to In Progress",
+    ],
+  },
   {
     version: "0.6.0",
     date: "2026-06-06",
