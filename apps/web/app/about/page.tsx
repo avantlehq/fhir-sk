@@ -7,34 +7,6 @@ export const metadata: Metadata = {
     "About FHIR.sk — FHIR Interoperability Lab focused on HL7 FHIR, healthcare interoperability, and EHDS. Not affiliated with any healthcare institution.",
 };
 
-const philosophy = [
-  {
-    principle: "Learn By Implementation",
-    explanation:
-      "Build before discussing theory. A working HAPI FHIR server teaches more about FHIR than three hours of reading the specification. Theory follows practice.",
-  },
-  {
-    principle: "Architecture Before Coding",
-    explanation:
-      "Always explain the WHY before the HOW. Every component should have a clear reason for existing. No accidental complexity.",
-  },
-  {
-    principle: "Simplicity First",
-    explanation:
-      "Docker Compose, not Kubernetes. A single HAPI FHIR server, not a microservices cluster. The simplest thing that works is the right starting point.",
-  },
-  {
-    principle: "FHIR First",
-    explanation:
-      "Everything is built on FHIR. Not a proprietary data model that maps to FHIR later. FHIR resources are the primary data model from day one.",
-  },
-  {
-    principle: "AI Last",
-    explanation:
-      "AI tools come after mastering FHIR foundations. You cannot use AI effectively in a domain you do not understand. Understand FHIR first. Use AI to accelerate after.",
-  },
-];
-
 const notList = [
   "A production healthcare system",
   "An Electronic Health Record (EHR) platform",
@@ -90,30 +62,6 @@ export default function AboutPage() {
             fictional identifiers, fictional clinical records. No real patient
             data is used, stored, or processed at any point.
           </p>
-        </section>
-
-        {/* Core Philosophy */}
-        <section className="mb-12">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">
-            Core Philosophy
-          </h2>
-          <div className="space-y-4">
-            {philosophy.map((item, i) => (
-              <div key={item.principle} className="flex gap-4">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="font-semibold text-slate-900 mb-1">
-                    {item.principle}
-                  </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {item.explanation}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
         </section>
 
         {/* Tech Stack */}
