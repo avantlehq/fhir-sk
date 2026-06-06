@@ -42,14 +42,20 @@ Profiles and IGs must emerge from reality, not precede it. A profile invented wi
 | 5 | Phase 5 — EHDS and EHRxF | ✅ Complete |
 | 6 | Phase 6 — Governance and Consolidation | ✅ Complete |
 
-### Year 2 — Slovak Interoperability
+### Year 2 — Slovak Interoperability + Architecture
 
 | Phase | Topic |
 |-------|-------|
 | Phase 7 | Slovak Interoperability Mapping |
 | Phase 8 | Slovak FHIR Profiles |
-| Phase 9 | Slovak FHIR Implementation Guide |
-| Phase 10 | Architecture Patterns |
+| Phase 9 | Architecture Patterns |
+| Phase 10 | Implementation Guide + Terminology Architecture |
+
+### Year 3 — EHDS + Cross-border
+
+| Phase | Topic |
+|-------|-------|
+| Phase 11+ | EHDS EHRxF conformance, MyHealth@EU cross-border, national rollout |
 
 ---
 
@@ -363,29 +369,84 @@ IM is an internal NCZI document. What goes public (fhir.sk, GitHub): abstract ma
 
 ---
 
-## Phase 9 — Slovak FHIR Implementation Guide
+## Phase 9 — Architecture Patterns
 
 **Status:** Planned (after Phase 8)
 
-**Goal:** Publish Slovak FHIR profiles as a proper Implementation Guide using FSH/SUSHI and HL7 IG Publisher. The IG formalizes what was derived from reality in Phases 7–8.
+**Goal:** Understand how FHIR integrates at system level. The most important decisions in any FHIR project are architectural — Facade vs Hybrid vs FHIR-native determines the entire project trajectory, costs, and timeline. This is consultant-level competency, not developer tooling.
 
-**Input:** Phase 8 profiles. No IG work before profiles are stable.
+**Why before IG:** Architecture decisions shape what the IG must cover. A Facade IG looks different from a FHIR-native IG. Architecture first.
+
+**Reference:** Darren Devitt's FHIR architecture framework — architectural decisions are superordinate to technology choices.
+
+### Core decision framework
+
+**Facade** — FHIR REST API in front of existing SOAP/XML system. No migration, fast to deploy, limited FHIR depth. Slovak example: eZdravie SOAP → FHIR Facade → EHDS-conformant endpoint. Risk: FHIR is a thin layer, underlying system constraints leak through.
+
+**Hybrid** — new FHIR-native modules alongside legacy systems, with integration layer. Most realistic for Slovak healthcare in 2025–2030 transition period. Some data is FHIR-native (new modules), some is Facade (legacy eZdravie), ConceptMap bridges terminology differences.
+
+**FHIR-native** — greenfield. New systems built on FHIR R4 from day one. Maximum FHIR depth, highest migration cost from legacy. Target state for EHDS 2027+ new implementations.
 
 ### Topics
 
-FSH (FHIR Shorthand), SUSHI compiler, HL7 IG Publisher, IG structure (pages, profiles, examples, narrative), versioning, publication
+| Topic | What you learn |
+|-------|---------------|
+| Facade vs Hybrid vs FHIR-native | When to use each, cost/risk tradeoffs |
+| FHIR Facade pattern | Wrapping eZdravie SOAP/XML behind FHIR REST |
+| FHIR Subscriptions | Event-driven notifications, R4 vs R5 model |
+| SMART on FHIR | OAuth2 for FHIR — EHR launch, standalone, backend services |
+| Bulk Data ($export) | NDJSON export, async pattern, EHDS secondary use |
+| HAPI FHIR cloud | Railway deploy, hapi.fhir.sk, production configuration |
+
+### Slovak context
+
+Every Slovak PZS that needs EHDS compliance by 2027 will face this exact decision: Facade eZdravie, build hybrid, or replace. Understanding the architecture options and their tradeoffs is the core consulting value.
 
 ---
 
-## Phase 10 — Architecture Patterns
+## Phase 10 — Implementation Guide + Terminology Architecture
 
 **Status:** Planned (after Phase 9)
 
-**Goal:** Understand how FHIR integrates at system level — event-driven patterns, authorization, bulk operations. Now meaningful because we have real Slovak profiles to work with.
+**Goal:** Two parallel tracks that are tightly coupled in practice — publish Slovak FHIR profiles as a formal IG, and stand up a proper terminology infrastructure. For EHDS, both are required. A system that cannot expand a ValueSet or validate a SNOMED code is not conformant.
 
-### Topics
+**Why after Architecture:** IG structure reflects architecture decisions. Facade IG ≠ FHIR-native IG. Terminology architecture is infrastructure — needs to fit the deployment pattern chosen in Phase 9.
 
-FHIR Subscriptions (event-driven), SMART on FHIR (OAuth2 authorization), Bulk Data ($export, NDJSON), FHIR Facade pattern (wrapping legacy SOAP/XML systems like eZdravie), HAPI FHIR cloud deployment
+### Track A — Slovak FHIR Implementation Guide
+
+**Tooling chain:**
+```
+FSH files (human-readable)
+↓ SUSHI compiler
+StructureDefinition JSON + ValueSet JSON + CodeSystem JSON
+↓ HL7 IG Publisher
+HTML site (profiles, examples, narrative, differential view)
+```
+
+**FSH (FHIR Shorthand)** — domain-specific language for writing FHIR profiles. Replaces 200-line StructureDefinition JSON with readable constraints. Industry standard for IG authoring.
+
+**IG structure:** Home, Profiles (one page per profile with differential + snapshot + examples), Terminology (ValueSets, CodeSystems), Examples, Downloads.
+
+**Output:** Slovak FHIR IG — minimum locally published, target: hosted on fhir.sk subdomain or GitHub Pages.
+
+### Track B — Terminology Architecture
+
+FHIR resources reference external terminology servers for $expand, $validate-code and subsumption queries. This is a separate infrastructure from HAPI FHIR.
+
+| Component | Tool | Purpose |
+|-----------|------|---------|
+| SNOMED CT server | Snowstorm (IHTSDO open-source) | Full SNOMED CT hierarchy, ECL queries, $expand |
+| LOINC | HAPI FHIR with LOINC loaded, or Ontoserver | Lab code lookup, panel definitions |
+| Custom CodeSystems | HAPI FHIR | Slovak číselníky (špecializácie, kódy zariadení) |
+| ConceptMap | HAPI FHIR | SK lab codes → LOINC, MKCH-10 → ICD-10 |
+| Terminology governance | Process, not tooling | Versioning, deprecation, ownership |
+
+**Why Snowstorm, not HAPI FHIR for SNOMED:** SNOMED CT has 350,000+ concepts and a complex hierarchy. HAPI FHIR can load it but Snowstorm is purpose-built — faster subsumption queries, proper ECL support, IHTSDO-maintained. For EHDS conformance testing, SNOMED CT server will be required.
+
+**ConceptMap priority for Slovak context:**
+- Slovak lab test codes (eLab číselník) → LOINC (needed for EHDS cross-border)
+- MKCH-10-SK → ICD-10-CM (needed for EHRxF Condition coding)
+- ATC SK → ATC International (medication coding alignment)
 
 ---
 
@@ -399,4 +460,6 @@ FHIR Subscriptions (event-driven), SMART on FHIR (OAuth2 authorization), Bulk Da
 | Track 4 — EHDS and EHRxF | Phase 5 | ✅ Live |
 | Track 5 — Governance and Conformance | Phase 6 | ✅ Live |
 | Track 6 — Slovak Interoperability | Phase 7 | Year 2 |
-| Track 7 — Architecture and Deployment | Phase 10 | Year 2 |
+| Track 7 — Architecture Patterns | Phase 9 | Year 2 |
+| Track 8 — Terminology Architecture | Phase 10 | Year 2 |
+| Track 9 — EHDS and Cross-border | Phase 11+ | Year 3 |
