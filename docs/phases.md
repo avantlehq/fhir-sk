@@ -126,7 +126,7 @@ cd infra/hapi && docker compose up -d
 
 ## Phase 2 — Core Clinical Resources
 
-**Status:** Planned
+**Status:** In Progress
 
 **Month:** 2
 
