@@ -1,7 +1,24 @@
-export const VERSION = "1.4.0";
-export const VERSION_NAME = "Phase 6 — Governance and Consolidation";
+export const VERSION = "1.4.1";
+export const VERSION_NAME = "Status corrections and roadmap update";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.1",
+    date: "2026-06-07",
+    changes: [
+      "Homepage: Mock Server, Validator, Terminology Explorer all show Live status (were In Progress / Planned)",
+      "Homepage: replace Synthetic Data (stub) with Terminology Explorer in 3-module preview",
+      "Homepage: update lab module descriptions to reflect actual capabilities",
+      "Homepage: Track 6 link updated to /learn/roadmap with Year 2 note",
+      "Lab: Mock Server In Progress → Live, Validator Planned → Live, Terminology Explorer Planned → Live",
+      "Lab: reorder modules — 3 Live first, 3 Planned after",
+      "Lab: update module descriptions (Validator mentions actual profiles, not ePrescription stub)",
+      "Lab: update footer note to reflect 3 live + 3 planned",
+      "Roadmap: full rewrite — Phases 1–6 Complete, 7–8 Planned. Correct goals, deliverables and descriptions for each phase.",
+      "Roadmap: add Complete status with emerald styling and ✓ badge",
+      "Roadmap: subtitle updated from 'Phase 1 is in progress' to 'Phases 1–6 complete'",
+    ],
+  },
   {
     version: "1.4.0",
     date: "2026-06-07",

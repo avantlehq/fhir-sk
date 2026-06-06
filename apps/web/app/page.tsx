@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 };
 
 const labModules = [
-  { title: "Mock Server", description: "Simulated FHIR REST API for CRUD operations, search and transaction testing based on HAPI FHIR R4.", status: "In Progress" as const, href: "/lab/mock-server" },
-  { title: "Validator", description: "Validate FHIR JSON and XML against R4 rules and profiles. Supports Bundles, Patient Summary and ePrescription.", status: "Planned" as const, href: "/lab/validator" },
-  { title: "Synthetic Data", description: "Generate realistic fictional FHIR datasets: patients, encounters, observations, medications and Patient Summary.", status: "Planned" as const, href: "/lab/synthetic-data" },
+  { title: "Mock Server", description: "Simulated FHIR REST API — 9 endpoints covering Patient, Condition, Encounter, MedicationRequest, Observation, AllergyIntolerance and IPS Document Bundle.", status: "Live" as const, href: "/lab/mock-server" },
+  { title: "Validator", description: "Validate FHIR JSON against R4 rules and profiles. Supports base R4, FhirSkPatient and AllergyIntolerance (fhirsk-allergy) profiles with OperationOutcome output.", status: "Live" as const, href: "/lab/validator" },
+  { title: "Terminology Explorer", description: "Browse ValueSets and CodeSystems — administrative-gender, condition-clinical, LOINC vital signs, observation-category and FHIR.sk identifier types.", status: "Live" as const, href: "/lab/terminology-explorer" },
 ];
 
 const learnAreas = [
   { title: "FHIR Fundamentals", description: "Resources, REST API, Bundles, CapabilityStatement and HAPI FHIR.", href: "/learn/fhir-foundations" },
-  { title: "Health Data Standards", description: "HL7 v2, CDA, FHIR, openEHR and OMOP — how standards relate.", href: "/learn/resources" },
-  { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10/11, ValueSet and CodeSystem.", href: "/learn/terminology" },
-  { title: "EHDS and EHRxF", description: "European Health Data Space, Patient Summary, ePrescription and MyHealth@EU.", href: "/learn/ehds" },
-  { title: "Governance and Conformance", description: "Consent, Provenance, AuditEvent, conformance testing and implementation guides.", href: "/learn/profiling" },
-  { title: "Analytics and Secondary Use", description: "FHIR to SQL, OMOP, Power BI over synthetic data and EHDS secondary use.", href: "/learn" },
+  { title: "Health Data Standards", description: "HL7 v2, CDA, FHIR and how the standards relate — comparison and coexistence.", href: "/learn/resources" },
+  { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10, ATC — CodeSystem, ValueSet and binding strengths.", href: "/learn/terminology" },
+  { title: "EHDS and EHRxF", description: "European Health Data Space regulation, EHRxF timeline, IPS Patient Summary and MyHealth@EU.", href: "/learn/ehds" },
+  { title: "Governance and Conformance", description: "Consent, AuditEvent, Provenance, CapabilityStatement and conformance resources.", href: "/learn/profiling" },
+  { title: "Analytics and Secondary Use", description: "Power BI over synthetic FHIR data, Bulk Data export and EHDS secondary use framework — Phase 7, Year 2.", href: "/learn/roadmap" },
 ];
 
 export default function HomePage() {

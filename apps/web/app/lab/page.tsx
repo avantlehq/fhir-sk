@@ -10,34 +10,34 @@ export const metadata: Metadata = {
 
 const modules = [
   {
+    title: "Mock Server",
+    description: "Simulated FHIR REST API — 9 endpoints: Patient, Condition, Encounter, MedicationRequest, Observation, AllergyIntolerance, IPS Document Bundle and metadata. Searchset Bundles with patient= filter.",
+    status: "Live" as const,
+    href: "/lab/mock-server",
+  },
+  {
+    title: "Validator",
+    description: "Validate FHIR JSON against R4 rules and profiles. Supports base FHIR R4 (structural), FhirSkPatient v0.2.0 and AllergyIntolerance (fhirsk-allergy). Returns OperationOutcome with severity and expression paths.",
+    status: "Live" as const,
+    href: "/lab/validator",
+  },
+  {
+    title: "Terminology Explorer",
+    description: "Browse ValueSets and CodeSystems — administrative-gender, condition-clinical, LOINC vital signs, observation-category and FHIR.sk identifier types. Two-panel layout with detail view.",
+    status: "Live" as const,
+    href: "/lab/terminology-explorer",
+  },
+  {
     title: "Resource Builder",
     description: "Create and edit FHIR R4 resources such as Patient, Observation, Condition, MedicationRequest and Encounter. View JSON output, inspect profile requirements and validate before sending to the mock server.",
     status: "Planned" as const,
     href: "/lab/resource-builder",
   },
   {
-    title: "Validator",
-    description: "Validate FHIR JSON and XML resources against base FHIR R4 rules and selected profiles. Supports validation of Bundles, Patient Summary and ePrescription examples.",
-    status: "Planned" as const,
-    href: "/lab/validator",
-  },
-  {
-    title: "Mock Server",
-    description: "Simulated FHIR REST API for testing CRUD operations, transactions, search and integration scenarios. Based on HAPI FHIR R4 with Docker Compose.",
-    status: "In Progress" as const,
-    href: "/lab/mock-server",
-  },
-  {
     title: "Synthetic Data",
-    description: "Generate realistic fictional FHIR datasets: patients, encounters, diagnoses, observations, medications and Patient Summary examples. Synthetic, not anonymized real data.",
+    description: "Generate realistic fictional FHIR datasets: patients, encounters, diagnoses, observations, medications and Patient Summary examples. Planned for Phase 7 with 50–100 patient scale.",
     status: "Planned" as const,
     href: "/lab/synthetic-data",
-  },
-  {
-    title: "Terminology Explorer",
-    description: "Explore CodeSystem, ValueSet and ConceptMap resources. Work with LOINC, SNOMED CT, ICD-10, ATC and custom terminology examples.",
-    status: "Planned" as const,
-    href: "/lab/terminology-explorer",
   },
   {
     title: "Profile Explorer",
@@ -63,10 +63,11 @@ export default function LabPage() {
         </div>
         <div className="mt-12 bg-slate-50 border border-slate-200 rounded-xl p-6">
           <p className="text-sm text-slate-500 leading-relaxed">
-            <strong className="text-slate-700">Note:</strong> Lab modules are built gradually across phases.
-            Mock Server is based on HAPI FHIR R4 running locally via Docker Compose — see{" "}
-            <code className="font-mono text-xs bg-slate-200 px-1 py-0.5 rounded">infra/hapi/</code> in the repository.
-            All other modules are planned for upcoming phases.
+            <strong className="text-slate-700">Note:</strong> Mock Server, Validator and Terminology Explorer are live (Phases 2–4).
+            Resource Builder, Synthetic Data and Profile Explorer are planned for Year 2.
+            The mock server data mirrors{" "}
+            <code className="font-mono text-xs bg-slate-200 px-1 py-0.5 rounded">infra/hapi/</code>{" "}
+            running locally via Docker Compose — see the repository for setup.
           </p>
         </div>
       </div>
