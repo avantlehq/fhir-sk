@@ -1,0 +1,73 @@
+{
+  "resourceType": "AllergyIntolerance",
+  "id": "allergy-amoxicillin-001",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips"]
+  },
+  "clinicalStatus": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+      "code": "active",
+      "display": "Active"
+    }]
+  },
+  "verificationStatus": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+      "code": "confirmed",
+      "display": "Confirmed"
+    }]
+  },
+  "type": "allergy",
+  "category": ["medication"],
+  "criticality": "high",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "372687004",
+        "display": "Amoxicillin"
+      },
+      {
+        "system": "http://www.whocc.no/atc",
+        "code": "J01CA04",
+        "display": "Amoxicillin"
+      }
+    ],
+    "text": "Amoxicillin"
+  },
+  "patient": {
+    "reference": "Patient/patient-001",
+    "display": "Jana Horváth"
+  },
+  "onsetDateTime": "2015-06-01",
+  "reaction": [
+    {
+      "substance": {
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "372687004",
+          "display": "Amoxicillin"
+        }]
+      },
+      "manifestation": [
+        {
+          "coding": [{
+            "system": "http://snomed.info/sct",
+            "code": "271807003",
+            "display": "Skin rash"
+          }]
+        },
+        {
+          "coding": [{
+            "system": "http://snomed.info/sct",
+            "code": "247472004",
+            "display": "Weal"
+          }]
+        }
+      ],
+      "severity": "moderate",
+      "description": "Urticaria and generalised skin rash within 2 hours of first dose."
+    }
+  ]
+}

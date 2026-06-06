@@ -6,9 +6,9 @@ Last revised: 2026-06-06
 
 ## Current Status
 
-**Active phase:** Phase 5 — EHDS and EHRxF
+**Active phase:** Phase 6 — Governance and Conformance
 
-Phase 1, 2, 3, and 4 complete (v1.2.0). Starting Phase 5.
+Phase 1, 2, 3, 4, and 5 complete (v1.3.0). Starting Phase 6.
 
 ---
 
@@ -206,21 +206,22 @@ Track 2: HL7 v2, CDA, FHIR comparison ✅
 
 ## Phase 5 — EHDS and EHRxF
 
-**Status:** Planned
+**Status:** Complete (v1.3.0)
 
-**Month:** 4 (intro) — 5 (primary)
+**Month:** 5
 
 **Goal:** Understand EHDS regulation, EHRxF, Patient Summary (IPS), ePrescription.
 
 ### Success Criteria
 
-- [ ] Synthetic IPS-compliant Patient Summary created
-- [ ] EHDS compliance checklist understood
-- [ ] Learn article: FHIR and EHDS
+- [x] Synthetic IPS-compliant Patient Summary created (examples/bundles/ips-patient-summary.json)
+- [x] EHDS compliance checklist understood (docs/phase-5-notes.md, /learn/ehds/fhir-and-ehds)
+- [x] Learn article: FHIR and EHDS + International Patient Summary
 
 ### Content (Track 4)
 
-EHDS, EHRxF, Patient Summary, ePrescription, MyHealth@EU
+- [x] FHIR and EHDS: regulation, EHRxF, MyHealth@EU, Slovak context, compliance checklist
+- [x] International Patient Summary: Composition, sections, document Bundle rules
 
 ---
 

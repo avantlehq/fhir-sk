@@ -1,0 +1,365 @@
+{
+  "resourceType": "Bundle",
+  "id": "ips-jana-horvath-20240315",
+  "meta": {
+    "profile": ["http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips"]
+  },
+  "identifier": {
+    "system": "https://fhir.sk/fhir/Bundle",
+    "value": "ips-jana-horvath-20240315"
+  },
+  "type": "document",
+  "timestamp": "2024-03-15T10:30:00+01:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:comp-ips-001",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "comp-ips-001",
+        "status": "final",
+        "type": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "60591-5",
+            "display": "Patient summary Document"
+          }]
+        },
+        "subject": { "reference": "urn:uuid:patient-001" },
+        "date": "2024-03-15T10:30:00+01:00",
+        "author": [{ "reference": "urn:uuid:practitioner-001" }],
+        "title": "Patient Summary — Jana Horváth",
+        "confidentiality": "N",
+        "attester": [{
+          "mode": "professional",
+          "time": "2024-03-15",
+          "party": { "reference": "urn:uuid:practitioner-001" }
+        }],
+        "custodian": { "reference": "urn:uuid:org-001" },
+        "section": [
+          {
+            "title": "Allergies and Intolerances",
+            "code": {
+              "coding": [{
+                "system": "http://loinc.org",
+                "code": "48765-2",
+                "display": "Allergies and adverse reactions Document"
+              }]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">High-criticality allergy to amoxicillin — skin rash (confirmed, active).</div>"
+            },
+            "entry": [{ "reference": "urn:uuid:allergy-001" }]
+          },
+          {
+            "title": "Medication Summary",
+            "code": {
+              "coding": [{
+                "system": "http://loinc.org",
+                "code": "10160-0",
+                "display": "History of Medication use Narrative"
+              }]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Metformin 500 mg twice daily for type 2 diabetes mellitus.</div>"
+            },
+            "entry": [{ "reference": "urn:uuid:rx-metformin-001" }]
+          },
+          {
+            "title": "Problem List",
+            "code": {
+              "coding": [{
+                "system": "http://loinc.org",
+                "code": "11450-4",
+                "display": "Problem list - Reported"
+              }]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Type 2 diabetes mellitus (SNOMED 44054006, ICD-10 E11) — active, confirmed. Onset 2020-03-15.</div>"
+            },
+            "entry": [{ "reference": "urn:uuid:condition-diabetes-001" }]
+          },
+          {
+            "title": "Results",
+            "code": {
+              "coding": [{
+                "system": "http://loinc.org",
+                "code": "30954-2",
+                "display": "Relevant diagnostic tests and/or laboratory data Narrative"
+              }]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Blood glucose 7.2 mmol/L (2024-03-15). Blood pressure 128/82 mmHg (2024-03-15).</div>"
+            },
+            "entry": [
+              { "reference": "urn:uuid:obs-glucose-001" },
+              { "reference": "urn:uuid:obs-bp-001" }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:patient-001",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-001",
+        "identifier": [
+          {
+            "system": "urn:oid:2.16.840.1.113883.2.9.4.3.2",
+            "value": "855315/1234"
+          }
+        ],
+        "name": [{ "use": "official", "family": "Horváth", "given": ["Jana"] }],
+        "gender": "female",
+        "birthDate": "1985-03-15",
+        "address": [{
+          "use": "home",
+          "line": ["Mlynská 12"],
+          "city": "Bratislava",
+          "postalCode": "81105",
+          "country": "SK"
+        }],
+        "communication": [{
+          "language": {
+            "coding": [{
+              "system": "urn:ietf:bcp:47",
+              "code": "sk",
+              "display": "Slovak"
+            }]
+          },
+          "preferred": true
+        }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-001",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "practitioner-001",
+        "name": [{ "use": "official", "family": "Novák", "given": ["Peter"], "prefix": ["MUDr."] }],
+        "identifier": [{
+          "system": "https://fhir.sk/fhir/NamingSystem/practitioner-id",
+          "value": "SK-GP-12345"
+        }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:org-001",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "org-001",
+        "name": "Všeobecná ambulancia MUDr. Novák",
+        "identifier": [{
+          "system": "https://fhir.sk/fhir/NamingSystem/organization-id",
+          "value": "SK-ORG-98765"
+        }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:allergy-001",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-001",
+        "clinicalStatus": {
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+            "code": "active",
+            "display": "Active"
+          }]
+        },
+        "verificationStatus": {
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+            "code": "confirmed",
+            "display": "Confirmed"
+          }]
+        },
+        "type": "allergy",
+        "category": ["medication"],
+        "criticality": "high",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "372687004",
+              "display": "Amoxicillin"
+            }
+          ],
+          "text": "Amoxicillin"
+        },
+        "patient": { "reference": "urn:uuid:patient-001" },
+        "onsetDateTime": "2015-06-01",
+        "reaction": [{
+          "manifestation": [{
+            "coding": [{
+              "system": "http://snomed.info/sct",
+              "code": "271807003",
+              "display": "Skin rash"
+            }]
+          }],
+          "severity": "moderate"
+        }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:rx-metformin-001",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "rx-metformin-001",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.whocc.no/atc",
+              "code": "A10BA02",
+              "display": "Metformin"
+            }
+          ],
+          "text": "Metformin 500 mg"
+        },
+        "subject": { "reference": "urn:uuid:patient-001" },
+        "authoredOn": "2024-03-15",
+        "reasonReference": [{ "reference": "urn:uuid:condition-diabetes-001" }],
+        "dosageInstruction": [{
+          "text": "500 mg twice daily with food",
+          "timing": {
+            "repeat": { "frequency": 2, "period": 1, "periodUnit": "d" }
+          },
+          "doseAndRate": [{
+            "doseQuantity": {
+              "value": 500, "unit": "mg",
+              "system": "http://unitsofmeasure.org", "code": "mg"
+            }
+          }]
+        }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-diabetes-001",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-diabetes-001",
+        "clinicalStatus": {
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active",
+            "display": "Active"
+          }]
+        },
+        "verificationStatus": {
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed",
+            "display": "Confirmed"
+          }]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Diabetes mellitus type 2"
+            },
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "E11",
+              "display": "Type 2 diabetes mellitus"
+            }
+          ]
+        },
+        "subject": { "reference": "urn:uuid:patient-001" },
+        "onsetDateTime": "2020-03-15"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-glucose-001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-glucose-001",
+        "status": "final",
+        "category": [{
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "laboratory",
+            "display": "Laboratory"
+          }]
+        }],
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "2339-0",
+            "display": "Glucose [Mass/volume] in Blood"
+          }]
+        },
+        "subject": { "reference": "urn:uuid:patient-001" },
+        "effectiveDateTime": "2024-03-15T09:15:00+01:00",
+        "valueQuantity": {
+          "value": 7.2,
+          "unit": "mmol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "mmol/L"
+        },
+        "interpretation": [{
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+            "code": "H",
+            "display": "High"
+          }]
+        }],
+        "referenceRange": [{
+          "low": { "value": 3.9, "unit": "mmol/L", "system": "http://unitsofmeasure.org", "code": "mmol/L" },
+          "high": { "value": 6.1, "unit": "mmol/L", "system": "http://unitsofmeasure.org", "code": "mmol/L" }
+        }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-bp-001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bp-001",
+        "status": "final",
+        "category": [{
+          "coding": [{
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "vital-signs",
+            "display": "Vital Signs"
+          }]
+        }],
+        "code": {
+          "coding": [{
+            "system": "http://loinc.org",
+            "code": "55284-4",
+            "display": "Blood pressure systolic and diastolic"
+          }]
+        },
+        "subject": { "reference": "urn:uuid:patient-001" },
+        "effectiveDateTime": "2024-03-15T10:00:00+01:00",
+        "component": [
+          {
+            "code": {
+              "coding": [{ "system": "http://loinc.org", "code": "8480-6", "display": "Systolic blood pressure" }]
+            },
+            "valueQuantity": {
+              "value": 128, "unit": "mmHg",
+              "system": "http://unitsofmeasure.org", "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [{ "system": "http://loinc.org", "code": "8462-4", "display": "Diastolic blood pressure" }]
+            },
+            "valueQuantity": {
+              "value": 82, "unit": "mmHg",
+              "system": "http://unitsofmeasure.org", "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

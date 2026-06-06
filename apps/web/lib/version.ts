@@ -1,7 +1,21 @@
-export const VERSION = "1.2.0";
-export const VERSION_NAME = "Phase 4 — Terminology";
+export const VERSION = "1.3.0";
+export const VERSION_NAME = "Phase 5 — EHDS and IPS";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.3.0",
+    date: "2026-06-07",
+    changes: [
+      "Phase 5 complete: EHDS regulation, IPS Document Bundle, 2 Learn articles",
+      "Synthetic IPS Patient Summary (examples/bundles/ips-patient-summary.json): 9 entries, 4 sections, all required IPS sections",
+      "AllergyIntolerance resource introduced (examples/patients/allergy-intolerance-example.json): amoxicillin, high criticality, skin rash",
+      "Composition resource: document type (60591-5), sections with LOINC codes and narrative text",
+      "Learn: FHIR and EHDS — regulation 2025/327, EHRxF timeline, MyHealth@EU, Slovak context, EHDS compliance checklist",
+      "Learn: International Patient Summary — document Bundle rules, Composition, required sections table, IPS profiles",
+      "/learn/ehds rebuilt as Track 4 article index with 2 articles",
+      "docs/phase-5-notes.md: IPS structure, EHDS key facts, AllergyIntolerance elements, 6 review questions",
+    ],
+  },
   {
     version: "1.2.0",
     date: "2026-06-06",
