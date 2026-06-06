@@ -10,7 +10,7 @@ Last validated: 2026-06-06
 Lab | Learn | Reference | About
 ```
 
-**Note:** Current implementation uses `Lab | Learn | About` (3 items). `Reference` section planned — do not add to nav until Reference has real content.
+**Note:** Current implementation uses `Lab | Learn | Reference | About` (4 items). Reference added in Phase 2 with 10 core entries live.
 
 ### Rules
 
@@ -39,13 +39,17 @@ fhir.sk/
 │   ├── /learn/profiling               ← Stub
 │   ├── /learn/terminology             ← Stub
 │   └── /learn/ehds                    ← Stub
-├── /reference/                        ← Planned (not yet implemented)
-│   ├── /reference/ehds
-│   ├── /reference/standards
-│   ├── /reference/terminologies
-│   ├── /reference/governance
-│   ├── /reference/architecture
-│   └── /reference/security
+├── /reference/                        ← Live (Phase 2)
+│   ├── /reference/fhir                ← Live
+│   ├── /reference/resource            ← Live
+│   ├── /reference/patient             ← Live
+│   ├── /reference/observation         ← Live
+│   ├── /reference/bundle              ← Live
+│   ├── /reference/profile             ← Live
+│   ├── /reference/rest-api            ← Live
+│   ├── /reference/search              ← Live
+│   ├── /reference/validation          ← Live
+│   └── /reference/capability-statement ← Live
 ├── /about/
 ├── /disclaimer/
 ├── /newsletter/

@@ -8,7 +8,8 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { href: "/lab",   label: "Lab"   },
-  { href: "/learn", label: "Learn" },
-  { href: "/about", label: "About" },
+  { href: "/lab",       label: "Lab"       },
+  { href: "/learn",     label: "Learn"     },
+  { href: "/reference", label: "Reference" },
+  { href: "/about",     label: "About"     },
 ];
