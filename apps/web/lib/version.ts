@@ -1,7 +1,18 @@
-export const VERSION = "0.9.0";
-export const VERSION_NAME = "Phase 3 — Validator MVP";
+export const VERSION = "1.0.0";
+export const VERSION_NAME = "Phase 3 — Learn Articles";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.0.0",
+    date: "2026-06-06",
+    changes: [
+      "3 Phase 3 Learn articles under /learn/profiling/",
+      "What is a Profile: StructureDefinition, differential vs snapshot, all 6 constraint types, FhirSkPatient table, real-world profiles (IPS, US Core, EHDS)",
+      "Validation: 5 validation types, OperationOutcome severity levels, $validate operation, our test results, validation tools",
+      "HL7 v2 vs CDA vs FHIR (Track 2): pipe format, CDA XML, FHIR REST, comparison table, coexistence reality",
+      "/learn/profiling rebuilt as article index with 3 cards",
+    ],
+  },
   {
     version: "0.9.0",
     date: "2026-06-06",
