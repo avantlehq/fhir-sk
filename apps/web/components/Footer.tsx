@@ -8,8 +8,9 @@ const navCol = [
 ];
 
 const connectCol = [
-  { href: "/newsletter",     label: "Newsletter" },
-  { href: "/disclaimer",     label: "Disclaimer" },
+  { href: "/newsletter", label: "Newsletter" },
+  { href: "/disclaimer", label: "Disclaimer" },
+  { href: "/copyright",  label: "Copyright" },
 ];
 
 export function Footer() {
@@ -72,7 +73,12 @@ export function Footer() {
             &copy; {new Date().getFullYear()} FHIR.sk{" "}
             <span className="text-slate-600">v{VERSION}</span>
           </p>
-          <p className="text-xs">No real patient data. Synthetic data only.</p>
+          <p className="text-xs">
+            No real patient data. Synthetic data only.{" "}
+            <Link href="/copyright" className="hover:text-slate-300 transition-colors">
+              Third-party terminology: SNOMED CT, LOINC, ICD-10, ATC.
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

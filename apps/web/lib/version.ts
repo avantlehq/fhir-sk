@@ -1,7 +1,17 @@
-export const VERSION = "1.5.8";
-export const VERSION_NAME = "About: maintainer attribution added";
+export const VERSION = "1.5.9";
+export const VERSION_NAME = "Copyright page: third-party terminology acknowledgments";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.9",
+    date: "2026-06-07",
+    changes: [
+      "New page: /copyright — IP acknowledgments for HL7 FHIR R4 (CC0), SNOMED CT (licence required), LOINC (free with attribution), ICD-10/ATC (WHO), UCUM (Regenstrief)",
+      "SNOMED CT section highlights Slovakia is not a member country; codes used for educational/synthetic purposes only",
+      "Footer: Copyright added to Connect column",
+      "Footer bottom bar: third-party terminology notice with link to /copyright",
+    ],
+  },
   {
     version: "1.5.8",
     date: "2026-06-07",
