@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,7 +13,6 @@ const notList = [
   "An Electronic Health Record (EHR) platform",
   "A national or regional health information platform",
   "Affiliated with NCZI (Národné centrum zdravotníckych informácií)",
-  "Affiliated with HL7 Slovakia",
   "Affiliated with the Slovak Ministry of Health",
   "Affiliated with any hospital, clinic, or healthcare provider",
   "A system that processes real patient data — EVER",
@@ -64,47 +64,6 @@ export default function AboutPage() {
           </p>
         </section>
 
-        {/* Tech Stack */}
-        <section className="mb-12">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">Tech Stack</h2>
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">Frontend</p>
-                <p className="text-slate-500">
-                  Next.js 15, App Router, TypeScript, Tailwind CSS v3
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">
-                  FHIR Server
-                </p>
-                <p className="text-slate-500">
-                  HAPI FHIR R4 (v7-tomcat), PostgreSQL 16
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">
-                  Local Infra
-                </p>
-                <p className="text-slate-500">Docker Compose</p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">
-                  Cloud Deploy
-                </p>
-                <p className="text-slate-500">Vercel (web), Railway (FHIR)</p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-700 mb-1">
-                  FHIR Version
-                </p>
-                <p className="text-slate-500">R4 (primary), R4B noted</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* What it is NOT */}
         <section className="mb-12">
           <h2 className="text-xl font-bold text-slate-900 mb-4">
@@ -130,6 +89,12 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Contact */}
+        <section className="mb-12">
+          <h2 className="text-xl font-bold text-slate-900 mb-4">Contact</h2>
+          <ContactForm />
         </section>
 
         {/* Disclaimer link */}

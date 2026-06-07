@@ -69,7 +69,6 @@ export default function DisclaimerPage() {
             <ul className="space-y-2 mb-4">
               {[
                 "NCZI — Národné centrum zdravotníckych informácií (National Health Information Centre of Slovakia)",
-                "HL7 Slovakia — the Slovak national HL7 affiliate",
                 "HL7 International",
                 "Slovak Ministry of Health (Ministerstvo zdravotníctva SR)",
                 "Any Slovak or European hospital, clinic, or healthcare provider",

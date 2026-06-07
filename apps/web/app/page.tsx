@@ -130,7 +130,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <span className="text-amber-700 font-semibold text-sm flex-shrink-0">⚠ Important:</span>
           <p className="text-amber-800 text-sm leading-relaxed">
-            All data is synthetic. Not affiliated with NCZI, HL7 Slovakia, or any healthcare institution.{" "}
+            All data is synthetic. Not affiliated with NCZI or any healthcare institution.{" "}
             <Link href="/disclaimer" className="underline hover:no-underline">Read full disclaimer.</Link>
           </p>
         </div>

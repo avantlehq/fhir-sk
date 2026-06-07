@@ -1,7 +1,18 @@
-export const VERSION = "1.5.2";
-export const VERSION_NAME = "docs: Architecture before Profiles — Phase 9↔10 reorder";
+export const VERSION = "1.5.3";
+export const VERSION_NAME = "About: contact form, HL7 Slovakia removed site-wide";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.3",
+    date: "2026-06-07",
+    changes: [
+      "About: Tech Stack section removed",
+      "About: Contact section added — name/email/message form → POST /api/contact → rastislav.mitasik@gmail.com",
+      "About: ContactForm extracted as client component (ContactForm.tsx), page stays server component",
+      "New API route: POST /api/contact (Resend, subject: Contact — fhir.sk)",
+      "HL7 Slovakia removed site-wide: about/page.tsx, disclaimer/page.tsx, page.tsx, learn/fhir-foundations/page.tsx",
+    ],
+  },
   {
     version: "1.5.2",
     date: "2026-06-07",

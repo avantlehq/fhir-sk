@@ -222,8 +222,7 @@ export default function FhirFoundationsPage() {
           </p>
           <p className="text-slate-700 leading-relaxed">
             This lab (FHIR.sk) is a personal learning project exploring these
-            concepts. It is not affiliated with NCZI, HL7 Slovakia, or any
-            official body.
+            concepts. It is not affiliated with NCZI or any official body.
           </p>
         </section>
 
