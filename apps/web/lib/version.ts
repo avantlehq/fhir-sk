@@ -1,7 +1,19 @@
-export const VERSION = "1.5.6";
-export const VERSION_NAME = "Learn: Slovak Interoperability track added";
+export const VERSION = "1.5.7";
+export const VERSION_NAME = "Reference: grouped categories, search, difficulty tags, See also";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.7",
+    date: "2026-06-07",
+    changes: [
+      "Reference: entries grouped into 5 categories with section headings and anchor links (#core-concepts etc.)",
+      "Reference: client-side search — filters by title + summary in real time, 'No results' state",
+      "Reference: difficulty tags (Beginner / Intermediate / Advanced) on every entry, AND filter with search",
+      "Reference: card redesign — left border accent by category, difficulty badge, 'New' badge (<30 days), 'See also' line",
+      "Reference: data extracted to lib/reference-data.ts, ReferenceList extracted as client component",
+      "page.tsx stays server component — metadata export preserved",
+    ],
+  },
   {
     version: "1.5.6",
     date: "2026-06-07",
