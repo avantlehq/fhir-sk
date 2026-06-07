@@ -1,7 +1,16 @@
-export const VERSION = "1.4.8";
-export const VERSION_NAME = "Roadmap removed site-wide, Year 2 references cleaned up";
+export const VERSION = "1.4.9";
+export const VERSION_NAME = "Phase number references removed site-wide";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.9",
+    date: "2026-06-07",
+    changes: [
+      "lab/page.tsx: '(Phases 2–4)' removed from live modules note",
+      "learn/profiling/conformance: '(Phase 3)' removed from $validate description",
+      "learn/profiling/profile: 'Phase 3 learning exercise' rewritten without phase reference",
+    ],
+  },
   {
     version: "1.4.8",
     date: "2026-06-07",

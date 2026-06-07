@@ -124,7 +124,7 @@ export default function ProfileLearnPage() {
         <section className="mb-12">
           <h2 className="text-xl font-bold text-slate-900 mb-4">FhirSk Patient — our profile</h2>
           <p className="text-slate-700 leading-relaxed mb-4">
-            We built <code className="font-mono text-xs bg-slate-100 px-1 rounded">FhirSkPatient</code> as a Phase 3 learning exercise. It constrains the base Patient to require the minimum set of fields a Slovak healthcare system would need:
+            We built <code className="font-mono text-xs bg-slate-100 px-1 rounded">FhirSkPatient</code> to constrain the base Patient to the minimum set of fields a Slovak healthcare system would need:
           </p>
           <div className="overflow-x-auto border border-slate-200 rounded-lg mb-4">
             <table className="w-full text-sm text-slate-600">

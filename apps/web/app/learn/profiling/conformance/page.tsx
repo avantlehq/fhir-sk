@@ -93,7 +93,7 @@ export default function ConformancePage() {
         </p>
         <ul className="space-y-1 text-slate-600 mb-8 ml-4">
           <li><span className="font-semibold">Postman collection:</span> manual verification of each endpoint and search parameter</li>
-          <li><span className="font-semibold">$validate operation:</span> per-resource validation against HAPI FHIR (Phase 3)</li>
+          <li><span className="font-semibold">$validate operation:</span> per-resource validation against HAPI FHIR</li>
           <li><span className="font-semibold">Validator Lab:</span> structural validation against our profiles in the browser</li>
         </ul>
 
