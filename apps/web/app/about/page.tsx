@@ -100,10 +100,8 @@ export default function AboutPage() {
         {/* Attribution + disclaimer */}
         <div className="border-t border-slate-200 pt-8 space-y-3">
           <p className="text-sm text-slate-500 leading-relaxed">
-            FHIR.sk is maintained by Rastislav Mitašík, an IT consultant and analyst focused on
-            interoperability, privacy and digital governance. The project was created as an
-            independent initiative for exploring HL7 FHIR, healthcare interoperability and
-            EHDS-related concepts.
+            FHIR.sk is a personal project created as an independent initiative for exploring
+            HL7 FHIR, healthcare interoperability and EHDS-related concepts.
           </p>
           <p className="text-sm text-slate-400">
             For the full legal disclaimer, see the{" "}

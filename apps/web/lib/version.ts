@@ -1,7 +1,14 @@
-export const VERSION = "1.6.1";
-export const VERSION_NAME = "UX: active nav state, article prev/next, newsletter removed";
+export const VERSION = "1.6.2";
+export const VERSION_NAME = "About: attribution text simplified";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.6.2",
+    date: "2026-06-07",
+    changes: [
+      "About: attribution simplified — name removed for now, 'FHIR.sk is a personal project created as an independent initiative...'",
+    ],
+  },
   {
     version: "1.6.1",
     date: "2026-06-07",
