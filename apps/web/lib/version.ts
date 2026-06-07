@@ -1,7 +1,14 @@
-export const VERSION = "1.5.9";
-export const VERSION_NAME = "Copyright page: third-party terminology acknowledgments";
+export const VERSION = "1.6.0";
+export const VERSION_NAME = "Hero: Browse Reference CTA removed";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.6.0",
+    date: "2026-06-07",
+    changes: [
+      "Hero: 'Browse Reference' CTA removed — three CTAs reduced to two (Open Lab primary, Learn tertiary text-link)",
+    ],
+  },
   {
     version: "1.5.9",
     date: "2026-06-07",

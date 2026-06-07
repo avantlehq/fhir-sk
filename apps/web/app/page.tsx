@@ -44,9 +44,6 @@ export default function HomePage() {
             <Link href="/lab" className="bg-teal-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-teal-500 transition-colors">
               Open Lab →
             </Link>
-            <Link href="/reference" className="border border-slate-600 text-slate-200 font-semibold px-6 py-3 rounded-lg hover:border-slate-400 hover:text-white transition-colors">
-              Browse Reference
-            </Link>
             <Link href="/learn" className="text-slate-400 font-semibold px-6 py-3 rounded-lg hover:text-slate-200 transition-colors">
               Learn →
             </Link>
