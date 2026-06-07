@@ -16,12 +16,12 @@ const labModules = [
 ];
 
 const learnAreas = [
-  { title: "FHIR Fundamentals", description: "Resources, REST API, Bundles, CapabilityStatement and HAPI FHIR.", href: "/learn/fhir-foundations", upcoming: false },
-  { title: "Health Data Standards", description: "HL7 v2, CDA, FHIR and how the standards relate — comparison and coexistence.", href: "/learn/resources", upcoming: false },
-  { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10, ATC — CodeSystem, ValueSet and binding strengths.", href: "/learn/terminology", upcoming: false },
-  { title: "EHDS and EHRxF", description: "European Health Data Space regulation, EHRxF timeline, IPS Patient Summary and MyHealth@EU.", href: "/learn/ehds", upcoming: false },
-  { title: "Governance and Conformance", description: "Consent, AuditEvent, Provenance, CapabilityStatement and conformance resources.", href: "/learn/profiling", upcoming: false },
-  { title: "Data Privacy in FHIR", description: "GDPR and health data, Consent resource, AuditEvent, Provenance and Privacy by Design in FHIR systems.", href: "/learn/privacy", upcoming: false },
+  { title: "FHIR Fundamentals", description: "Resources, REST API, Bundles, CapabilityStatement and HAPI FHIR.", href: "/learn/fhir-foundations" },
+  { title: "Health Data Standards", description: "HL7 v2, CDA, FHIR and how the standards relate — comparison and coexistence.", href: "/learn/resources" },
+  { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10, ATC — CodeSystem, ValueSet and binding strengths.", href: "/learn/terminology" },
+  { title: "EHDS and EHRxF", description: "European Health Data Space regulation, EHRxF timeline, IPS Patient Summary and MyHealth@EU.", href: "/learn/ehds" },
+  { title: "Governance and Conformance", description: "Consent, AuditEvent, Provenance, CapabilityStatement and conformance resources.", href: "/learn/profiling" },
+  { title: "Data Privacy in FHIR", description: "GDPR and health data, Consent resource, AuditEvent, Provenance and Privacy by Design in FHIR systems.", href: "/learn/privacy" },
 ];
 
 export default function HomePage() {
@@ -88,22 +88,13 @@ export default function HomePage() {
               <Link
                 key={area.title}
                 href={area.href}
-                className={`flex items-start justify-between gap-4 border rounded-xl p-5 transition-colors group ${
-                  area.upcoming
-                    ? "border-slate-200 border-dashed hover:border-slate-300"
-                    : "border-slate-200 hover:border-teal-300 hover:bg-slate-50"
-                }`}
+                className="flex items-start justify-between gap-4 border border-slate-200 rounded-xl p-5 transition-colors group hover:border-teal-300 hover:bg-slate-50"
               >
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className={`text-sm font-bold ${area.upcoming ? "text-slate-400" : "text-slate-900"}`}>{area.title}</h3>
-                    {area.upcoming && (
-                      <span className="text-xs font-semibold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Year 2</span>
-                    )}
-                  </div>
-                  <p className={`text-sm leading-relaxed ${area.upcoming ? "text-slate-400" : "text-slate-500"}`}>{area.description}</p>
+                  <h3 className="text-sm font-bold text-slate-900 mb-1">{area.title}</h3>
+                  <p className="text-sm leading-relaxed text-slate-500">{area.description}</p>
                 </div>
-                <span className={`font-bold text-lg flex-shrink-0 group-hover:translate-x-1 transition-transform ${area.upcoming ? "text-slate-300" : "text-teal-600"}`}>→</span>
+                <span className="font-bold text-lg flex-shrink-0 text-teal-600 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             ))}
           </div>

@@ -4,17 +4,11 @@ import { SectionHeader } from "@/components/SectionHeader";
 
 export const metadata: Metadata = {
   title: "Learn",
-  description: "Roadmap, guides and explanations for HL7 FHIR, profiles, terminology, EHDS and European healthcare interoperability.",
+  description: "Guides and explanations for HL7 FHIR, profiles, terminology, EHDS and European healthcare interoperability.",
   alternates: { canonical: "https://fhir.sk/learn" },
 };
 
 const learningAreas = [
-  {
-    title: "Roadmap",
-    description: "8-phase learning path from FHIR basics to EHDS, terminology, integration architecture and advanced experiments.",
-    href: "/learn/roadmap",
-    topics: ["Phase 1–8", "Goals", "Deliverables", "Related Lab Modules"],
-  },
   {
     title: "FHIR Foundations",
     description: "What is HL7 FHIR, why it was created, core concepts, REST API, Bundles and CapabilityStatement.",
@@ -45,6 +39,12 @@ const learningAreas = [
     href: "/learn/ehds",
     topics: ["EHDS", "EHRxF", "Patient Summary", "ePrescription", "Provenance", "Consent"],
   },
+  {
+    title: "Data Privacy in FHIR",
+    description: "GDPR and health data, Consent resource, AuditEvent, Provenance and Privacy by Design in FHIR systems.",
+    href: "/learn/privacy",
+    topics: ["GDPR Art. 9", "Consent", "AuditEvent", "Provenance", "Privacy by Design", "EHDS patient rights"],
+  },
 ];
 
 export default function LearnPage() {
@@ -54,7 +54,7 @@ export default function LearnPage() {
         <SectionHeader
           label="Learn"
           title="Knowledge and Guides"
-          description="Roadmap, guides and explanations for HL7 FHIR, profiles, terminology and European healthcare interoperability."
+          description="Guides and explanations for HL7 FHIR, profiles, terminology and European healthcare interoperability."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {learningAreas.map((area) => (

@@ -1,7 +1,19 @@
-export const VERSION = "1.4.7";
-export const VERSION_NAME = "Data Privacy track, Roadmap removed from homepage";
+export const VERSION = "1.4.8";
+export const VERSION_NAME = "Roadmap removed site-wide, Year 2 references cleaned up";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.8",
+    date: "2026-06-07",
+    changes: [
+      "/learn/roadmap: redirects to /learn (page no longer public)",
+      "learn/page.tsx: Roadmap card removed, Data Privacy in FHIR card added",
+      "learn/page.tsx: metadata and SectionHeader description cleaned (no 'Roadmap' mention)",
+      "lab/page.tsx: 'Year 2' → 'a future release', Synthetic Data phase reference removed",
+      "lab/synthetic-data, resource-builder, profile-explorer: roadmap links removed → 'planned for a future release'",
+      "homepage page.tsx: upcoming logic and Year 2 badge removed, learnAreas simplified",
+    ],
+  },
   {
     version: "1.4.7",
     date: "2026-06-07",

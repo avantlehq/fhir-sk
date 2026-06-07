@@ -24,11 +24,9 @@ export default function ResourceBuilderPage() {
         </p>
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-8 text-center">
           <div className="text-4xl mb-4">🔬</div>
-          <h2 className="text-lg font-semibold text-slate-700 mb-2">Coming in a future phase</h2>
+          <h2 className="text-lg font-semibold text-slate-700 mb-2">Coming soon</h2>
           <p className="text-slate-500 text-sm max-w-md mx-auto">
-            This module is on the roadmap. Follow the{" "}
-            <Link href="/learn/roadmap" className="text-teal-600 hover:underline">learning roadmap</Link>{" "}
-            to track progress.
+            This module is planned for a future release.
           </p>
         </div>
       </div>

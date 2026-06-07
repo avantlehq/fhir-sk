@@ -35,7 +35,7 @@ const modules = [
   },
   {
     title: "Synthetic Data",
-    description: "Generate realistic fictional FHIR datasets: patients, encounters, diagnoses, observations, medications and Patient Summary examples. Planned for Phase 7 with 50–100 patient scale.",
+    description: "Generate realistic fictional FHIR datasets: patients, encounters, diagnoses, observations, medications and Patient Summary examples.",
     status: "Planned" as const,
     href: "/lab/synthetic-data",
   },
@@ -64,7 +64,7 @@ export default function LabPage() {
         <div className="mt-12 bg-slate-50 border border-slate-200 rounded-xl p-6">
           <p className="text-sm text-slate-500 leading-relaxed">
             <strong className="text-slate-700">Note:</strong> Mock Server, Validator and Terminology Explorer are live (Phases 2–4).
-            Resource Builder, Synthetic Data and Profile Explorer are planned for Year 2.
+            Resource Builder, Synthetic Data and Profile Explorer are planned for a future release.
             The mock server data mirrors{" "}
             <code className="font-mono text-xs bg-slate-200 px-1 py-0.5 rounded">infra/hapi/</code>{" "}
             running locally via Docker Compose — see the repository for setup.
