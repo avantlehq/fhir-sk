@@ -42,12 +42,15 @@ fhir-sk/
 │       │   ├── reference/    ← /reference + 25 entry pages
 │       │   ├── about/
 │       │   └── disclaimer/
-│       ├── components/       ← Header, Footer, StatusBadge, ModuleCard, LearningCard, SectionHeader
+│       ├── components/       ← Header (active nav), Footer, StatusBadge, ModuleCard, LearningCard,
+│       │                        SectionHeader, ArticleNav (prev/next), ReferenceList (client, search+filter)
 │       └── lib/
-│           ├── site.ts       ← siteConfig, navLinks (Lab / Learn / Reference / About)
-│           ├── version.ts    ← VERSION, VERSION_NAME, CHANGELOG
-│           ├── fhir-mock/    ← Static FHIR data: Patient, Condition, Encounter, MedicationRequest,
-│           │   index.ts         Observation, AllergyIntolerance, IPS Bundle, CapabilityStatement
+│           ├── site.ts            ← siteConfig, navLinks (Lab / Learn / Reference / About)
+│           ├── version.ts         ← VERSION, VERSION_NAME, CHANGELOG
+│           ├── reference-data.ts  ← 25 reference entries: difficulty, dateAdded, seeAlso, groups
+│           ├── learn-tracks.ts    ← Article ordering for resources/profiling/ehds tracks (prev/next)
+│           ├── fhir-mock/         ← Static FHIR data: Patient, Condition, Encounter, MedicationRequest,
+│           │   index.ts              Observation, AllergyIntolerance, IPS Bundle, CapabilityStatement
 │           └── fhir-terminology.ts ← Static ValueSets + CodeSystems (5 + 4)
 ├── infra/
 │   └── hapi/                 ← HAPI FHIR R4 Docker Compose + PostgreSQL
@@ -111,6 +114,8 @@ Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (
 | `/learn/fhir-foundations` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles, Core Resources links |
 | `/learn/resources` | ✅ Live | Article index: Observation, Condition, Encounter, Search, Bundle (no top-level card) |
 | `/learn/slovak` | ✅ Live | Slovak Interoperability track — compliance-timeline + Phase 7–8 upcoming stubs |
+| `/copyright` | ✅ Live | Third-party terminology acknowledgments: HL7 FHIR, SNOMED CT, LOINC, ICD-10/ATC, UCUM |
+| `/about` | ✅ Live | What FHIR.sk is, what it is NOT, contact form, attribution |
 | `/learn/resources/observation` | ✅ Live | Observation deep-dive |
 | `/learn/resources/condition` | ✅ Live | Condition deep-dive |
 | `/learn/resources/encounter` | ✅ Live | Encounter deep-dive |
@@ -130,7 +135,6 @@ Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (
 | `/learn/privacy` | ✅ Live | Track 6 — GDPR health data, Consent, AuditEvent, Privacy by Design |
 | `/reference` | ✅ Live | 25 entries in 5 groups |
 | `/reference/[slug]` | ✅ Live | 25 individual reference pages |
-| `/about` | ✅ Live | What FHIR.sk is, what it is NOT, contact form |
 | `/disclaimer` | ✅ Live | Synthetic data notice, no affiliation, legal |
 
 ### Mock FHIR API routes (apps/web/app/api/fhir/)
@@ -167,7 +171,7 @@ Version is defined in `apps/web/lib/version.ts`:
 
 **Rule: update version.ts + package.json after every deployment. No exceptions.**
 
-Current version: **1.5.6 "Learn: Slovak Interoperability track added"**
+Current version: **1.6.2 "About: attribution text simplified"**
 
 ### Design system
 

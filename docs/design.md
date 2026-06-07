@@ -69,8 +69,11 @@ Style: `rounded-full`, `text-xs`, `font-semibold`, `px-2.5 py-0.5`
 - Sticky top, `z-50`
 - Background: `bg-white`, border: `border-b border-slate-200`
 - Height: `h-16`
-- Logo: `font-mono font-bold text-xl text-slate-900` + Phase badge
+- Logo: `text-base font-semibold text-slate-900` — text "FHIR.sk", links to `/`
 - Nav links: `text-sm font-medium text-slate-600 hover:text-teal-700`
+- Active nav link (desktop): `text-teal-700 underline underline-offset-4 decoration-teal-300`
+- Active nav link (mobile): `text-teal-700 font-semibold`
+- Active detection: `usePathname().startsWith(link.href)`
 - Mobile: hamburger menu below `md` breakpoint
 
 ### Footer (`components/Footer.tsx`)
@@ -93,6 +96,20 @@ Style: `rounded-full`, `text-xs`, `font-semibold`, `px-2.5 py-0.5`
 
 - Section heading: label (small caps / muted) + title + description
 - Used across all major page sections
+
+### ArticleNav (`components/ArticleNav.tsx`)
+
+- Client component — uses `usePathname()` to resolve position in track
+- Renders `← prev title` / `next title →` at bottom of multi-article Learn pages
+- Data source: `lib/learn-tracks.ts`
+- Renders nothing on pages not in a defined track
+
+### ReferenceList (`components/ReferenceList.tsx`)
+
+- Client component — search input + difficulty filter buttons
+- Imported by `/reference/page.tsx` (server component) to preserve `metadata` export
+- Data source: `lib/reference-data.ts`
+- Filters: text (title + summary) AND difficulty (Beginner / Intermediate / Advanced)
 
 ---
 
@@ -133,7 +150,7 @@ Style: `rounded-full`, `text-xs`, `font-semibold`, `px-2.5 py-0.5`
 
 ## What to Avoid
 
-- Animations (no Framer Motion, no CSS transitions beyond `transition-colors`)
+- Animations (no Framer Motion; CSS transitions limited to `transition-colors` and subtle `translate-x/y` on interactive arrows)
 - shadcn/ui or other heavy component libraries
 - Gradients
 - Drop shadows on cards (use border instead)
@@ -152,8 +169,7 @@ Current stack:
 - `next` 16.2.6
 - `react` 19
 - `tailwindcss` v3
-- `autoprefixer`
-- `postcss`
-- `typescript`
+- `resend` — email delivery for contact form and mock server access requests
+- `autoprefixer`, `postcss`, `typescript`
 
 No UI component libraries. No animation libraries. No icon packs (use inline SVG when needed).
