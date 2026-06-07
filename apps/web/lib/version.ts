@@ -1,7 +1,17 @@
-export const VERSION = "1.5.3";
-export const VERSION_NAME = "About: contact form, HL7 Slovakia removed site-wide";
+export const VERSION = "1.5.4";
+export const VERSION_NAME = "Learn: EHDS Compliance Timeline article";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.4",
+    date: "2026-06-07",
+    changes: [
+      "New article: /learn/ehds/compliance-timeline — EHDS Compliance Timeline for Slovak Healthcare",
+      "Covers: GDPR Art. 9 → FHIR Consent/AuditEvent/Provenance, EHDS Phase 1 (2027) datasets, EHDS Phase 2 (2029), Slovak national laws (153/2013, 576/2004, 18/2018)",
+      "Includes: overview table (legislation/deadline/FHIR work), 4 technical implications, 8-item compliance checklist",
+      "learn/ehds/page.tsx: 3rd article card added, topics list expanded",
+    ],
+  },
   {
     version: "1.5.3",
     date: "2026-06-07",

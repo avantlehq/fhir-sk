@@ -19,6 +19,12 @@ const articles = [
     summary: "The IPS specification: Composition, required sections (Allergies, Medications, Problems), Document Bundle structure, and why IPS is the basis for EHDS Patient Summary.",
     time: "8 min",
   },
+  {
+    href: "/learn/ehds/compliance-timeline",
+    title: "EHDS Compliance Timeline for Slovak Healthcare",
+    summary: "Legislative obligations driving FHIR adoption in Slovakia: EHDS 2025/327 Phase 1 (2027) and Phase 2 (2029), GDPR health data requirements, and what each mandate means technically.",
+    time: "12 min",
+  },
 ];
 
 export default function EhdsLearnPage() {
@@ -54,7 +60,7 @@ export default function EhdsLearnPage() {
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
           <h2 className="text-sm font-semibold text-slate-700 mb-2">Topics in this track</h2>
           <ul className="grid grid-cols-2 gap-2 text-sm text-slate-600">
-            {["EHDS Regulation 2025/327", "EHRxF exchange format", "International Patient Summary", "ePrescription", "MyHealth@EU", "IPS Composition", "Document Bundle", "Cross-border access"].map((t) => (
+            {["EHDS Regulation 2025/327", "EHRxF exchange format", "International Patient Summary", "ePrescription", "MyHealth@EU", "IPS Composition", "Document Bundle", "Cross-border access", "GDPR Article 9", "Compliance deadlines 2027/2029"].map((t) => (
               <li key={t} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-teal-400 rounded-full flex-shrink-0" />
                 {t}
