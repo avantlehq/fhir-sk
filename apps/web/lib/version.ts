@@ -1,7 +1,17 @@
-export const VERSION = "1.5.0";
-export const VERSION_NAME = "Mock Server: API docs replaced with access request form";
+export const VERSION = "1.5.1";
+export const VERSION_NAME = "docs: Phase 7–11 revised — eLab+eVyšetrenie focus, eRecept removed";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.1",
+    date: "2026-06-07",
+    changes: [
+      "docs/phases.md: Phase 7 — eRecept removed, JRUZ as cross-cutting chapter, 3 outputs defined (Analytical docs, MkDocs PoC, eZdravie Examples lab module)",
+      "docs/phases.md: Phase 8 — eRecept mapping removed, JRUZ identifiers as cross-cutting section",
+      "docs/phases.md: Phase 9 — 8 profiles → 7 profiles, FhirSkMedicationRequest removed",
+      "docs/phases.md: Phase 11 — ATC SK ConceptMap removed (eRecept out of scope)",
+    ],
+  },
   {
     version: "1.5.0",
     date: "2026-06-07",

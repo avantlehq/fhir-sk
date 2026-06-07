@@ -327,22 +327,41 @@ IM je interný NCZI dokument. Verejné (fhir.sk + GitHub): abstraktné analýzy,
 | JRUZ | Národný register — dátový model, identitné vzťahy, update model |
 | NZIS | Vzťah k eZdraviu, sekundárne využitie, štatistické výstupy |
 
-**Moduly na analýzu (prioritný poriadok):**
+**Moduly na analýzu:**
 
-| Priorita | Modul | Prečo |
-|----------|-------|-------|
-| 1 | eLab v3 | Najštruktúrovanejší, najčistejší dátový model |
-| 2 | eVyšetrenie v8/v9 | Najklinicky bohatší — ambulantný nález |
-| 3 | eRecept v6 | EHDS Phase 1 ePrescription |
-| 4 | JRUZ v1.2.0 | Identitný základ pre všetko ostatné |
+| Modul | Prečo |
+|-------|-------|
+| eLab v3 | Najštruktúrovanejší, najčistejší dátový model |
+| eVyšetrenie v8/v9 | Najklinicky bohatší — ambulantný nález |
 
-**Success criteria Track A:**
+**JRUZ identifikátory — priečna kapitola (nie samostatný modul):**
+Rodné číslo, JRÚZ ID, poistný kód, IČO PZS, kód lekára sú referencované v oboch moduloch. Analyzujú sa ako súčasť eLab a eVyšetrenie analýzy, nie ako samostatná fáza.
+
+### Výstupy Phase 7
+
+**Output A — Analytické dokumenty (privátne, docs/):**
+- docs/phase-7-architecture.md — architektúra eZdravia
+- docs/phase-7-elab-analysis.md — eLab v3 dátové elementy, XSD, procesný tok
+- docs/phase-7-evysetrenie-analysis.md — eVyšetrenie sekcie, povinné/voliteľné elementy
+- Vstup pre Phase 8 mapovanie
+
+**Output B — Moderná dokumentácia (MkDocs PoC):**
+- eVyšetrenie a eLab prevedené do štruktúrovaného Markdown formátu
+- PoC pre NCZI proposal — ukázať ako môže vyzerať lepší IM
+- Verejná: abstraktná architektúra, dátové elementy bez proprietárnych detailov
+
+**Output C — eZdravie Examples (nový lab modul na fhir.sk):**
+- Statické XML príklady eLab výsledku a eVyšetrenie dokumentu
+- Vedľa každého príkladu FHIR ekvivalent
+- Vizuálna ukážka hodnoty mapovania — čo prišlo z eZdravia, čo odchádza ako FHIR
+
+**Success criteria:**
 - [ ] Architektúra eZdravia zdokumentovaná (docs/phase-7-architecture.md)
-- [ ] eLab v3: dátové elementy, XSD štruktúra, procesný tok (docs/phase-7-elab-analysis.md)
+- [ ] eLab v3: dátové elementy, XSD štruktúra, procesný tok + JRUZ identifikátory (docs/phase-7-elab-analysis.md)
 - [ ] eVyšetrenie: sekcie dokumentu, povinné vs voliteľné elementy (docs/phase-7-evysetrenie-analysis.md)
-- [ ] eRecept: životný cyklus receptu, XSD dátové elementy (docs/phase-7-erecept-analysis.md)
-- [ ] JRUZ: identifikátory, dátový model, update vzory (docs/phase-7-jruz-analysis.md)
-- [ ] Číselníky NCZI: OID strom, vzťah k LOINC/MKCH-10/ATC zdokumentovaný
+- [ ] Číselníky NCZI: OID strom, vzťah k LOINC/MKCH-10 zdokumentovaný
+- [ ] Output B: MkDocs PoC — aspoň jeden modul v modernom formáte
+- [ ] Output C: eZdravie Examples lab modul na fhir.sk
 
 **Learn články Track A (fhir.sk — Track 6: Slovak Interoperability):**
 - How eZdravie Works Today
@@ -358,9 +377,9 @@ IM je interný NCZI dokument. Verejné (fhir.sk + GitHub): abstraktné analýzy,
 
 **Status:** Planned (po Phase 7 Track A)
 
-**Goal:** Pre každý eZdravie modul vytvoriť mapovanie: XML element → FHIR R4 path. Identifikovať terminologické medzery, gap analýzy, design rozhodnutia. Výstup: mapovanie tabuľky ktoré budú vstupom pre Phase 9 profily.
+**Goal:** Pre každý analyzovaný modul vytvoriť mapovanie: XML element → FHIR R4 path. Identifikovať terminologické medzery, gap analýzy, design rozhodnutia. Výstup: mapovanie tabuľky ktoré budú vstupom pre Phase 9 profily.
 
-**Input:** Phase 7 analýza každého modulu. Mapovanie začína až po pochopení zdrojového systému.
+**Input:** Phase 7 analýza eLab v3 a eVyšetrenie. Mapovanie začína až po pochopení zdrojového systému.
 
 ### Mapovanie modulov
 
@@ -384,12 +403,7 @@ IM je interný NCZI dokument. Verejné (fhir.sk + GitHub): abstraktné analýzy,
 - Výkony → Procedure[]
 - Celý dokument → Document Bundle (Composition first entry)
 
-**eRecept v6 → FHIR:**
-- Predpis → MedicationRequest (ATC binding, status, intent)
-- Vydanie → MedicationDispense (quantity, performer → Pharmacy)
-- Životný cyklus: predpísaný → vydaný → exspirovaný
-
-**JRUZ v1.2.0 → FHIR:**
+**JRUZ identifikátory → FHIR (priečna kapitola):**
 - Pacient → Patient (rodné číslo + JRÚZ ID slices, name, birthDate, gender, address)
 - Lekár → Practitioner (kód lekára, špecializácia binding)
 - Zariadenie → Organization (IČO PZS, kód zariadenia)
@@ -397,22 +411,20 @@ IM je interný NCZI dokument. Verejné (fhir.sk + GitHub): abstraktné analýzy,
 ### Success criteria
 
 - [ ] Mapovacia tabuľka eLab v3: každý XML element → FHIR path (docs/phase-8-elab-mapping.md)
-- [ ] Terminologická gap analýza: aké SK kódy nemajú priamy LOINC ekvivalent
+- [ ] Terminologická gap analýza: SK kódy bez priameho LOINC ekvivalentu
 - [ ] Design rozhodnutie zdokumentované: DiagnosticReport + Observation[] vs samostatné Observations
 - [ ] Mapovacia tabuľka eVyšetrenie: sekcia → FHIR resource (docs/phase-8-evysetrenie-mapping.md)
-- [ ] Mapovacia tabuľka eRecept → MedicationRequest (docs/phase-8-erecept-mapping.md)
-- [ ] Identifikátory JRUZ → Patient.identifier slices (docs/phase-8-jruz-mapping.md)
+- [ ] JRUZ identifikátory → Patient/Practitioner/Organization.identifier slices (docs/phase-8-identifiers.md)
 
 **Learn články (fhir.sk — Track 6):**
 - How eLab Maps to FHIR
 - How eVyšetrenie Maps to FHIR: From XML Document to FHIR Bundle
-- How ePrescription Maps to FHIR
 - From XML/SOAP to FHIR REST: The Full Transformation
 
 **Reference — FHIR Mapping Catalog** (nová sekcia):
-- eLab v3 → Observation + DiagnosticReport (tabuľka element po elemente)
-- eRecept v6 → MedicationRequest
-- JRUZ → Patient identifiers
+- eLab v3 → Observation + DiagnosticReport
+- eVyšetrenie → Composition + Encounter + Condition
+- Slovak Health Identifiers → Patient/Practitioner/Organization slices
 
 ---
 
@@ -422,18 +434,17 @@ IM je interný NCZI dokument. Verejné (fhir.sk + GitHub): abstraktné analýzy,
 
 **Goal:** Vytvoriť Slovak FHIR profily odvodené z Phase 8 mapovania. Každý constraint má dôvod zdokumentovaný v Phase 7–8. Žiadna profile práca bez dokončeného mapovania.
 
-**8 profilov:**
+**7 profilov:**
 
 | Profil | Základ | Nahrádza |
 |--------|--------|---------|
-| FhirSkPatient v1.0 | JRUZ analýza (Phase 7) | vymyslený v0.2.0 |
+| FhirSkPatient v1.0 | JRUZ identifikátory (Phase 7–8) | vymyslený v0.2.0 |
 | FhirSkObservation | eLab analýza (Phase 8) | — |
 | FhirSkDiagnosticReport | eLab analýza (Phase 8) | — |
-| FhirSkMedicationRequest | eRecept analýza (Phase 8) | — |
 | FhirSkEncounter | eVyšetrenie analýza (Phase 8) | — |
 | FhirSkCondition | eVyšetrenie + MKCH-10 (Phase 8) | — |
-| FhirSkPractitioner | JRUZ analýza (Phase 7) | — |
-| FhirSkOrganization | JRUZ analýza (Phase 7) | — |
+| FhirSkPractitioner | JRUZ identifikátory (Phase 8) | — |
+| FhirSkOrganization | JRUZ identifikátory (Phase 8) | — |
 
 **Tooling:** StructureDefinition JSON pre drafty. FSH/SUSHI pre finálne profily v Phase 11.
 
@@ -516,7 +527,6 @@ FHIR resources reference external terminology servers for $expand, $validate-cod
 **ConceptMap priority for Slovak context:**
 - Slovak lab test codes (eLab číselník) → LOINC (needed for EHDS cross-border)
 - MKCH-10-SK → ICD-10-CM (needed for EHRxF Condition coding)
-- ATC SK → ATC International (medication coding alignment)
 
 ---
 
