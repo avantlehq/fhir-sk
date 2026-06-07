@@ -1,7 +1,14 @@
-export const VERSION = "1.5.7";
-export const VERSION_NAME = "Reference: grouped categories, search, difficulty tags, See also";
+export const VERSION = "1.5.8";
+export const VERSION_NAME = "About: maintainer attribution added";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.8",
+    date: "2026-06-07",
+    changes: [
+      "About: maintainer attribution added — Rastislav Mitašík, IT consultant/analyst, independent initiative",
+    ],
+  },
   {
     version: "1.5.7",
     date: "2026-06-07",
