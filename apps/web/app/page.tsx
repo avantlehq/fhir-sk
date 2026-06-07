@@ -31,7 +31,7 @@ export default function HomePage() {
       <section className="bg-slate-900 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <span className="inline-block text-xs font-semibold bg-teal-900 text-teal-300 px-3 py-1 rounded-full uppercase tracking-widest mb-6">
-            Mock API · 25 Reference entries · IPS Bundle · EHDS
+            Mock Server · 25 Reference entries · IPS Bundle · EHDS
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
             FHIR Interoperability Lab
