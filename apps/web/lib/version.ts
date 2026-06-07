@@ -1,7 +1,18 @@
-export const VERSION = "1.5.5";
-export const VERSION_NAME = "Homepage: disclaimer moved up, FHIR.sk capitalized";
+export const VERSION = "1.5.6";
+export const VERSION_NAME = "Learn: Slovak Interoperability track added";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.6",
+    date: "2026-06-07",
+    changes: [
+      "New learn track: /learn/slovak — Slovak Interoperability (NCZI, eZdravie, legislative obligations)",
+      "Homepage and /learn: 'Health Data Standards' block replaced with 'Slovak Interoperability' → /learn/slovak",
+      "/learn/slovak: compliance-timeline as live article, Phase 7–8 articles shown as upcoming stubs",
+      "/learn/fhir-foundations: Core Clinical Resources section added (links to Observation, Condition, Encounter, Bundle, Search)",
+      "/learn/resources: URL and articles remain accessible, no longer a top-level navigation card",
+    ],
+  },
   {
     version: "1.5.5",
     date: "2026-06-07",

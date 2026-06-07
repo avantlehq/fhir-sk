@@ -16,10 +16,10 @@ const learningAreas = [
     topics: ["Resources", "REST API", "JSON/XML", "Bundles", "CapabilityStatement"],
   },
   {
-    title: "Core Resources",
-    description: "The clinical resources that form the backbone of any healthcare record.",
-    href: "/learn/resources",
-    topics: ["Patient", "Observation", "Condition", "Encounter", "MedicationRequest"],
+    title: "Slovak Interoperability",
+    description: "Slovak eHealth context, NCZI integration landscape, legislative obligations and the FHIR path to EHDS compliance.",
+    href: "/learn/slovak",
+    topics: ["eZdravie", "NCZI", "EHDS 2027", "153/2013", "FHIR Mapping"],
   },
   {
     title: "Profiling and Validation",

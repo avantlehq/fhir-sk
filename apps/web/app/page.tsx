@@ -17,7 +17,7 @@ const labModules = [
 
 const learnAreas = [
   { title: "FHIR Fundamentals", description: "Resources, REST API, Bundles, CapabilityStatement and HAPI FHIR.", href: "/learn/fhir-foundations" },
-  { title: "Health Data Standards", description: "HL7 v2, CDA, FHIR and how the standards relate — comparison and coexistence.", href: "/learn/resources" },
+  { title: "Slovak Interoperability", description: "Slovak eHealth context, NCZI integration, legislative obligations and the FHIR path to EHDS compliance.", href: "/learn/slovak" },
   { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10, ATC — CodeSystem, ValueSet and binding strengths.", href: "/learn/terminology" },
   { title: "EHDS and EHRxF", description: "European Health Data Space regulation, EHRxF timeline, IPS Patient Summary and MyHealth@EU.", href: "/learn/ehds" },
   { title: "Governance and Conformance", description: "Consent, AuditEvent, Provenance, CapabilityStatement and conformance resources.", href: "/learn/profiling" },

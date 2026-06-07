@@ -226,6 +226,36 @@ export default function FhirFoundationsPage() {
           </p>
         </section>
 
+        {/* Core Resources */}
+        <section className="mb-12">
+          <h2 className="text-xl font-bold text-slate-900 mb-2">
+            Core Clinical Resources
+          </h2>
+          <p className="text-slate-600 text-sm leading-relaxed mb-5">
+            The resources you will encounter in almost every FHIR implementation.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { href: "/learn/resources/observation", label: "Observation", desc: "Vital signs, lab results, measurements" },
+              { href: "/learn/resources/condition", label: "Condition", desc: "Diagnoses and clinical problems" },
+              { href: "/learn/resources/encounter", label: "Encounter", desc: "Patient-provider interactions" },
+              { href: "/learn/resources/bundle", label: "Bundle", desc: "Transactions, documents, searchsets" },
+              { href: "/learn/resources/search", label: "Search", desc: "Query parameters and modifiers" },
+            ].map((r) => (
+              <Link
+                key={r.href}
+                href={r.href}
+                className="flex items-start gap-3 border border-slate-200 rounded-lg px-4 py-3 hover:border-teal-300 hover:bg-slate-50 transition-all group"
+              >
+                <div>
+                  <span className="font-mono text-sm font-semibold text-slate-900 group-hover:text-teal-700">{r.label}</span>
+                  <p className="text-xs text-slate-500 mt-0.5">{r.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* Official Links */}
         <section className="border-t border-slate-200 pt-8">
           <h2 className="text-lg font-bold text-slate-900 mb-4">

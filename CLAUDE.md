@@ -108,8 +108,9 @@ Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (
 | `/lab/profile-explorer` | 🔧 Stub | Planned: inspect StructureDefinitions |
 | `/learn` | ✅ Live | Learn index with 6 track cards |
 | `/learn/roadmap` | ↪ Redirect | → /learn |
-| `/learn/fhir-foundations` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles |
-| `/learn/resources` | ✅ Live | Article index: Observation, Condition, Encounter, Search, Bundle |
+| `/learn/fhir-foundations` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles, Core Resources links |
+| `/learn/resources` | ✅ Live | Article index: Observation, Condition, Encounter, Search, Bundle (no top-level card) |
+| `/learn/slovak` | ✅ Live | Slovak Interoperability track — compliance-timeline + Phase 7–8 upcoming stubs |
 | `/learn/resources/observation` | ✅ Live | Observation deep-dive |
 | `/learn/resources/condition` | ✅ Live | Condition deep-dive |
 | `/learn/resources/encounter` | ✅ Live | Encounter deep-dive |
@@ -166,7 +167,7 @@ Version is defined in `apps/web/lib/version.ts`:
 
 **Rule: update version.ts + package.json after every deployment. No exceptions.**
 
-Current version: **1.5.4 "Learn: EHDS Compliance Timeline article"**
+Current version: **1.5.6 "Learn: Slovak Interoperability track added"**
 
 ### Design system
 
