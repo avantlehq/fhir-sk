@@ -10,7 +10,7 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-base font-semibold text-slate-900 hover:text-teal-700 transition-colors">
-            fhir.sk
+            FHIR.sk
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (

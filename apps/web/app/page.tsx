@@ -54,6 +54,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Disclaimer */}
+      <section className="py-3 px-4 bg-amber-50 border-b border-amber-200">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-2">
+          <span className="text-amber-700 font-semibold text-sm flex-shrink-0">⚠ Under construction:</span>
+          <p className="text-amber-800 text-sm leading-relaxed">
+            This site is under active development. All data is synthetic and fictional. Not affiliated with NCZI or any healthcare institution.{" "}
+            <Link href="/disclaimer" className="underline hover:no-underline">Read full disclaimer.</Link>
+          </p>
+        </div>
+      </section>
+
       {/* Lab Modules */}
       <section className="py-16 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
@@ -125,16 +136,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Disclaimer */}
-      <section className="py-8 px-4 bg-amber-50 border-t border-amber-200">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <span className="text-amber-700 font-semibold text-sm flex-shrink-0">⚠ Important:</span>
-          <p className="text-amber-800 text-sm leading-relaxed">
-            All data is synthetic. Not affiliated with NCZI or any healthcare institution.{" "}
-            <Link href="/disclaimer" className="underline hover:no-underline">Read full disclaimer.</Link>
-          </p>
-        </div>
-      </section>
     </>
   );
 }

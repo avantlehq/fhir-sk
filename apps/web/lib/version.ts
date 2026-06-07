@@ -1,7 +1,16 @@
-export const VERSION = "1.5.4";
-export const VERSION_NAME = "Learn: EHDS Compliance Timeline article";
+export const VERSION = "1.5.5";
+export const VERSION_NAME = "Homepage: disclaimer moved up, FHIR.sk capitalized";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.5",
+    date: "2026-06-07",
+    changes: [
+      "Header: fhir.sk → FHIR.sk (FHIR is an acronym)",
+      "Homepage: disclaimer moved from bottom to directly below hero",
+      "Homepage: disclaimer text updated — 'Under construction' label, 'under active development' notice added",
+    ],
+  },
   {
     version: "1.5.4",
     date: "2026-06-07",
