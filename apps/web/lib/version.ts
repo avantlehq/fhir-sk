@@ -1,7 +1,17 @@
-export const VERSION = "1.4.9";
-export const VERSION_NAME = "Phase number references removed site-wide";
+export const VERSION = "1.5.0";
+export const VERSION_NAME = "Mock Server: API docs replaced with access request form";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.0",
+    date: "2026-06-07",
+    changes: [
+      "Mock Server: API documentation and curl examples replaced with access request form",
+      "Mock Server: name + email + use case form → POST /api/contact-mock → email to rastislav.mitasik@gmail.com",
+      "Mock Server: StatusBadge corrected to Live",
+      "New API route: POST /api/contact-mock (Resend)",
+    ],
+  },
   {
     version: "1.4.9",
     date: "2026-06-07",
