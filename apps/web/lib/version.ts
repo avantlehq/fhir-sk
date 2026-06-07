@@ -1,7 +1,16 @@
-export const VERSION = "1.4.5";
-export const VERSION_NAME = "Logo in header, Phase 1 badge removed";
+export const VERSION = "1.4.6";
+export const VERSION_NAME = "Header: fhir.sk text nav, logo removed";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.6",
+    date: "2026-06-07",
+    changes: [
+      "Header: logo image removed, replaced with fhir.sk text (text-sm font-semibold text-slate-900)",
+      "Header: fhir.sk text is HOME button (href=/)",
+      "Header: same size and weight as nav links",
+    ],
+  },
   {
     version: "1.4.5",
     date: "2026-06-07",
