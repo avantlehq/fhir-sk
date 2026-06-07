@@ -1,7 +1,16 @@
-export const VERSION = "1.4.6";
-export const VERSION_NAME = "Header: fhir.sk text nav, logo removed";
+export const VERSION = "1.4.7";
+export const VERSION_NAME = "Data Privacy track, Roadmap removed from homepage";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.7",
+    date: "2026-06-07",
+    changes: [
+      "Homepage hero: 'Roadmap →' CTA replaced with 'Learn →' (/learn)",
+      "Homepage Learn section: Track 6 'Analytics and Secondary Use' → 'Data Privacy in FHIR' (/learn/privacy)",
+      "New page: /learn/privacy — Track 6, GDPR + health data, Consent, AuditEvent, Provenance, Privacy by Design",
+    ],
+  },
   {
     version: "1.4.6",
     date: "2026-06-07",

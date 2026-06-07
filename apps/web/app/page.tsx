@@ -21,7 +21,7 @@ const learnAreas = [
   { title: "Terminologies", description: "SNOMED CT, LOINC, ICD-10, ATC — CodeSystem, ValueSet and binding strengths.", href: "/learn/terminology", upcoming: false },
   { title: "EHDS and EHRxF", description: "European Health Data Space regulation, EHRxF timeline, IPS Patient Summary and MyHealth@EU.", href: "/learn/ehds", upcoming: false },
   { title: "Governance and Conformance", description: "Consent, AuditEvent, Provenance, CapabilityStatement and conformance resources.", href: "/learn/profiling", upcoming: false },
-  { title: "Analytics and Secondary Use", description: "Power BI over synthetic FHIR data, Bulk Data export and EHDS secondary use framework.", href: "/learn/roadmap", upcoming: true },
+  { title: "Data Privacy in FHIR", description: "GDPR and health data, Consent resource, AuditEvent, Provenance and Privacy by Design in FHIR systems.", href: "/learn/privacy", upcoming: false },
 ];
 
 export default function HomePage() {
@@ -47,8 +47,8 @@ export default function HomePage() {
             <Link href="/reference" className="border border-slate-600 text-slate-200 font-semibold px-6 py-3 rounded-lg hover:border-slate-400 hover:text-white transition-colors">
               Browse Reference
             </Link>
-            <Link href="/learn/roadmap" className="text-slate-400 font-semibold px-6 py-3 rounded-lg hover:text-slate-200 transition-colors">
-              Roadmap →
+            <Link href="/learn" className="text-slate-400 font-semibold px-6 py-3 rounded-lg hover:text-slate-200 transition-colors">
+              Learn →
             </Link>
           </div>
         </div>
