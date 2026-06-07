@@ -48,8 +48,8 @@ Profiles and IGs must emerge from reality, not precede it. A profile invented wi
 |-------|-------|
 | Phase 7 | Slovak eHealth Analysis |
 | Phase 8 | FHIR Mapping |
-| Phase 9 | Slovak FHIR Profiles |
-| Phase 10 | Architecture Patterns |
+| Phase 9 | Architecture Patterns |
+| Phase 10 | Slovak FHIR Profiles |
 | Phase 11 | Implementation Guide + Terminology Architecture |
 
 ### Year 3 — EHDS + Cross-border
@@ -297,11 +297,13 @@ Integračný manuál NCZI
 ↓
 XML / XSD / ADL
 ↓
-FHIR mapovanie  (Phase 8)
+FHIR mapovanie       (Phase 8)
 ↓
-FHIR profily    (Phase 9)
+Architektúra         (Phase 9)
 ↓
-EHDS            (Phase 12+)
+FHIR profily         (Phase 10)
+↓
+EHDS                 (Phase 12+)
 ```
 
 **Source material:** eZdravie IM v4.6.0 / ZS 8.5 (April 2026). Interný NCZI dokument. Predchádzajúca analýza: `C:\Users\rasti\Projects\eZdravie_IM_evaluation\`.
@@ -428,35 +430,15 @@ Rodné číslo, JRÚZ ID, poistný kód, IČO PZS, kód lekára sú referencovan
 
 ---
 
-## Phase 9 — Slovak FHIR Profiles
+## Phase 9 — Architecture Patterns
 
-**Status:** Planned (po Phase 8)
-
-**Goal:** Vytvoriť Slovak FHIR profily odvodené z Phase 8 mapovania. Každý constraint má dôvod zdokumentovaný v Phase 7–8. Žiadna profile práca bez dokončeného mapovania.
-
-**7 profilov:**
-
-| Profil | Základ | Nahrádza |
-|--------|--------|---------|
-| FhirSkPatient v1.0 | JRUZ identifikátory (Phase 7–8) | vymyslený v0.2.0 |
-| FhirSkObservation | eLab analýza (Phase 8) | — |
-| FhirSkDiagnosticReport | eLab analýza (Phase 8) | — |
-| FhirSkEncounter | eVyšetrenie analýza (Phase 8) | — |
-| FhirSkCondition | eVyšetrenie + MKCH-10 (Phase 8) | — |
-| FhirSkPractitioner | JRUZ identifikátory (Phase 8) | — |
-| FhirSkOrganization | JRUZ identifikátory (Phase 8) | — |
-
-**Tooling:** StructureDefinition JSON pre drafty. FSH/SUSHI pre finálne profily v Phase 11.
-
----
-
-## Phase 10 — Architecture Patterns
-
-**Status:** Planned (after Phase 9 — Slovak Profiles)
+**Status:** Planned (after Phase 8 — FHIR Mapping)
 
 **Goal:** Understand how FHIR integrates at system level. The most important decisions in any FHIR project are architectural — Facade vs Hybrid vs FHIR-native determines the entire project trajectory, costs, and timeline. This is consultant-level competency, not developer tooling.
 
-**Why before IG:** Architecture decisions shape what the IG must cover. A Facade IG looks different from a FHIR-native IG. Architecture first.
+**Why Architecture before Profiles:** Profiles are technical expressions of architectural decisions. `FhirSkPatient.identifier` cardinality depends on whether you're building a Facade (JRUZ always present) or a standalone system. Profile constraints that ignore the architecture are guesses.
+
+**Why before IG:** Architecture decisions shape what the IG must cover. A Facade IG looks different from a FHIR-native IG.
 
 **Reference:** Darren Devitt's FHIR architecture framework — architectural decisions are superordinate to technology choices.
 
@@ -482,6 +464,28 @@ Rodné číslo, JRÚZ ID, poistný kód, IČO PZS, kód lekára sú referencovan
 ### Slovak context
 
 Every Slovak PZS that needs EHDS compliance by 2027 will face this exact decision: Facade eZdravie, build hybrid, or replace. Understanding the architecture options and their tradeoffs is the core consulting value.
+
+---
+
+## Phase 10 — Slovak FHIR Profiles
+
+**Status:** Planned (after Phase 9 — Architecture Patterns)
+
+**Goal:** Vytvoriť Slovak FHIR profily odvodené z Phase 8 mapovania a Phase 9 architektonických rozhodnutí. Každý constraint má dôvod zdokumentovaný v Phase 7–9. Žiadna profile práca bez dokončeného mapovania a bez jasného architektonického kontextu.
+
+**7 profilov:**
+
+| Profil | Základ | Nahrádza |
+|--------|--------|---------|
+| FhirSkPatient v1.0 | JRUZ identifikátory (Phase 7–8) + architektonický kontext (Phase 9) | vymyslený v0.2.0 |
+| FhirSkObservation | eLab analýza (Phase 8) | — |
+| FhirSkDiagnosticReport | eLab analýza (Phase 8) | — |
+| FhirSkEncounter | eVyšetrenie analýza (Phase 8) | — |
+| FhirSkCondition | eVyšetrenie + MKCH-10 (Phase 8) | — |
+| FhirSkPractitioner | JRUZ identifikátory (Phase 8) | — |
+| FhirSkOrganization | JRUZ identifikátory (Phase 8) | — |
+
+**Tooling:** StructureDefinition JSON pre drafty. FSH/SUSHI pre finálne profily v Phase 11.
 
 ---
 
@@ -540,6 +544,6 @@ FHIR resources reference external terminology servers for $expand, $validate-cod
 | Track 4 — EHDS and EHRxF | Phase 5 | ✅ Live |
 | Track 5 — Governance and Conformance | Phase 6 | ✅ Live |
 | Track 6 — Slovak Interoperability | Phase 7–8 | Year 2 |
-| Track 7 — Architecture Patterns | Phase 10 | Year 2 |
+| Track 7 — Architecture Patterns | Phase 9 | Year 2 |
 | Track 8 — Terminology Architecture | Phase 11 | Year 2 |
 | Track 9 — EHDS and Cross-border | Phase 12+ | Year 3 |

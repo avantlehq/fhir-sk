@@ -1,7 +1,20 @@
-export const VERSION = "1.5.1";
-export const VERSION_NAME = "docs: Phase 7–11 revised — eLab+eVyšetrenie focus, eRecept removed";
+export const VERSION = "1.5.2";
+export const VERSION_NAME = "docs: Architecture before Profiles — Phase 9↔10 reorder";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.5.2",
+    date: "2026-06-07",
+    changes: [
+      "docs/phases.md: Phase 9 → Architecture Patterns (moved from Phase 10)",
+      "docs/phases.md: Phase 10 → Slovak FHIR Profiles (moved from Phase 9)",
+      "docs/phases.md: Phase 9 rationale — architecture decisions shape profile constraints, not vice versa",
+      "docs/phases.md: Phase 10 profiles now reference Phase 9 architectural context as input",
+      "docs/phases.md: knowledge chain updated (Phase 8 → Architecture → Profiles → IG)",
+      "docs/phases.md: Learn Track 7 alignment updated to Phase 9",
+      "CLAUDE.md: phase table and summary line updated to match new order",
+    ],
+  },
   {
     version: "1.5.1",
     date: "2026-06-07",

@@ -265,11 +265,11 @@ All examples use **synthetic data only**. Fictional names and identifiers.
 | 6 | Governance and Consolidation | ✅ Complete | v1.4.0 |
 | 7 | Slovak eHealth Analysis | 🔄 In Progress | — |
 | 8 | FHIR Mapping | 🔲 Planned | — |
-| 9 | Slovak FHIR Profiles | 🔲 Planned | — |
-| 10 | Architecture Patterns | 🔲 Planned | — |
+| 9 | Architecture Patterns | 🔲 Planned | — |
+| 10 | Slovak FHIR Profiles | 🔲 Planned | — |
 | 11 | Implementation Guide + Terminology Architecture | 🔲 Planned | — |
 
-Phases 7–11: eHealth Analysis → Mapping → Profiles → Architecture → IG + Terminology.
+Phases 7–11: eHealth Analysis → Mapping → Architecture → Profiles → IG + Terminology.
 Full details in `docs/phases.md`.
 
 ---
