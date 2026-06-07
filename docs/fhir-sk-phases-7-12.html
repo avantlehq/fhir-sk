@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FHIR.sk — Phases 7–12 Plan</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #1e293b;
+      background: #fff;
+      padding: 48px 56px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    @media print {
+      body { padding: 20px 28px; font-size: 11px; }
+      .phase { page-break-before: always; }
+      .phase:first-of-type { page-break-before: avoid; }
+      .no-break { page-break-inside: avoid; }
+      a { text-decoration: none; color: inherit; }
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .doc-header {
+      border-bottom: 3px solid #0d9488;
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+    .doc-header .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0d9488;
+      margin-bottom: 8px;
+    }
+    .doc-header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .doc-header .meta {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .doc-header .meta span {
+      margin-right: 20px;
+    }
+
+    /* ── Knowledge chain ─────────────────────────────────── */
+    .chain {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #0d9488;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+    .chain h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+    .chain-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .chain-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chain-step .num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #0d9488;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .chain-step .title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 13px;
+    }
+    .chain-step .sub {
+      color: #64748b;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+    .chain-arrow {
+      padding-left: 14px;
+      color: #94a3b8;
+      font-size: 11px;
+      line-height: 1;
+      margin: 2px 0;
+    }
+
+    /* ── Phase section ───────────────────────────────────── */
+    .phase {
+      margin-bottom: 52px;
+    }
+    .phase-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .phase-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #0d9488;
+      background: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-radius: 4px;
+      padding: 4px 10px;
+      white-space: nowrap;
+      margin-top: 3px;
+    }
+    .phase-num.in-progress {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #d97706;
+    }
+    .phase-num.planned {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #64748b;
+    }
+    .phase-title-block h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .phase-title-block .phase-goal {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* ── Subsection heading ──────────────────────────────── */
+    h3 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0d9488;
+      margin: 20px 0 10px;
+    }
+
+    /* ── Tables ──────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    thead th {
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 10px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafafa; }
+    .code {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 11px;
+      color: #0f172a;
+    }
+    .fhir-type {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+    .tag-private { background: #fef3c7; color: #92400e; }
+    .tag-public  { background: #dcfce7; color: #166534; }
+    .tag-new     { background: #ede9fe; color: #5b21b6; }
+
+    /* ── Callout box ─────────────────────────────────────── */
+    .callout {
+      background: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-left: 4px solid #0d9488;
+      border-radius: 5px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #134e4a;
+      margin: 14px 0;
+      line-height: 1.55;
+    }
+    .callout strong { color: #0f172a; }
+    .callout.amber {
+      background: #fffbeb;
+      border-color: #fde68a;
+      border-left-color: #d97706;
+      color: #78350f;
+    }
+
+    /* ── Checklist ───────────────────────────────────────── */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 16px;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+      font-size: 12px;
+      color: #334155;
+      border-bottom: 1px solid #f8fafc;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-box {
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Output cards ────────────────────────────────────── */
+    .outputs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .output-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .output-card .output-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .output-card .output-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .output-card .output-desc {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    /* ── Arch decision framework ─────────────────────────── */
+    .arch-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .arch-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .arch-card.highlight {
+      border-color: #0d9488;
+      background: #f0fdfa;
+    }
+    .arch-card .arch-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 5px;
+    }
+    .arch-card .arch-def {
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .arch-card .arch-when {
+      font-size: 10px;
+      font-weight: 600;
+      color: #0d9488;
+    }
+
+    /* ── Toolchain ───────────────────────────────────────── */
+    .toolchain {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin: 12px 0 16px;
+      flex-wrap: wrap;
+    }
+    .toolchain-step {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0f172a;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+    .toolchain-arrow {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .doc-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 18px;
+      margin-top: 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+    .doc-footer strong { color: #475569; }
+
+    /* ── Security note ───────────────────────────────────── */
+    .security-note {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-left: 4px solid #f97316;
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #7c2d12;
+      margin-bottom: 36px;
+    }
+
+    p { margin-bottom: 10px; }
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    li { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Document header ───────────────────────────────── -->
+  <div class="doc-header">
+    <div class="label">FHIR.sk — Interoperability Lab</div>
+    <h1>Phases 7–12: Slovak Interoperability Plan</h1>
+    <div class="meta">
+      <span><strong>Verzia:</strong> 1.5.2</span>
+      <span><strong>Revízia:</strong> 2026-06-07</span>
+      <span><strong>Status:</strong> Year 2 In Progress</span>
+    </div>
+  </div>
+
+  <!-- ─── Security note ─────────────────────────────────── -->
+  <div class="security-note">
+    <strong>Poznámka:</strong> Všetky príklady používajú výhradne syntetické (vymyslené) dáta. Žiadna závislosť na NCZI, HL7 Slovensko ani Ministerstve zdravotníctva SR.
+    eZdravie Integračný manuál je interný dokument NCZI — verejné výstupy obsahujú iba abstraktné analýzy, nie proprietárne štruktúry.
+  </div>
+
+  <!-- ─── Knowledge chain ───────────────────────────────── -->
+  <div class="chain no-break">
+    <h2>Knowledge chain — logická závislosť fáz</h2>
+    <div class="chain-steps">
+      <div class="chain-step">
+        <div class="num">7</div>
+        <div><span class="title">Slovak eHealth Analysis</span><span class="sub">— pochopiť zdroj: eZdravie, NCZI IM, XML/XSD, číselníky</span></div>
+      </div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">
+        <div class="num">8</div>
+        <div><span class="title">FHIR Mapping</span><span class="sub">— preložiť element po elemente: XML path → FHIR R4 path</span></div>
+      </div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">
+        <div class="num">9</div>
+        <div><span class="title">Architecture Patterns</span><span class="sub">— rozhodnúť: Facade / Hybrid / FHIR-native</span></div>
+      </div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">
+        <div class="num">10</div>
+        <div><span class="title">Slovak FHIR Profiles</span><span class="sub">— constraintovať s architektonickým kontextom (nie vymýšľať)</span></div>
+      </div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">
+        <div class="num">11</div>
+        <div><span class="title">IG + Terminology</span><span class="sub">— FSH/SUSHI, IG Publisher, Snowstorm, ConceptMap</span></div>
+      </div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">
+        <div class="num">12</div>
+        <div><span class="title">EHDS + Cross-border</span><span class="sub">— EHRxF conformance testing, MyHealth@EU (Year 3)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 7
+  ════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num in-progress">In Progress</div>
+      <div class="phase-title-block">
+        <h2>Phase 7 — Slovak eHealth Analysis</h2>
+        <div class="phase-goal">Pochopiť ako slovenské zdravotníctvo funguje dnes. Cieľom nie je navrhnúť zmenu — ale vedieť čítať, interpretovať a preložiť eZdravie do FHIR a EHDS.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Strategická hodnota:</strong> Väčšina FHIR konzultantov vie FHIR. Málokto vie zároveň eZdravie, NCZI IM, XML/XSD/SOAP a vedieť to preložiť do FHIR a EHDS. Toto je vzácna kompetencia špecifická pre slovenský kontext.
+    </div>
+
+    <h3>Moduly na analýzu</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>Modul</th><th>Prečo prioritný</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>eLab v3</strong></td>
+          <td>Najštruktúrovanejší, najčistejší dátový model. Mapovanie na Observation + DiagnosticReport je priamočiare.</td>
+        </tr>
+        <tr>
+          <td><strong>eVyšetrenie v8/v9</strong></td>
+          <td>Najklinicky bohatší modul — ambulantný nález. Komplexné sekcie, voliteľné elementy, diagnózy, výkony.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout amber">
+      <strong>JRUZ — priečna kapitola (nie samostatný modul):</strong> Rodné číslo, JRÚZ ID, poistný kód, IČO PZS, kód lekára sú referencované v oboch moduloch. Analyzujú sa ako súčasť eLab a eVyšetrenie analýzy.
+    </div>
+
+    <h3>Oblasti štúdia</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>Oblasť</th><th>Čo pochopiť</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Architektúra eZdravia</td><td>13 modulov, verzie, vzájomné závislosti, NZIS vs eZdravie</td></tr>
+        <tr><td>SOAP/XML services</td><td>WSDL, operácie, WS-Security, eID, SAML — request/response pattern</td></tr>
+        <tr><td>XSD schémy</td><td>Ako čítať XSD: typy, reštrikcie, extensions, enumerations</td></tr>
+        <tr><td>ADL archetypy</td><td>Vzťah k XSD a klinickému modelu</td></tr>
+        <tr><td>Číselníky NCZI</td><td>OID strom, verzie, MKCH-10-SK, vzťah k LOINC/ICD-10</td></tr>
+        <tr><td>Identifikátory</td><td>Rodné číslo, JRÚZ ID, poistný kód, IČO PZS, kód lekára, kód zariadenia</td></tr>
+        <tr><td>NZIS</td><td>Vzťah k eZdraviu, sekundárne využitie, štatistické výstupy</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tri výstupy</h3>
+    <div class="outputs">
+      <div class="output-card">
+        <div class="output-label">Output A <span class="tag tag-private">Privátne</span></div>
+        <div class="output-title">Analytické dokumenty</div>
+        <div class="output-desc">docs/phase-7-architecture.md, phase-7-elab-analysis.md, phase-7-evysetrenie-analysis.md. Vstup pre Phase 8 mapovanie. Lokálne, nie na GitHub.</div>
+      </div>
+      <div class="output-card">
+        <div class="output-label">Output B <span class="tag tag-new">MkDocs PoC</span></div>
+        <div class="output-title">Moderná dokumentácia</div>
+        <div class="output-desc">eVyšetrenie + eLab v štruktúrovanom Markdown. PoC pre NCZI proposal — ukázať ako môže vyzerať lepší IM. Verejná: abstraktná architektúra bez proprietárnych detailov.</div>
+      </div>
+      <div class="output-card">
+        <div class="output-label">Output C <span class="tag tag-public">Lab modul</span></div>
+        <div class="output-title">eZdravie Examples</div>
+        <div class="output-desc">Nový modul na fhir.sk. Statické XML príklady eLab + eVyšetrenie vedľa FHIR ekvivalentu. Vizuálna ukážka hodnoty mapovania.</div>
+      </div>
+    </div>
+
+    <h3>Learn články (Track 6 — Slovak Interoperability)</h3>
+    <table class="no-break">
+      <thead><tr><th>Článok</th></tr></thead>
+      <tbody>
+        <tr><td>How eZdravie Works Today</td></tr>
+        <tr><td>Understanding the NCZI Integration Manual</td></tr>
+        <tr><td>SOAP Architecture of Slovak eHealth</td></tr>
+        <tr><td>XSD to Data Elements: Reading eZdravie Schemas</td></tr>
+        <tr><td>Slovak Health Identifiers: rodné číslo, JRÚZ, IČO PZS</td></tr>
+        <tr><td>Current State of Slovak Interoperability</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Success criteria</h3>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Architektúra eZdravia zdokumentovaná (docs/phase-7-architecture.md)</li>
+      <li><div class="check-box"></div>eLab v3: dátové elementy, XSD štruktúra, procesný tok + JRUZ identifikátory (docs/phase-7-elab-analysis.md)</li>
+      <li><div class="check-box"></div>eVyšetrenie: sekcie dokumentu, povinné vs voliteľné elementy (docs/phase-7-evysetrenie-analysis.md)</li>
+      <li><div class="check-box"></div>Číselníky NCZI: OID strom, vzťah k LOINC/MKCH-10 zdokumentovaný</li>
+      <li><div class="check-box"></div>Output B: MkDocs PoC — aspoň jeden modul v modernom formáte</li>
+      <li><div class="check-box"></div>Output C: eZdravie Examples lab modul live na fhir.sk</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 8
+  ════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num planned">Planned</div>
+      <div class="phase-title-block">
+        <h2>Phase 8 — FHIR Mapping</h2>
+        <div class="phase-goal">Pre každý modul vytvoriť mapovanie XML element → FHIR R4 path. Identifikovať terminologické medzery, gap analýzy, design rozhodnutia. Input: Phase 7 analýza. Mapovanie začína až po pochopení zdrojového systému.</div>
+      </div>
+    </div>
+
+    <h3>eLab v3 → FHIR</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>eZdravie element</th><th>FHIR resource</th><th>FHIR path</th><th>Poznámka</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="code">laboratoryResult.testCode</td>
+          <td><span class="fhir-type">Observation</span></td>
+          <td class="code">Observation.code</td>
+          <td>LOINC binding — ConceptMap SK lab → LOINC</td>
+        </tr>
+        <tr>
+          <td class="code">laboratoryResult.value</td>
+          <td><span class="fhir-type">Observation</span></td>
+          <td class="code">Observation.value[x]</td>
+          <td>Numeric vs string — závisí od kódu</td>
+        </tr>
+        <tr>
+          <td class="code">laboratoryResult.unit</td>
+          <td><span class="fhir-type">Observation</span></td>
+          <td class="code">Observation.valueQuantity.unit</td>
+          <td>UCUM binding</td>
+        </tr>
+        <tr>
+          <td class="code">laboratoryResult.referenceRange</td>
+          <td><span class="fhir-type">Observation</span></td>
+          <td class="code">Observation.referenceRange</td>
+          <td>Low / high / text</td>
+        </tr>
+        <tr>
+          <td class="code">laboratoryResult.status</td>
+          <td><span class="fhir-type">Observation</span></td>
+          <td class="code">Observation.status</td>
+          <td>Enum mapping — registered/preliminary/final</td>
+        </tr>
+        <tr>
+          <td class="code">laboratoryResult.performer</td>
+          <td><span class="fhir-type">Observation</span></td>
+          <td class="code">Observation.performer</td>
+          <td>→ Practitioner reference</td>
+        </tr>
+        <tr>
+          <td class="code">panel / set výsledkov</td>
+          <td><span class="fhir-type">DiagnosticReport</span></td>
+          <td class="code">DiagnosticReport.result[]</td>
+          <td>1 DiagnosticReport + N Observation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>eVyšetrenie v8/v9 → FHIR</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>eZdravie sekcia</th><th>FHIR resource</th><th>Poznámka</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hlavička dokumentu</td>
+          <td><span class="fhir-type">Composition</span></td>
+          <td>type, subject, author, date, title</td>
+        </tr>
+        <tr>
+          <td>Návšteva pacienta</td>
+          <td><span class="fhir-type">Encounter</span></td>
+          <td>class AMB, period, reasonCode</td>
+        </tr>
+        <tr>
+          <td>Diagnózy</td>
+          <td><span class="fhir-type">Condition</span>[]</td>
+          <td>MKCH-10-SK binding, clinicalStatus</td>
+        </tr>
+        <tr>
+          <td>Objektívny nález</td>
+          <td><span class="fhir-type">Observation</span>[]</td>
+          <td>Merania, fyzikálne nálezy</td>
+        </tr>
+        <tr>
+          <td>Výkony</td>
+          <td><span class="fhir-type">Procedure</span>[]</td>
+          <td>Kódy výkonov → FHIR code</td>
+        </tr>
+        <tr>
+          <td>Celý dokument</td>
+          <td><span class="fhir-type">Bundle</span> (Document)</td>
+          <td>Composition first entry, všetky referencie interné</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>JRUZ identifikátory → FHIR (priečna kapitola)</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>JRUZ entita</th><th>FHIR resource</th><th>identifier slice</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pacient</td>
+          <td><span class="fhir-type">Patient</span></td>
+          <td>rodné číslo (OID) + JRÚZ ID slice, name, birthDate, gender, address</td>
+        </tr>
+        <tr>
+          <td>Lekár</td>
+          <td><span class="fhir-type">Practitioner</span></td>
+          <td>kód lekára, špecializácia → ValueSet binding</td>
+        </tr>
+        <tr>
+          <td>Zariadenie</td>
+          <td><span class="fhir-type">Organization</span></td>
+          <td>IČO PZS, kód zariadenia</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Success criteria</h3>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Mapovacia tabuľka eLab v3: každý XML element → FHIR path (docs/phase-8-elab-mapping.md)</li>
+      <li><div class="check-box"></div>Terminologická gap analýza: SK kódy bez priameho LOINC ekvivalentu</li>
+      <li><div class="check-box"></div>Design rozhodnutie: DiagnosticReport+Observation[] vs samostatné Observations</li>
+      <li><div class="check-box"></div>Mapovacia tabuľka eVyšetrenie: sekcia → FHIR resource (docs/phase-8-evysetrenie-mapping.md)</li>
+      <li><div class="check-box"></div>JRUZ identifikátory → Patient/Practitioner/Organization.identifier slices (docs/phase-8-identifiers.md)</li>
+    </ul>
+
+    <h3>Learn + Reference výstupy</h3>
+    <table class="no-break">
+      <thead><tr><th>Výstup</th><th>Typ</th></tr></thead>
+      <tbody>
+        <tr><td>How eLab Maps to FHIR</td><td>Learn / Track 6</td></tr>
+        <tr><td>How eVyšetrenie Maps to FHIR: From XML Document to FHIR Bundle</td><td>Learn / Track 6</td></tr>
+        <tr><td>From XML/SOAP to FHIR REST: The Full Transformation</td><td>Learn / Track 6</td></tr>
+        <tr><td>FHIR Mapping Catalog — eLab, eVyšetrenie, Slovak Health Identifiers</td><td>Reference (nová sekcia)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 9
+  ════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num planned">Planned</div>
+      <div class="phase-title-block">
+        <h2>Phase 9 — Architecture Patterns</h2>
+        <div class="phase-goal">Rozhodnúť ako sa FHIR integruje na systémovej úrovni. Architektonické rozhodnutia sú nadradené technologickým — Facade vs Hybrid vs FHIR-native určuje celý trajectory projektu, náklady a timeline.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Prečo Architecture pred Profiles:</strong> Profily sú technický výraz architektonického rozhodnutia.
+      Napríklad <code>FhirSkPatient.identifier</code> cardinality závisí od toho, či buduješ Facade
+      (JRUZ vždy prítomný v kontexte) alebo standalone systém. Profil napísaný pred architektúrou je dohadom.
+    </div>
+
+    <h3>Core decision framework (Darren Devitt)</h3>
+    <div class="arch-options">
+      <div class="arch-card">
+        <div class="arch-name">Facade</div>
+        <div class="arch-def">FHIR REST API pred existujúcim SOAP/XML systémom. Bez migrácie, rýchle nasadenie, obmedzená FHIR hĺbka. <em>Slovenský prípad:</em> eZdravie SOAP → FHIR Facade → EHDS endpoint.</div>
+        <div class="arch-when">Risk: FHIR je tenká vrstva, legacy obmedzenia presakujú</div>
+      </div>
+      <div class="arch-card highlight">
+        <div class="arch-name">Hybrid ✓ SK 2025–2030</div>
+        <div class="arch-def">Nové FHIR moduly vedľa legacy systémov + integračná vrstva. Niektoré dáta FHIR-native (nové moduly), niektoré Facade (legacy eZdravie).</div>
+        <div class="arch-when">Najrealistickejší scenár pre slovenské zdravotníctvo</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-name">FHIR-native</div>
+        <div class="arch-def">Greenfield. Nové systémy postavené na FHIR R4 od začiatku. Maximálna FHIR hĺbka, najvyššia migračná cena z legacy.</div>
+        <div class="arch-when">Target state pre EHDS 2027+ nové implementácie</div>
+      </div>
+    </div>
+
+    <h3>Témy</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>Téma</th><th>Čo sa naučíš</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Facade vs Hybrid vs FHIR-native</strong></td><td>Cost/risk tradeoffs, kedy čo použiť, decision checklist</td></tr>
+        <tr><td>FHIR Facade over eZdravie</td><td>Wrapping SOAP/XML za FHIR REST — konkrétny SK vzor</td></tr>
+        <tr><td>FHIR Subscriptions</td><td>Event-driven notifikácie — R4 vs R5 model</td></tr>
+        <tr><td>SMART on FHIR</td><td>OAuth2 pre FHIR — EHR launch, standalone, backend services</td></tr>
+        <tr><td>Bulk Data ($export)</td><td>NDJSON async export, EHDS sekundárne využitie</td></tr>
+        <tr><td>HAPI FHIR cloud</td><td>Railway deploy, hapi.fhir.sk, production konfigurácia</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout amber">
+      <strong>Slovenský kontext:</strong> Každé PZS s EHDS deadline 2027 bude čeliť presne tomuto rozhodnutiu: Facade eZdravie, Hybrid, alebo replace? Porozumenie architektonickým možnostiam a tradeoffom je jadro consulting hodnoty.
+    </div>
+
+    <h3>Success criteria</h3>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Facade vs Hybrid vs FHIR-native decision framework zdokumentovaný s konkrétnym SK príkladom</li>
+      <li><div class="check-box"></div>FHIR Facade nad eZdravie SOAP/XML — implementačný vzor</li>
+      <li><div class="check-box"></div>SMART on FHIR auth flow — EHR launch + standalone</li>
+      <li><div class="check-box"></div>Bulk Data $export — async pattern, NDJSON</li>
+      <li><div class="check-box"></div>HAPI FHIR nasadený na Railway (hapi.fhir.sk)</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 10
+  ════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num planned">Planned</div>
+      <div class="phase-title-block">
+        <h2>Phase 10 — Slovak FHIR Profiles</h2>
+        <div class="phase-goal">Vytvoriť Slovak FHIR profily odvodené z Phase 8 mapovania a Phase 9 architektonických rozhodnutí. Každý constraint má dôvod zdokumentovaný v Phase 7–9. Žiadna profile práca bez dokončeného mapovania a bez jasného architektonického kontextu.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Prečo nie skôr:</strong> Súčasný FhirSkPatient v0.2.0 bol napísaný bez analýzy zdrojového systému a bez architektonického kontextu — je to dohadom. Phase 10 ho nahradí profilmi ktoré vychádzajú z reality.
+    </div>
+
+    <h3>7 Slovak FHIR profilov</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>Profil</th><th>Základ (vstup z)</th><th>Nahrádza</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="fhir-type">FhirSkPatient</span> v1.0</td>
+          <td>JRUZ identifikátory (Phase 7–8) + architektonický kontext (Phase 9)</td>
+          <td>vymyslený v0.2.0</td>
+        </tr>
+        <tr>
+          <td><span class="fhir-type">FhirSkObservation</span></td>
+          <td>eLab v3 analýza (Phase 8)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="fhir-type">FhirSkDiagnosticReport</span></td>
+          <td>eLab v3 analýza (Phase 8)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="fhir-type">FhirSkEncounter</span></td>
+          <td>eVyšetrenie analýza (Phase 8)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="fhir-type">FhirSkCondition</span></td>
+          <td>eVyšetrenie + MKCH-10-SK (Phase 8)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="fhir-type">FhirSkPractitioner</span></td>
+          <td>JRUZ identifikátory (Phase 8)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="fhir-type">FhirSkOrganization</span></td>
+          <td>JRUZ identifikátory (Phase 8)</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tooling</h3>
+    <p style="font-size:12px; color:#475569; margin-bottom:8px;">StructureDefinition JSON pre prvotné drafty. FSH/SUSHI pre finálne profily — formalizácia prebieha v Phase 11.</p>
+
+    <h3>Success criteria</h3>
+    <ul class="checklist">
+      <li><div class="check-box"></div>FhirSkPatient v1.0 — JRUZ identifikátory + architektonický kontext z Phase 9</li>
+      <li><div class="check-box"></div>FhirSkObservation — eLab binding, LOINC required, UCUM unit</li>
+      <li><div class="check-box"></div>FhirSkDiagnosticReport — eLab panel pattern</li>
+      <li><div class="check-box"></div>FhirSkEncounter — eVyšetrenie class AMB, MKCH-10 reasonCode</li>
+      <li><div class="check-box"></div>FhirSkCondition — MKCH-10-SK binding, clinicalStatus required</li>
+      <li><div class="check-box"></div>FhirSkPractitioner, FhirSkOrganization — JRUZ identifiers</li>
+      <li><div class="check-box"></div>Každý profil: constraint zdokumentovaný s odkazom na zdrojový element z Phase 7–8</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 11
+  ════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num planned">Planned</div>
+      <div class="phase-title-block">
+        <h2>Phase 11 — Implementation Guide + Terminology Architecture</h2>
+        <div class="phase-goal">Dva paralelné tracky — publikovať Slovak FHIR profily ako formálny IG, a postaviť terminologickú infraštruktúru. Pre EHDS sú oba povinné.</div>
+      </div>
+    </div>
+
+    <h3>Track A — Slovak FHIR Implementation Guide</h3>
+    <div class="toolchain">
+      <div class="toolchain-step">FSH files</div>
+      <div class="toolchain-arrow">→</div>
+      <div class="toolchain-step">SUSHI compiler</div>
+      <div class="toolchain-arrow">→</div>
+      <div class="toolchain-step">StructureDefinition JSON</div>
+      <div class="toolchain-arrow">→</div>
+      <div class="toolchain-step">HL7 IG Publisher</div>
+      <div class="toolchain-arrow">→</div>
+      <div class="toolchain-step">HTML IG site</div>
+    </div>
+
+    <p style="font-size:12px;color:#475569;margin-bottom:12px;"><strong>FSH (FHIR Shorthand)</strong> — domain-specific jazyk pre písanie FHIR profilov. Nahrádza 200-riadkový StructureDefinition JSON čitateľnými constraintami. Priemyselný štandard pre IG authoring.</p>
+
+    <p style="font-size:12px;color:#475569;"><strong>IG štruktúra:</strong> Home, Profiles (differential + snapshot + examples), Terminology (ValueSets, CodeSystems), Examples, Downloads. Output: Slovak FHIR IG — minimum lokálne, cieľ: fhir.sk subdoména alebo GitHub Pages.</p>
+
+    <h3>Track B — Terminology Architecture</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>Component</th><th>Tool</th><th>Účel</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>SNOMED CT</strong></td>
+          <td>Snowstorm (IHTSDO)</td>
+          <td>Hierarchia, ECL queries, $expand — purpose-built, nie HAPI FHIR</td>
+        </tr>
+        <tr>
+          <td><strong>LOINC</strong></td>
+          <td>HAPI FHIR + LOINC / Ontoserver</td>
+          <td>Lab code lookup, panel definitions</td>
+        </tr>
+        <tr>
+          <td><strong>Custom CodeSystems</strong></td>
+          <td>HAPI FHIR</td>
+          <td>Slovak číselníky: špecializácie, kódy zariadení</td>
+        </tr>
+        <tr>
+          <td><strong>ConceptMap</strong></td>
+          <td>HAPI FHIR</td>
+          <td>SK lab kódy → LOINC, MKCH-10-SK → ICD-10-CM</td>
+        </tr>
+        <tr>
+          <td><strong>Terminology governance</strong></td>
+          <td>Process</td>
+          <td>Versioning, deprecation, ownership — nie len tooling</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>ConceptMap priority</h3>
+    <table class="no-break">
+      <thead><tr><th>ConceptMap</th><th>Prečo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Slovak lab kódy (eLab číselník) → LOINC</td>
+          <td>EHDS cross-border — bez LOINC nie je možná výmena eLab dát</td>
+        </tr>
+        <tr>
+          <td>MKCH-10-SK → ICD-10-CM</td>
+          <td>EHRxF Condition coding — povinné pre EHRxF conformance</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Success criteria</h3>
+    <ul class="checklist">
+      <li><div class="check-box"></div>FSH profily: všetkých 7 profilov z Phase 10 prevedených do FSH</li>
+      <li><div class="check-box"></div>SUSHI build: bez chýb, StructureDefinition JSON generovaný</li>
+      <li><div class="check-box"></div>HL7 IG Publisher: HTML IG site publikovaný</li>
+      <li><div class="check-box"></div>Snowstorm: lokálne nasadený, $expand funkčný pre SK SNOMED subset</li>
+      <li><div class="check-box"></div>ConceptMap: SK lab → LOINC (minimálne 20 mapovaní z eLab číselníka)</li>
+      <li><div class="check-box"></div>ConceptMap: MKCH-10-SK → ICD-10-CM (frekventované diagnózy)</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 12
+  ════════════════════════════════════════════════════════ -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num planned">Year 3</div>
+      <div class="phase-title-block">
+        <h2>Phase 12+ — EHDS + Cross-border</h2>
+        <div class="phase-goal">Testovanie EHDS EHRxF konformity, MyHealth@EU cezhraničná výmena, národné rollout vzory pre slovenské PZS.</div>
+      </div>
+    </div>
+
+    <h3>Oblasti</h3>
+    <table class="no-break">
+      <thead>
+        <tr><th>Oblasť</th><th>Detail</th><th>Deadline</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>EHDS EHRxF Phase 1</strong></td>
+          <td>Patient Summary (IPS), ePrescription, Lab results — conformance testing</td>
+          <td>2027</td>
+        </tr>
+        <tr>
+          <td><strong>EHDS EHRxF Phase 2</strong></td>
+          <td>Medical imaging, hospital discharge, rare diseases</td>
+          <td>2029</td>
+        </tr>
+        <tr>
+          <td><strong>MyHealth@EU cross-border</strong></td>
+          <td>Patient Summary + ePrescription cez cezhraničný gateway</td>
+          <td>2027</td>
+        </tr>
+        <tr>
+          <td><strong>National rollout patterns</strong></td>
+          <td>Ako slovak PZS implementuje EHDS compliance — Facade vzor nad eZdravím</td>
+          <td>2026–2028</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── Summary table ─────────────────────────────────── -->
+  <div class="no-break" style="margin-top:40px; margin-bottom:48px;">
+    <h3 style="margin-bottom:12px;">Prehľad fáz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fáza</th>
+          <th>Názov</th>
+          <th>Kľúčový výstup</th>
+          <th>Input z</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Slovak eHealth Analysis</td>
+          <td>Analytické docs + MkDocs PoC + eZdravie Examples</td>
+          <td>IM v4.6.0 / ZS 8.5</td>
+          <td style="color:#d97706;font-weight:700;">In Progress</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>FHIR Mapping</td>
+          <td>Mapovacia tabuľka + FHIR Mapping Catalog</td>
+          <td>Phase 7</td>
+          <td style="color:#64748b;">Planned</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>Architecture Patterns</td>
+          <td>Façade/Hybrid/FHIR-native rozhodnutie + HAPI cloud</td>
+          <td>Phase 8</td>
+          <td style="color:#64748b;">Planned</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td>Slovak FHIR Profiles</td>
+          <td>7 grounded profilov (nie vymyslených)</td>
+          <td>Phase 7–9</td>
+          <td style="color:#64748b;">Planned</td>
+        </tr>
+        <tr>
+          <td><strong>11</strong></td>
+          <td>IG + Terminology</td>
+          <td>Slovak FHIR IG + Snowstorm + ConceptMap</td>
+          <td>Phase 10</td>
+          <td style="color:#64748b;">Planned</td>
+        </tr>
+        <tr>
+          <td><strong>12+</strong></td>
+          <td>EHDS + Cross-border</td>
+          <td>EHRxF conformance, MyHealth@EU</td>
+          <td>Phase 11</td>
+          <td style="color:#94a3b8;">Year 3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── Footer ────────────────────────────────────────── -->
+  <div class="doc-footer">
+    <div>
+      <strong>FHIR.sk</strong> — Interoperability Lab &nbsp;·&nbsp;
+      <strong>fhir.sk</strong> &nbsp;·&nbsp;
+      github.com/avantlehq/fhir-sk
+    </div>
+    <div>v1.5.2 &nbsp;·&nbsp; 2026-06-07 &nbsp;·&nbsp; Year 2</div>
+  </div>
+
+</body>
+</html>

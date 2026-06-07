@@ -100,14 +100,14 @@ Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (
 |-------|--------|-------------|
 | `/` | ✅ Live | Homepage: hero, lab modules, learning roadmap, newsletter |
 | `/lab` | ✅ Live | Lab index with 6 module cards |
-| `/lab/mock-server` | ✅ Live | Mock FHIR REST API — 9 endpoints, curl examples |
+| `/lab/mock-server` | ✅ Live | Access request form — name/email/use case → email via Resend |
 | `/lab/validator` | ✅ Live | Validate FHIR JSON — 3 profiles, OperationOutcome display |
 | `/lab/terminology-explorer` | ✅ Live | Browse ValueSets and CodeSystems — static data |
 | `/lab/resource-builder` | 🔧 Stub | Planned: create/edit FHIR R4 resources |
 | `/lab/synthetic-data` | 🔧 Stub | Planned: generate synthetic FHIR datasets |
 | `/lab/profile-explorer` | 🔧 Stub | Planned: inspect StructureDefinitions |
-| `/learn` | ✅ Live | Learn index with 5 track cards |
-| `/learn/roadmap` | ✅ Live | 8-phase roadmap with status badges |
+| `/learn` | ✅ Live | Learn index with 6 track cards |
+| `/learn/roadmap` | ↪ Redirect | → /learn |
 | `/learn/fhir-foundations` | ✅ Live | What is HL7 FHIR R4 — concepts, REST, Resources, Bundles |
 | `/learn/resources` | ✅ Live | Article index: Observation, Condition, Encounter, Search, Bundle |
 | `/learn/resources/observation` | ✅ Live | Observation deep-dive |
@@ -122,12 +122,14 @@ Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (
 | `/learn/profiling/conformance` | ✅ Live | Conformance, CapabilityStatement, governance resources |
 | `/learn/terminology` | ✅ Live | Article index: Why Terminologies Matter |
 | `/learn/terminology/why-terminologies-matter` | ✅ Live | CodeSystem, ValueSet, binding, SNOMED vs LOINC |
-| `/learn/ehds` | ✅ Live | Article index: FHIR and EHDS, International Patient Summary |
+| `/learn/ehds` | ✅ Live | Article index: FHIR and EHDS, IPS, Compliance Timeline |
 | `/learn/ehds/fhir-and-ehds` | ✅ Live | EHDS regulation 2025/327, EHRxF, MyHealth@EU |
 | `/learn/ehds/international-patient-summary` | ✅ Live | IPS Composition, sections, document Bundle |
+| `/learn/ehds/compliance-timeline` | ✅ Live | EHDS 2027/2029 deadlines, GDPR Art. 9, SK legislation, FHIR mapping |
+| `/learn/privacy` | ✅ Live | Track 6 — GDPR health data, Consent, AuditEvent, Privacy by Design |
 | `/reference` | ✅ Live | 25 entries in 5 groups |
 | `/reference/[slug]` | ✅ Live | 25 individual reference pages |
-| `/about` | ✅ Live | Philosophy, objectives, tech stack, what it is NOT |
+| `/about` | ✅ Live | What FHIR.sk is, what it is NOT, contact form |
 | `/disclaimer` | ✅ Live | Synthetic data notice, no affiliation, legal |
 
 ### Mock FHIR API routes (apps/web/app/api/fhir/)
@@ -144,6 +146,8 @@ Four top-level sections: **Lab** (`/lab`), **Learn** (`/learn`), **Reference** (
 | GET | `/api/fhir/AllergyIntolerance` | searchset Bundle (patient= filter) |
 | GET | `/api/fhir/Bundle/[id]` | IPS Document Bundle or 404 |
 | POST | `/api/validate` | OperationOutcome (3 profiles) |
+| POST | `/api/contact-mock` | Mock Server access request → email (Resend) |
+| POST | `/api/contact` | About page contact form → email (Resend) |
 
 ### Validator profiles (POST /api/validate)
 
@@ -162,7 +166,7 @@ Version is defined in `apps/web/lib/version.ts`:
 
 **Rule: update version.ts + package.json after every deployment. No exceptions.**
 
-Current version: **1.4.0 "Phase 6 — Governance and Consolidation"**
+Current version: **1.5.4 "Learn: EHDS Compliance Timeline article"**
 
 ### Design system
 
