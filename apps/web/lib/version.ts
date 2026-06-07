@@ -1,7 +1,16 @@
-export const VERSION = "1.4.4";
-export const VERSION_NAME = "Phase 7–11: Slovak eHealth Analysis → IG + Terminology";
+export const VERSION = "1.4.5";
+export const VERSION_NAME = "Logo in header, Phase 1 badge removed";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.4.5",
+    date: "2026-06-07",
+    changes: [
+      "Header: FHIR.sk text logo replaced with fhir-logo.png image",
+      "Header: Phase 1 badge removed",
+      "public/fhir-logo.png added",
+    ],
+  },
   {
     version: "1.4.4",
     date: "2026-06-07",
