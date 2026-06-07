@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "EHDS Compliance Timeline for Slovak Healthcare — Learn — FHIR.sk",
@@ -293,6 +294,7 @@ export default function ComplianceTimelinePage() {
           <Link href="/learn/privacy" className="text-teal-600 hover:underline">Data Privacy in FHIR</Link>
           <Link href="/reference/smart-on-fhir" className="text-teal-600 hover:underline">SMART on FHIR</Link>
         </div>
+        <ArticleNav />
       </div>
     </article>
   );

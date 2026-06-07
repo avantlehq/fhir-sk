@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "What is Conformance? — Learn — FHIR.sk",
@@ -123,6 +124,7 @@ export default function ConformancePage() {
           <Link href="/reference/implementation-guide" className="text-teal-600 hover:underline">Implementation Guide</Link>
           <Link href="/lab/validator" className="text-teal-600 hover:underline">Validator Lab</Link>
         </div>
+        <ArticleNav />
       </div>
     </article>
   );

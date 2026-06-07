@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "What is a Profile — Profiling and Validation",
@@ -177,6 +178,7 @@ export default function ProfileLearnPage() {
             <Link href="/lab/validator" className="text-teal-600 hover:underline">Lab: Validator</Link>
           </div>
         </section>
+        <ArticleNav />
       </div>
     </article>
   );

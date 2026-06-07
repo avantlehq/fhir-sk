@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "HL7 v2, CDA, and FHIR — Profiling and Validation",
@@ -136,6 +137,7 @@ PV1|1|O|CARDIO^101^1^HOSPITAL||||DR^Novák^Ján`}</pre>
             <Link href="/learn/profiling/profile" className="text-teal-600 hover:underline">Learn: What is a Profile</Link>
           </div>
         </section>
+        <ArticleNav />
       </div>
     </article>
   );

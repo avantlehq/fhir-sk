@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "Encounter — Core Resources",
@@ -157,6 +158,7 @@ export default function EncounterLearnPage() {
             <Link href="/reference/resource" className="text-teal-600 hover:underline">Reference: Resource</Link>
           </div>
         </section>
+        <ArticleNav />
       </div>
     </article>
   );

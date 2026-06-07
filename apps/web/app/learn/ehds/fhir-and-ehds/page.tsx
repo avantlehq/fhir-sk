@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "FHIR and EHDS — Learn — FHIR.sk",
@@ -130,6 +131,7 @@ export default function FhirAndEhdsPage() {
           <Link href="/reference/implementation-guide" className="text-teal-600 hover:underline">Implementation Guide</Link>
           <Link href="/reference/smart-on-fhir" className="text-teal-600 hover:underline">SMART on FHIR</Link>
         </div>
+        <ArticleNav />
       </div>
     </article>
   );

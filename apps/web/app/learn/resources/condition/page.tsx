@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "Condition — Core Resources",
@@ -171,6 +172,7 @@ export default function ConditionLearnPage() {
             <Link href="/learn/resources/encounter" className="text-teal-600 hover:underline">Learn: Encounter</Link>
           </div>
         </section>
+        <ArticleNav />
       </div>
     </article>
   );

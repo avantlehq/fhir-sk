@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "Bundle — Core Resources",
@@ -187,6 +188,7 @@ export default function BundleLearnPage() {
             <Link href="/reference/rest-api" className="text-teal-600 hover:underline">Reference: REST API</Link>
           </div>
         </section>
+        <ArticleNav />
       </div>
     </article>
   );

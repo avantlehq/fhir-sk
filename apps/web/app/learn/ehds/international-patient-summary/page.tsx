@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleNav } from "@/components/ArticleNav";
 
 export const metadata: Metadata = {
   title: "International Patient Summary — Learn — FHIR.sk",
@@ -166,6 +167,7 @@ export default function InternationalPatientSummaryPage() {
           <Link href="/reference/bundle" className="text-teal-600 hover:underline">Bundle Reference</Link>
           <Link href="/reference/profile" className="text-teal-600 hover:underline">Profile Reference</Link>
         </div>
+        <ArticleNav />
       </div>
     </article>
   );

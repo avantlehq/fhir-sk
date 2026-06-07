@@ -1,7 +1,19 @@
-export const VERSION = "1.6.0";
-export const VERSION_NAME = "Hero: Browse Reference CTA removed";
+export const VERSION = "1.6.1";
+export const VERSION_NAME = "UX: active nav state, article prev/next, newsletter removed";
 
 export const CHANGELOG: { version: string; date: string; changes: string[] }[] = [
+  {
+    version: "1.6.1",
+    date: "2026-06-07",
+    changes: [
+      "Header: active nav state — current section highlighted with teal underline (usePathname, startsWith match)",
+      "Header: mobile menu active state — current section uses font-semibold",
+      "ArticleNav component: prev/next navigation at bottom of every multi-article Learn page",
+      "lib/learn-tracks.ts: article ordering for resources (5), profiling (4), ehds (3) tracks",
+      "ArticleNav added to 12 article pages across 3 tracks",
+      "Homepage: newsletter section removed — covered by footer Connect column link",
+    ],
+  },
   {
     version: "1.6.0",
     date: "2026-06-07",
